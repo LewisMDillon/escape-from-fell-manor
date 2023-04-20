@@ -6,8 +6,6 @@ import time
 import sys
 import art
 
-TITLE = art.TITLE
-
 
 def type_print(text, speed=0.03):
     '''
@@ -19,8 +17,12 @@ def type_print(text, speed=0.03):
         sys.stdout.flush()
         time.sleep(speed)
 
+
 def display_title_screen():
+    TITLE = art.TITLE
+    MAIN_MENU = art.MAIN_MENU
     type_print(TITLE, 0.001)
+    type_print(MAIN_MENU, 0.001)
 
 
 def title_screen_options():
@@ -53,4 +55,5 @@ def quit_game():
     sys.exit()
 
 
+display_title_screen()
 title_screen_options()
