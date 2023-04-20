@@ -251,6 +251,19 @@ def update_player_location(destination):
     """
     myPlayer.location = destination
 
+def print_room_description():
+    if room_map[myPlayer.location]['entered']:
+        type_effect(f"You are back in the {room_map[myPlayer.location]['description']}")
+    else:
+        type_effect(f"You find yourself in a {room_map[myPlayer.location]['description']}")
+    type_effect(room_map[myPlayer.location]['description'])
+
+
+def print_room_details():
+    type_effect(room_map[myPlayer.location]['details'])
+
+
+
 
 def main():
     display_title_screen()
