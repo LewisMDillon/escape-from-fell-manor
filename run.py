@@ -160,4 +160,17 @@ room_map = {
     },
 }
 
+
+def player_setup():
+    os.system("clear")
+    type_effect("What is your name, victim   ")
+    type_effect('\b\b\b\b\b\b\b\b\b')
+    type_effect('brave adventurer? \n')
+    name = input('> ')
+    myPlayer.name = name
+    os.system("clear")
+    type_effect(f"Welcome, {myPlayer.name}. \n")
+    update_player_location('c3')
+
+
 main()
