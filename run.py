@@ -102,4 +102,26 @@ def main():
     title_screen_options()
 
 
+# Map ########
+#     _________________
+#     |a1 |a2 |a3 |a4 |
+#     |___|___|___|___|
+#     |b1 |b2 |b3 |b4 |
+#     |___|___|___|___|
+#     |c1 |c2 |c3 |c4 |
+#     |___|___|___|___|
+
+room_map = {
+    'a1': {
+        'room_name': 'laboratory',
+        'description': 'a lab with chemicals',
+        'details': 'you look around and see chemicals',
+        'completed': False,
+        'north': False,
+        'south': 'b1',
+        'east': 'a2',
+        'west': False
+    },
+}
+
 main()
