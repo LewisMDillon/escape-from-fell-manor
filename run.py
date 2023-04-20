@@ -93,12 +93,12 @@ def quit_game():
 def test_function():
     print('The test function ran successfuly')
     print(room_map[myPlayer.location]['description'])
-    print(
-        f"welcome to Fell Manor, {myPlayer.name}. I hope you enjoy your stay HAHAHAHAHAHA"
-    )
-    print("Why don't I pick you a more exciting name... Aha! I've got it!")
-    myPlayer.name = 'Barry The Slayer'
-    print(f"Your new name is...{myPlayer.name}!")
+    myPlayer.location = 'a2'
+    print(room_map[myPlayer.location]['description'])
+    myPlayer.location = 'a3'
+    print(room_map[myPlayer.location]['description'])
+    myPlayer.location = 'a4'
+    print(room_map[myPlayer.location]['description'])
 
 
 def main():
