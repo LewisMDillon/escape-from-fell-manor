@@ -20,9 +20,12 @@ def type_print(text, speed=0.03):
 
 def display_title_screen():
     TITLE = art.TITLE
+    type_print(TITLE, 0.003)
+
+
+def display_main_menu():
     MAIN_MENU = art.MAIN_MENU
-    type_print(TITLE, 0.001)
-    type_print(MAIN_MENU, 0.001)
+    type_print(MAIN_MENU, 0.003)
 
 
 def title_screen_options():
@@ -43,17 +46,27 @@ def title_screen_options():
 
 
 def start_game():
-    print('Game Starting')
+    print('Game Starting...')
 
 
 def help_screen():
-    print('Here is some helpful info')
+    HELP = art.HELP
+    print(HELP)
+    input("Press ENTER to continue")
+    display_main_menu()
+    title_screen_options()
 
 
 def quit_game():
-    print('Exiting Game')
+    print('Exiting Game...')
     sys.exit()
 
 
-display_title_screen()
-title_screen_options()
+def main():
+    display_title_screen()
+    time.sleep(2)
+    display_main_menu()
+    title_screen_options()
+
+
+main()
