@@ -9,8 +9,8 @@ import art
 
 def type_print(text, speed=0.03):
     '''
-    Function for typewriter effect for printing the text
-    with variable speed, 0.03 speed by default
+    prints out text letter by letter, adjust speed argument
+    to change speed, lower is faster
     '''
     for character in text:
         sys.stdout.write(character)
@@ -19,13 +19,30 @@ def type_print(text, speed=0.03):
 
 
 def display_title_screen():
+    """
+    Displays the Main Game Logo
+    """
     TITLE = art.TITLE
-    type_print(TITLE, 0.003)
+    type_print(TITLE, 0.0001)
 
 
 def display_main_menu():
+    """
+    Displays the main menu
+    """
     MAIN_MENU = art.MAIN_MENU
-    type_print(MAIN_MENU, 0.003)
+    type_print(MAIN_MENU, 0.0001)
+
+
+# Player Setup ############
+class Player:
+    def __init__(self, name, health, location):
+        self.name = name
+        self.health = health
+        self.location = location
+        
+        
+myPlayer = Player('Lewis', 3, 'a1')
 
 
 def title_screen_options():
