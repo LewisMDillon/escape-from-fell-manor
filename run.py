@@ -19,5 +19,38 @@ def type_print(text, speed=0.03):
         sys.stdout.flush()
         time.sleep(speed)
 
+def display_title_screen():
+    type_print(TITLE, 0.001)
 
-type_print(TITLE, 0.002)
+
+def title_screen_options():
+    """
+    presents user with different selectable options at
+    the title screen
+    """
+    option = input('> ')
+    if option.lower().strip() == ('play'):
+        start_game()  # define this later
+    elif option.lower().strip() == ('help'):
+        help_screen()  # define this later
+    elif option.lower().strip() == ('quit'):
+        quit_game()  # define this later
+    else:
+        print('Please type play, help, or quit')
+        title_screen_options()
+
+
+def start_game():
+    print('Game Starting')
+
+
+def help_screen():
+    print('Here is some helpful info')
+
+
+def quit_game():
+    print('Exiting Game')
+    sys.exit()
+
+
+title_screen_options()
