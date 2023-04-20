@@ -93,6 +93,12 @@ def quit_game():
 def test_function():
     print('The test function ran successfuly')
     print(room_map[myPlayer.location]['description'])
+    print(
+        f"welcome to Fell Manor, {myPlayer.name}. I hope you enjoy your stay HAHAHAHAHAHA"
+    )
+    print("Why don't I pick you a more exciting name... Aha! I've got it!")
+    myPlayer.name = 'Barry The Slayer'
+    print(f"Your new name is...{myPlayer.name}!")
 
 
 def main():
@@ -116,6 +122,36 @@ room_map = {
         'room_name': 'laboratory',
         'description': 'a lab with chemicals',
         'details': 'you look around and see chemicals',
+        'completed': False,
+        'north': False,
+        'south': 'b1',
+        'east': 'a2',
+        'west': False
+    },
+    'a2': {
+        'room_name': 'dungeon',
+        'description': 'a scary dungeon',
+        'details': "it's a really scary dungeon",
+        'completed': False,
+        'north': False,
+        'south': 'b1',
+        'east': 'a2',
+        'west': False
+    },
+    'a3': {
+        'room_name': 'cellar',
+        'description': 'a dingy cellar',
+        'details': "it's a really dingy cellar",
+        'completed': False,
+        'north': False,
+        'south': 'b1',
+        'east': 'a2',
+        'west': False
+    },
+    'a4': {
+        'room_name': 'dining room',
+        'description': 'a beautiful dining room',
+        'details': 'let the feast..... begin',
         'completed': False,
         'north': False,
         'south': 'b1',
