@@ -57,13 +57,24 @@ def title_screen_options():
         help_screen()  # define this later
     elif option.lower().strip() == ('quit'):
         quit_game()  # define this later
+    elif option.lower().strip() == ('test'):
+        test_function()
     else:
         print('Please type play, help, or quit')
         title_screen_options()
 
 
+# def update_player_location(location):
+
+
 def start_game():
     print('Game Starting...')
+    # update_player_location(location)
+    # update_player_health(health)
+    # game_introduction()
+    # describe_location()
+    # player_status()
+    # prompt()
 
 
 def help_screen():
@@ -79,9 +90,14 @@ def quit_game():
     sys.exit()
 
 
+def test_function():
+    print('The test function ran successfuly')
+    print(room_map[myPlayer.location]['description'])
+
+
 def main():
     display_title_screen()
-    time.sleep(2)
+    time.sleep(0)
     display_main_menu()
     title_screen_options()
 
