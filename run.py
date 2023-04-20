@@ -122,9 +122,9 @@ room_map = {
         'details': "it's a really scary dungeon",
         'completed': False,
         'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'south': 'b2',
+        'east': 'a3',
+        'west': 'a1'
     },
     'a3': {
         'room_name': 'cellar',
@@ -132,9 +132,9 @@ room_map = {
         'details': "it's a really dingy cellar",
         'completed': False,
         'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'south': 'b3',
+        'east': 'a4',
+        'west': 'a2'
     },
     'a4': {
         'room_name': 'dining room',
@@ -142,18 +142,18 @@ room_map = {
         'details': 'let the feast..... begin',
         'completed': False,
         'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'south': 'b4',
+        'east': False,
+        'west': 'a3'
     },
     'b1': {
         'room_name': 'Bedroom',
         'description': 'a bedroom',
         'details': 'you look around and see beds',
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
+        'north': 'a1',
+        'south': 'c1',
+        'east': 'b2',
         'west': False
     },
     'b2': {
@@ -161,39 +161,39 @@ room_map = {
         'description': 'a bathroom',
         'details': "you look around and see a toilet",
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'a2',
+        'south': 'c2',
+        'east': 'b3',
+        'west': 'b1'
     },
     'b3': {
         'room_name': 'Swimming Pool',
         'description': 'a Swimming Pool',
         'details': "you look around and see a pool",
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'a3',
+        'south': 'c3',
+        'east': 'b4',
+        'west': 'b2'
     },
     'b4': {
         'room_name': 'Study',
         'description': 'a Study',
         'details': 'you look around and see a desk',
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'a4',
+        'south': 'c4',
+        'east': False,
+        'west': 'b3'
     },
     'c1': {
         'room_name': 'Observatory',
         'description': 'an Observatory',
         'details': 'you look around and see space',
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
+        'north': 'b1',
+        'south': False,
+        'east': 'c2',
         'west': False
     },
     'c2': {
@@ -201,30 +201,30 @@ room_map = {
         'description': 'a library',
         'details': "you look around and see books",
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'b2',
+        'south': False,
+        'east': 'c3',
+        'west': 'c1'
     },
     'c3': {
         'room_name': 'Starting Room',
         'description': 'the starting room',
         'details': "you look around and see the starting room",
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'b3',
+        'south': False,
+        'east': 'c4',
+        'west': 'c2'
     },
     'c4': {
         'room_name': 'Spike Pit',
         'description': 'a spike pit',
         'details': 'you look around and see spikes',
         'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
+        'north': 'b4',
+        'south': False,
+        'east': False,
+        'west': 'c3'
     },
 }
 
@@ -238,7 +238,10 @@ def player_setup():
     myPlayer.name = name
     os.system("clear")
     type_effect(f"Welcome, {myPlayer.name}. \n")
-    update_player_location('c3')
+    update_player_location('a1')
+    print(myPlayer.location)
+    update_player_location(room_map[myPlayer.location]['east'])
+    print(myPlayer.location)
 
 
 def update_player_location(destination):
