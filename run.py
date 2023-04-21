@@ -267,9 +267,13 @@ def update_player_location(destination):
 
 def print_room_description():
     if room_map[myPlayer.location]['entered']:
-        type_effect(f"You are back in the {room_map[myPlayer.location]['description']}")
+        type_effect(
+            f"You are back in the {room_map[myPlayer.location]['description']}"
+            )
     else:
-        type_effect(f"You find yourself in a {room_map[myPlayer.location]['description']}")
+        type_effect(
+            f"You find yourself in a {room_map[myPlayer.location]['description']}"
+            )
 
 
 def print_room_details():
@@ -306,6 +310,7 @@ def prompt_default():
     if answer.lower().strip() in directions_list:
         update_player_location(room_map[myPlayer.location][f"{answer}"])
     elif answer == 'look':
+        os.system("clear")
         print_room_details()
     prompt_default()
     
