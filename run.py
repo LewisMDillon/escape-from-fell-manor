@@ -98,10 +98,12 @@ def test_function():
 #     |___|___|___|___|
 #     |c1 |c2 |c3 |c4 |
 #     |___|___|___|___|
+#     |d1 |d2 |d3 |d4 |
+#     |___|___|___|___|
 
 room_map = {
     'a1': {
-        'room_name': 'laboratory',
+        'room_name': 'Study',
         'description': 'a lab with chemicals',
         'details': 'you look around and see chemicals',
         'entered': False,
@@ -112,29 +114,29 @@ room_map = {
         'west': False
     },
     'a2': {
-        'room_name': 'dungeon',
+        'room_name': 'Corridor of Spikes',
         'description': 'a scary dungeon',
         'details': "it's a really scary dungeon",
         'entered': False,
         'completed': False,
         'north': False,
-        'south': 'b2',
+        'south': False,
         'east': 'a3',
         'west': 'a1'
     },
     'a3': {
-        'room_name': 'cellar',
+        'room_name': 'Library',
         'description': 'a dingy cellar',
         'details': "it's a really dingy cellar",
         'entered': False,
         'completed': False,
         'north': False,
-        'south': 'b3',
+        'south': False,
         'east': 'a4',
         'west': 'a2'
     },
     'a4': {
-        'room_name': 'dining room',
+        'room_name': 'Dining room',
         'description': 'a beautiful dining room',
         'details': 'let the feast..... begin',
         'entered': False,
@@ -145,7 +147,7 @@ room_map = {
         'west': 'a3'
     },
     'b1': {
-        'room_name': 'Bedroom',
+        'room_name': 'Upstairs Corridor',
         'description': 'a bedroom',
         'details': 'you look around and see beds',
         'entered': False,
@@ -156,29 +158,29 @@ room_map = {
         'west': False
     },
     'b2': {
-        'room_name': 'Bathroom',
+        'room_name': 'Arena',
         'description': 'a bathroom',
         'details': "you look around and see a toilet",
         'entered': False,
         'completed': False,
-        'north': 'a2',
+        'north': False,
         'south': 'c2',
-        'east': 'b3',
+        'east': False,
         'west': 'b1'
     },
     'b3': {
-        'room_name': 'Swimming Pool',
+        'room_name': 'Storage Room',
         'description': 'a Swimming Pool',
         'details': "you look around and see a pool",
         'entered': False,
         'completed': False,
-        'north': 'a3',
+        'north': False,
         'south': 'c3',
         'east': 'b4',
-        'west': 'b2'
+        'west': False
     },
     'b4': {
-        'room_name': 'Study',
+        'room_name': 'Grand Hall',
         'description': 'a Study',
         'details': 'you look around and see a desk',
         'entered': False,
@@ -189,29 +191,29 @@ room_map = {
         'west': 'b3'
     },
     'c1': {
-        'room_name': 'Observatory',
+        'room_name': 'Final Door',
         'description': 'an Observatory',
         'details': 'you look around and see space',
         'entered': False,
         'completed': False,
         'north': 'b1',
-        'south': False,
-        'east': 'c2',
+        'south': 'd1',
+        'east': False,
         'west': False
     },
     'c2': {
-        'room_name': 'Library',
+        'room_name': 'Bedroom',
         'description': 'a library',
         'details': "you look around and see books",
         'entered': False,
         'completed': False,
         'north': 'b2',
         'south': False,
-        'east': 'c3',
-        'west': 'c1'
+        'east': False,
+        'west': False
     },
     'c3': {
-        'room_name': 'Starting Room',
+        'room_name': 'Prison Cell',
         'description': ("Cold, stone room. It seems to be a cell of "
                         "some sort\nbut the large iron-barred door "
                         "to the north hangs open.\n"),
@@ -224,15 +226,59 @@ room_map = {
         'west': False
     },
     'c4': {
-        'room_name': 'Spike Pit',
+        'room_name': 'Stone Corridor',
         'description': 'a spike pit',
         'details': 'you look around and see spikes',
         'entered': False,
         'completed': False,
         'north': 'b4',
+        'south': 'd4',
+        'east': False,
+        'west': False
+    },
+    'd1': {
+        'room_name': 'Final Room',
+        'description': 'a spike pit',
+        'details': 'you look around and see spikes',
+        'entered': False,
+        'completed': False,
+        'north': 'c1',
         'south': False,
         'east': False,
-        'west': 'c3'
+        'west': False
+    },
+    'd2': {
+        'room_name': 'Altar',
+        'description': 'a spike pit',
+        'details': 'you look around and see spikes',
+        'entered': False,
+        'completed': False,
+        'north': False,
+        'south': False,
+        'east': 'd3',
+        'west': False
+    },
+    'd3': {
+        'room_name': 'Goblin Room',
+        'description': 'a spike pit',
+        'details': 'you look around and see spikes',
+        'entered': False,
+        'completed': False,
+        'north': False,
+        'south': False,
+        'east': 'd4',
+        'west': 'd2'
+    },
+    'd4': {
+        'room_name': 'Riddle Room',
+        'description': 'a spike pit',
+        'details': 'you look around and see spikes',
+        'entered': False,
+        'completed': False,
+        'north': 'c4',
+        'south': False,
+        'east': False,
+        'west': 'd3'
     },
 }
 
