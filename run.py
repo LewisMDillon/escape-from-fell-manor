@@ -4,7 +4,7 @@ import os
 import art
 
 
-def type_effect(text, speed=0.06):
+def type_effect(text, speed=0.0001):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -39,7 +39,7 @@ class Player:
         self.location = location
 
 
-myPlayer = Player('Name', 5, 'a1')
+myPlayer = Player('Name', 5, 'b1')
 
 
 def title_screen_options():
@@ -83,16 +83,12 @@ def quit_game():
     sys.exit()
 
 
+# Test Function #######################
 def test_function():
     print('The test function ran successfuly')
-    print(room_map[myPlayer.location]['description'])
-    myPlayer.location = 'a2'
-    print(room_map[myPlayer.location]['description'])
-    myPlayer.location = 'a3'
-    print(room_map[myPlayer.location]['description'])
-    myPlayer.location = 'a4'
-    print(room_map[myPlayer.location]['description'])
-
+    print(f"the player is currently in room {myPlayer.location}")
+    calculate_valid_directions()
+    
 
 # Map ########
 #     _________________
@@ -216,15 +212,16 @@ room_map = {
     },
     'c3': {
         'room_name': 'Starting Room',
-        'description': ("Cold, stone room. It seems to be a cell of some sort"
-                        " but the large iron-barred door hangs open."),
+        'description': ("Cold, stone room. It seems to be a cell of "
+                        "some sort\nbut the large iron-barred door "
+                        "to the north hangs open.\n"),
         'details': "you look around and see the starting room",
-        'entered': False,
+        'entered': True,
         'completed': False,
         'north': 'b3',
         'south': False,
-        'east': 'c4',
-        'west': 'c2'
+        'east': False,
+        'west': False
     },
     'c4': {
         'room_name': 'Spike Pit',
@@ -242,8 +239,8 @@ room_map = {
 
 def player_setup():
     os.system("clear")
-    type_effect("What is your name, victim  ")
-    type_effect('\b\b\b\b\b\b\b\b', 0.04)
+    type_effect("What is your name, victim ")
+    type_effect('\b\b\b\b\b\b\b', 0.04)
     type_effect('brave adventurer? \n')
     name = input('> ')
     myPlayer.name = name
@@ -262,6 +259,7 @@ def update_player_location(destination):
     Sets player location value to value of
     destination, passed as an argument.
     """
+    os.system("clear")
     myPlayer.location = destination
     print_room_description()
     room_map[myPlayer.location]['entered'] = True
@@ -272,7 +270,6 @@ def print_room_description():
         type_effect(f"You are back in the {room_map[myPlayer.location]['description']}")
     else:
         type_effect(f"You find yourself in a {room_map[myPlayer.location]['description']}")
-    type_effect(room_map[myPlayer.location]['description'])
 
 
 def print_room_details():
@@ -288,16 +285,30 @@ def game_begin_message():
 
 
 def calculate_valid_directions():
-    for value in room_map[myPlayer.location]:
-        if value != False:
-            print(key)
-   
+    directions_list = []
+    for key, value in room_map[myPlayer.location].items():
+        if key in ['north', 'south', 'east', 'west']:
+            if value is not False:
+                directions_list.append(key)
+    type_effect(" you can travel: \n")
+    for direction in directions_list:
+        type_effect(direction + '\n')
+    return directions_list
 
-def prompt():
-    calculate_valid_directions()
-    type_effect("What would you like to do", 0.04)
-    input("> ")
 
+def prompt_default():
+    print("\n")
+    type_effect("\nYou can 'look' around the room for more information, \nor")
+    directions_list = calculate_valid_directions()
+    print("\n")
+    type_effect("What would you like to do?\n", 0.04)
+    answer = input("> ")
+    if answer.lower().strip() in directions_list:
+        update_player_location(room_map[myPlayer.location][f"{answer}"])
+    elif answer == 'look':
+        print_room_details()
+    prompt_default()
+    
 
 # this is the code to move room
 # update_player_location(room_map[myPlayer.location]['east'])
@@ -305,20 +316,22 @@ def prompt():
 
 def game_introduction():
     os.system("clear")
-    type_effect("You must escape from Fell Manor! \n")
-    type_effect("To move from room to room, type 'go north', 'go south',\n")
-    type_effect("go east' or 'go west when prompted.")
+    type_effect("You must escape from Fell Manor! \n", 0.003)
+    type_effect("To move from room to room, type 'go north', 'go south',\n", 0.003)
+    type_effect("go east' or 'go west' when prompted.", 0.003)
     print('\n')
-    time.sleep(1)
-    type_effect("You can also type 'look' to try to examine")
-    type_effect(" the room you are in for more information \n")
-    time.sleep(1)
+    time.sleep(0.07)
+    type_effect("You can also type 'look' to try to examine", 0.003)
+    type_effect(" the room you are in for more information \n", 0.003)
     print("\n")
-    type_effect("Many challenges await you,\n")
-    type_effect("Good Luck!\n")
-    input("press ENTER to begin")
+    time.sleep(0.07)
+    type_effect("Many challenges await you,\n", 0.003)
+    type_effect("Good Luck!\n", 0.003)
+    print("\n \n \n \n")
+    input("-- press ENTER to begin --")
+    os.system("clear")
     game_begin_message()
-    prompt()
+    prompt_default()
 
 
 def main():
