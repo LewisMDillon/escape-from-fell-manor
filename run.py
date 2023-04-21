@@ -33,14 +33,25 @@ def display_main_menu():
 
 # Player Setup ############
 class Player:
-    def __init__(self, name, health, location):
+    def __init__(
+        self, name, location, health, weapon, shield, lantern,
+        manormap, eyeglass
+                ):
         self.name = name
-        self.health = health
         self.location = location
+        self.health = health
+        self.weapon = weapon
+        self.shield = shield
+        self.lantern = lantern
+        self.manormap = manormap
+        self.eyeglass = eyeglass
 
 
-myPlayer = Player('Name', 5, 'b1')
+myPlayer = Player('Name', 'c3', 5, 'fists', False, False, False, False)
 
+# Enemies Setup ###########
+class Monster:
+    def __init__(self)
 
 def title_screen_options():
     """
@@ -137,8 +148,16 @@ room_map = {
     },
     'a4': {
         'room_name': 'Dining room',
-        'description': 'a beautiful dining room',
-        'details': 'let the feast..... begin',
+        'description': (
+            "Dining room. A fire burns in the huge hearth on the"
+            " opposite wall, casting warm orange light on to the"
+            " centerpiece of the room:\na gigantic oaken dining table.\n\n"
+            " On this dining table sits a single plate, upon which"
+            " rests the most, soft, warm, appetizing loaf of bread\n"
+            " Your stomach grumbles..."),
+        'details': (
+            "Your eyes are transfixed on the loaf of bread.\n\n"
+                    ),
         'entered': False,
         'completed': False,
         'north': False,
@@ -170,8 +189,19 @@ room_map = {
     },
     'b3': {
         'room_name': 'Storage Room',
-        'description': 'a Swimming Pool',
-        'details': "you look around and see a pool",
+        'description': (
+            "storage room. Wooden crates are piled high"
+            " all around you. \nThere is very little light,"
+            " but you can just make out a spiral staircase"
+            " to the east\n"),
+        'details': (
+            "You search around in the dark and find a RUSTY DAGGER!\n"
+            "It looks like decades of rust have blunted its blade, "
+            "but it's better than your fists.\n\n"
+            "**You equip the RUSTY DAGGER**\n\n"
+            "There is probably more hidden among the crates, but "
+            "it's too dark to see anything"
+            ),
         'entered': False,
         'completed': False,
         'north': False,
@@ -181,8 +211,27 @@ room_map = {
     },
     'b4': {
         'room_name': 'Grand Hall',
-        'description': 'a Study',
-        'details': 'you look around and see a desk',
+        'description': (
+            "Grand hall. your eyes follow the intricate pattern on the"
+            " red and gold carpet up to the staggeringly high walls,"
+            " adorned from bottom to top with beautiful paintings"
+            " and portraits.\n\n There are large ornate wooden doors"
+            " to the north and to the south."),
+        'details': (
+            "You inspect the paintings. They are all beautifully done."
+            " You notice that the characters in the portraits are never"
+            " looking straight out, as you would expect, but instead"
+            " looking up or down at other portraits...\n\n"
+            " You follow the gaze of one portrait to the next, and again"
+            " and again and again \nuntil finally coming to a portrait"
+            " of a young girl.\n"
+            " The girl is holding out her hands as if presenting something"
+            " but her hands are empty. \n\n"
+            " As you peer into the painting, you realise that there is a"
+            " voice coming from it!\n"
+            " You press your ear close to it and try to make out what"
+            " it is saying...\n\n\n"
+            "     'Return to me when you can see beyond what is shown'\n\n\n"),
         'entered': False,
         'completed': False,
         'north': 'a4',
@@ -217,7 +266,8 @@ room_map = {
         'description': ("Cold, stone room. It seems to be a cell of "
                         "some sort\nbut the large iron-barred door "
                         "to the north hangs open.\n"),
-        'details': "you look around and see the starting room",
+        'details': ("It's too dark to see anything."
+                    " Perhaps if you had a light source..."),
         'entered': True,
         'completed': False,
         'north': 'b3',
@@ -323,7 +373,12 @@ def print_room_description():
 
 
 def print_room_details():
-    type_effect(room_map[myPlayer.location]['details'])
+    if room_map[myPlayer.location]['completed']:
+        type_effect("You have found all there is to find in this room")
+    else:
+        type_effect(room_map[myPlayer.location]['details'])
+    if myPlayer.location == 'a4':
+        dining_room_prompt()
 
 
 def update_player_health(num):
@@ -359,7 +414,22 @@ def prompt_default():
         os.system("clear")
         print_room_details()
     prompt_default()
-    
+
+
+def dining_room_prompt():
+    type_effect("Do you take a bite of the bread? (yes/no)\n")
+    answer = input("> ")
+    if answer.lower().strip() == 'yes':
+        type_effect("You take a bite of the bread etc.")
+        type_effect("Will you take another bite?")
+        second_answer = input("> ")
+        if second_answer.lower().strip() == 'yes':
+            type_effect("You sudddenly hear a loud crash etc.")
+        else:
+            type_effect("You manage to stop yourself etc.")
+    else:
+        type_effect("You manage to stop yourself etc.")
+
 
 # this is the code to move room
 # update_player_location(room_map[myPlayer.location]['east'])
@@ -367,22 +437,27 @@ def prompt_default():
 
 def game_introduction():
     os.system("clear")
-    type_effect("You must escape from Fell Manor! \n", 0.003)
-    type_effect("To move from room to room, type 'go north', 'go south',\n", 0.003)
-    type_effect("go east' or 'go west' when prompted.", 0.003)
-    print('\n')
-    time.sleep(0.07)
-    type_effect("You can also type 'look' to try to examine", 0.003)
-    type_effect(" the room you are in for more information \n", 0.003)
-    print("\n")
-    time.sleep(0.07)
-    type_effect("Many challenges await you,\n", 0.003)
-    type_effect("Good Luck!\n", 0.003)
-    print("\n \n \n \n")
+# type_effect("You must escape from Fell Manor! \n", 0.003)
+# type_effect("To move from room to room, type 'go north', 'go south',\n", 0.003)
+# type_effect("go east' or 'go west' when prompted.", 0.003)
+# print('\n')
+# time.sleep(0.07)
+# type_effect("You can also type 'look' to try to examine", 0.003)
+# type_effect(" the room you are in for more information \n", 0.003)
+# print("\n")
+# time.sleep(0.07)
+# type_effect("Many challenges await you,\n", 0.003)
+# type_effect("Good Luck!\n", 0.003)
+# print("\n \n \n \n")
     input("-- press ENTER to begin --")
     os.system("clear")
     game_begin_message()
     prompt_default()
+
+
+def combat_ogre()
+    type_effect("The ogre is mad")
+    type_effect("The ogre attacks")
 
 
 def main():
