@@ -2,6 +2,7 @@ import time
 import sys
 import os
 import art
+import random
 
 
 def type_effect(text, speed=0.0001):
@@ -34,24 +35,34 @@ def display_main_menu():
 # Player Setup ############
 class Player:
     def __init__(
-        self, name, location, health, weapon, shield, lantern,
+        self, name, location, health, strength, weapon, armour, lantern,
         manormap, eyeglass
                 ):
         self.name = name
         self.location = location
         self.health = health
+        self.strength = strength
         self.weapon = weapon
-        self.shield = shield
+        self.armour = armour
         self.lantern = lantern
         self.manormap = manormap
         self.eyeglass = eyeglass
 
 
-myPlayer = Player('Name', 'c3', 5, 'fists', False, False, False, False)
+myPlayer = Player('Name', 'c3', 10, 2, 'fists', 2, False, False, False)
+
 
 # Enemies Setup ###########
 class Monster:
-    def __init__(self)
+    def __init__(self, name, health, strength, armour):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.armour = armour
+
+
+ogre = Monster('Ogre', 10, 4, 2)
+
 
 def title_screen_options():
     """
@@ -76,7 +87,7 @@ def start_game():
     print('Game Starting...')
     player_setup()
     myPlayer.location = 'c3'
-    myPlayer.health = 5
+    myPlayer.health = 10
     game_introduction()
     # prompt()
 
@@ -368,7 +379,8 @@ def print_room_description():
             )
     else:
         type_effect(
-            f"You find yourself in a {room_map[myPlayer.location]['description']}"
+            "You find yourself in"
+            f" a {room_map[myPlayer.location]['description']}"
             )
 
 
@@ -382,7 +394,21 @@ def print_room_details():
 
 
 def update_player_health(num):
-    myPlayer.health = myPlayer.health + num
+    myPlayer.health = myPlayer.health - num
+
+
+def update_enemy_health(enemy, num):
+    enemy.health = enemy.health - num
+
+
+def player_death():
+    type_effect("You Died....")
+    time.sleep(2)
+    main()
+
+
+def enemy_death(enemy):
+    type_effect(f"You defeated the {enemy.name}!")
 
 
 def game_begin_message():
@@ -425,6 +451,7 @@ def dining_room_prompt():
         second_answer = input("> ")
         if second_answer.lower().strip() == 'yes':
             type_effect("You sudddenly hear a loud crash etc.")
+            combat(ogre)
         else:
             type_effect("You manage to stop yourself etc.")
     else:
@@ -455,9 +482,32 @@ def game_introduction():
     prompt_default()
 
 
-def combat_ogre()
-    type_effect("The ogre is mad")
-    type_effect("The ogre attacks")
+def combat(enemy):
+    type_effect(f"The {enemy.name} attacks!")
+    enemy_attack_strength = random.randint(0, 4) + enemy.strength - myPlayer.armour
+    type_effect(f"The {enemy.name} hits you for {enemy_attack_strength} damage!")
+    print(f"Your health was at {myPlayer.health}")
+    update_player_health(enemy_attack_strength)
+    print(f"after that attack, it's now at {myPlayer.health}")
+
+    if myPlayer.health <= 0:
+        player_death()
+        return
+    else:
+        input("Press ENTER to attack!")
+
+    type_effect(f"You attack the {enemy.name} with your {myPlayer.weapon}!")
+    attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
+    print(f"You hit the {enemy.name} for {attack_strength} damage!")
+    print(f"The {enemy.name}'s health was at {enemy.health}")
+    update_enemy_health(enemy, attack_strength)
+    print(f"After that attack, it's now at {enemy.health}")
+
+    if enemy.health <= 0:
+        enemy_death(enemy)
+        return
+    else:
+        input("Press ENTER to continue!")
 
 
 def main():
