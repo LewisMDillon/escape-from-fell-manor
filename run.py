@@ -113,6 +113,34 @@ def quit_game():
     sys.exit()
 
 
+
+def inventory_screen():
+    """
+    Displays the player inventory, lists all weapons,
+    equipment, and items the player has found.
+    """
+    print("Here are the items and equipment " 
+          "that you have gathered on your journey so far:\n")
+    if myPlayer.weapon == 'Rusty Dagger':
+        print(f"\nWeapon: {myPlayer.weapon} -- +{rusty_dagger.strength - 2} damage")
+    elif myPlayer.weapon == 'Silver Sword':
+        print(f"\nWeapon: {myPlayer.weapon} -- +{silver_sword.strength - 2} damage")
+    else:
+        print(f"\nWeapon: {myPlayer.weapon}")
+    print(f"\nShield: {myPlayer.shield}")
+    print("\nOther items:")
+    if myPlayer.lantern:
+        print("Lantern")
+    if myPlayer.manormap:
+        print("Map")
+    if myPlayer.eyeglass:
+        print("Eyeglass")
+    if myPlayer.silver_key:
+        print("Silver Key")
+    else:
+        print("None")
+
+
 # Test Function #######################
 def test_function():
     print('The test function ran successfuly')
