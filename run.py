@@ -187,8 +187,8 @@ def inventory_screen():
         print("Silver Key")
     
 
-def map_screen():
-    MAP = art.map
+def display_map():
+    print(f"{map_dict[myPlayer.location]}")
 
 
 # Test Function #######################
@@ -390,6 +390,25 @@ room_map = {
     },
 }
 
+map_dict = {
+    'a1': art.MAPA1,
+    'a2': art.MAPA2,
+    'a3': art.MAPA3,
+    'a4': art.MAPA4,
+    'b1': art.MAPB1,
+    'b2': art.MAPB2,
+    'b3': art.MAPB3,
+    'b4': art.MAPB4,
+    'c1': art.MAPC1,
+    'c2': art.MAPC2,
+    'c3': art.MAPC3,
+    'c4': art.MAPC4,
+    'd1': art.MAPD1,
+    'd2': art.MAPD2,
+    'd3': art.MAPD3,
+    'd4': art.MAPD4,
+}
+
 
 def game_introduction():
     os.system("clear")
@@ -532,6 +551,10 @@ def main_prompt():
         print_room_details()
     elif answer.lower().strip() == 'items':
         inventory_screen()
+    elif answer.lower().strip() == 'map':
+        if myPlayer.manormap:
+            display_map()
+
     main_prompt()
 
 
