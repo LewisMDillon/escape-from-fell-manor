@@ -72,6 +72,32 @@ class Monster:
 ogre = Monster('Ogre', 10, 4, 2)
 
 
+class Weapon:
+    """
+    Weapon class
+    """
+    def __init__(self, name, strength):
+        self.name = name
+        self.strength = strength
+
+
+rusty_dagger = Weapon('RUSTY DAGGER', 4)
+silver_sword = Weapon('SILVER SWORD', 8)
+
+
+class Shield:
+    """
+    Shield class
+    """
+    def __init__(self, name, armour):
+        self.name = name
+        self.armour = armour
+
+
+wooden_shield = Shield('WOODEN SHIELD', 2)
+iron_shield = Shield('IRON SHIELD', 4)
+
+
 def title_screen_options():
     """
     presents user with different selectable options at
