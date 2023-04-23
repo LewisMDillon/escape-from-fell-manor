@@ -529,6 +529,31 @@ def main_prompt():
     main_prompt()
 
 
+def lantern_prompt():
+    type_effect("Do you want to try to grab the lantern? (yes/no)\n")
+    answer = input("> ")
+    if answer.lower().strip() == 'yes':
+        lantern_attempt()
+    else:
+        main_prompt()
+        
+
+def lantern_attempt():
+    rng = random.randint(1, 3)
+    if rng <= 2:
+        type_effect(gametext.item_text['lantern_success'])
+        myPlayer.lantern = True
+    else:
+        type_effect(gametext.item_text['lantern_failure'])
+        update_player_health(1)
+        type_effect("Do you want to try again? (yes/no)")
+        answer = input("> ")
+        if answer.lower().strip() == 'yes':
+            lantern_attempt()
+        else:
+            main_prompt()
+
+
 def dining_room_prompt():
     type_effect("Do you take a bite of the bread? (yes/no)\n")
     answer = input("> ")
