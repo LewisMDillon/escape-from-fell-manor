@@ -3,6 +3,7 @@ import sys
 import os
 import random
 import art
+import gametext
 
 
 def type_effect(text, speed=0.0001):
@@ -163,23 +164,31 @@ def inventory_screen():
     print("Here are the items and equipment " 
           "that you have gathered on your journey so far:\n")
     if myPlayer.weapon == 'Rusty Dagger':
-        print(f"\nWeapon: {myPlayer.weapon} -- +{rusty_dagger.strength - 2} damage")
+        print(
+            f"\nWeapon: {myPlayer.weapon} -- +{rusty_dagger.strength - 2} damage"
+            )
     elif myPlayer.weapon == 'Silver Sword':
-        print(f"\nWeapon: {myPlayer.weapon} -- +{silver_sword.strength - 2} damage")
+        print(
+            f"\nWeapon: {myPlayer.weapon} -- +{silver_sword.strength - 2} damage"
+            )
     else:
         print(f"\nWeapon: {myPlayer.weapon}")
     print(f"\nShield: {myPlayer.shield}")
     print("\nOther items:")
     if myPlayer.lantern:
         print("Lantern")
+    else:
+        print("None")
     if myPlayer.manormap:
         print("Map")
     if myPlayer.eyeglass:
         print("Eyeglass")
     if myPlayer.silver_key:
         print("Silver Key")
-    else:
-        print("None")
+    
+
+def map_screen():
+    MAP = art.map
 
 
 # Test Function #######################
@@ -236,16 +245,8 @@ room_map = {
     },
     'a4': {
         'room_name': 'Dining room',
-        'description': (
-            "Dining room. A fire burns in the huge hearth on the"
-            " opposite wall, casting warm orange light on to the"
-            " centerpiece of the room:\na gigantic oaken dining table.\n\n"
-            " On this dining table sits a single plate, upon which"
-            " rests the most, soft, warm, appetizing loaf of bread\n"
-            " Your stomach grumbles..."),
-        'details': (
-            "Your eyes are transfixed on the loaf of bread.\n\n"
-                    ),
+        'description': (f"{gametext.room_descriptions[myPlayer.location]}"),
+        'details': (f"{gametext.room_details[myPlayer.location]}"),
         'entered': False,
         'completed': False,
         'north': False,
@@ -277,20 +278,11 @@ room_map = {
     },
     'b3': {
         'room_name': 'Storage Room',
-        'description': (
-            "storage room. Wooden crates are piled high"
-            " all around you. \nThere is very little light,"
-            " but you can just make out a spiral staircase"
-            " to the east\n"),
-        'details': (
-            "You search around in the dark and find a RUSTY DAGGER!\n"
-            "It looks like decades of rust have blunted its blade, "
-            "but it's better than your fists.\n\n"
-            "**You equip the RUSTY DAGGER**\n\n"
-            "There is probably more hidden among the crates, but "
-            "it's too dark to see anything"
-            ),
+        'description': (f"{gametext.room_descriptions['b3']}"),
+        'details': (f"{gametext.room_details['b3']}"),
         'entered': False,
+        'looked': False,
+        'lantern_looked': False,
         'completed': False,
         'north': False,
         'south': 'c3',
@@ -299,27 +291,8 @@ room_map = {
     },
     'b4': {
         'room_name': 'Grand Hall',
-        'description': (
-            "Grand hall. your eyes follow the intricate pattern on the"
-            " red and gold carpet up to the staggeringly high walls,"
-            " adorned from bottom to top with beautiful paintings"
-            " and portraits.\n\n There are large ornate wooden doors"
-            " to the north and to the south."),
-        'details': (
-            "You inspect the paintings. They are all beautifully done."
-            " You notice that the characters in the portraits are never"
-            " looking straight out, as you would expect, but instead"
-            " looking up or down at other portraits...\n\n"
-            " You follow the gaze of one portrait to the next, and again"
-            " and again and again \nuntil finally coming to a portrait"
-            " of a young girl.\n"
-            " The girl is holding out her hands as if presenting something"
-            " but her hands are empty. \n\n"
-            " As you peer into the painting, you realise that there is a"
-            " voice coming from it!\n"
-            " You press your ear close to it and try to make out what"
-            " it is saying...\n\n\n"
-            "     'Return to me when you can see beyond what is shown'\n\n\n"),
+        'description': (f"{gametext.room_descriptions['b4']}"),
+        'details': (f"{gametext.room_details['b4']}"),
         'entered': False,
         'completed': False,
         'north': 'a4',
@@ -351,11 +324,8 @@ room_map = {
     },
     'c3': {
         'room_name': 'Prison Cell',
-        'description': ("Cold, stone room. It seems to be a cell of "
-                        "some sort\nbut the large iron-barred door "
-                        "to the north hangs open.\n"),
-        'details': ("It's too dark to see anything."
-                    " Perhaps if you had a light source..."),
+        'description': (f"{gametext.room_descriptions['c3']}"),
+        'details': (f"{gametext.room_details['c3']}"),
         'entered': True,
         'completed': False,
         'north': 'b3',
@@ -365,8 +335,8 @@ room_map = {
     },
     'c4': {
         'room_name': 'Stone Corridor',
-        'description': 'a spike pit',
-        'details': 'you look around and see spikes',
+        'description': (f"{gametext.room_descriptions['c4']}"),
+        'details': (f"{gametext.room_details['c4']}"),
         'entered': False,
         'completed': False,
         'north': 'b4',
@@ -540,10 +510,17 @@ def calculate_valid_directions():
 
 def main_prompt():
     print("\n")
-    type_effect(
-        "\nYou can 'look' around the room for more information,"
-        " type 'items' to view your items, \nor"
-        )
+    if myPlayer.manormap is False:
+        type_effect(
+            "\nYou can 'look' around the room for more information,"
+            " type 'items' to view your items, \nor"
+                 )
+    else:
+        type_effect(
+            "\nYou can 'look' around the room for more information,"
+            " type 'items' to view your items, type 'map' to view the"
+            " map,\nor"
+                 )
     directions_list = calculate_valid_directions()
     print("\n")
     type_effect("What would you like to do?\n", 0.04)
@@ -592,11 +569,13 @@ def dining_room_prompt():
             " fluffy and warm, yet delightfully crunchy."
             "\n your health has increased by 2 points!"
             )
-        update_player_health(-2)
+        update_player_health(2)
         type_effect("\nWill you take another bite?")
         second_answer = input("> ")
         if second_answer.lower().strip() == 'yes':
-            type_effect("You sudddenly hear a loud crash etc.")
+            type_effect(
+                "You sudddenly hear a loud crash!\n"
+                )
             combat(ogre)
         else:
             type_effect("You manage to stop yourself etc.")
@@ -633,7 +612,7 @@ def combat(enemy):
     enemy_attack_strength = random.randint(0, 4) + enemy.strength - myPlayer.armour
     type_effect(f"The {enemy.name} hits you for {enemy_attack_strength} damage!")
     print(f"Your health was at {myPlayer.health}")
-    update_player_health(enemy_attack_strength)
+    update_player_health(enemy_attack_strength * -1)
     print(f"after that attack, it's now at {myPlayer.health}")
 
     if myPlayer.health <= 0:
@@ -649,7 +628,7 @@ def combat(enemy):
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
     print(f"You hit the {enemy.name} for {attack_strength} damage!")
     print(f"The {enemy.name}'s health was at {enemy.health}")
-    update_enemy_health(enemy, attack_strength)
+    update_enemy_health(enemy, attack_strength * -1)
     print(f"After that attack, it's now at {enemy.health}")
 
     if enemy.health <= 0:
