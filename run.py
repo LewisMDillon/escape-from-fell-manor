@@ -34,22 +34,30 @@ def display_main_menu():
 
 # Player Setup ############
 class Player:
+    """
+    Player character class
+    """
     def __init__(
-        self, name, location, health, strength, weapon, armour, lantern,
-        manormap, eyeglass
+        self, name, location, health, weapon, strength, shield, armour,
+        lantern, manormap, eyeglass, silver_key
                 ):
         self.name = name
         self.location = location
         self.health = health
-        self.strength = strength
         self.weapon = weapon
+        self.shield = shield
+        self.strength = strength
         self.armour = armour
         self.lantern = lantern
         self.manormap = manormap
         self.eyeglass = eyeglass
+        self.silver_key = silver_key
 
 
-myPlayer = Player('Name', 'c3', 10, 2, 'fists', 2, False, False, False)
+myPlayer = Player(
+    'Player', 'c3', 10, 'No Weapon', 2, 'No Shield', 2,
+    False, False, False, False
+    )
 
 
 # Enemies Setup ###########
