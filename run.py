@@ -465,18 +465,47 @@ def print_room_description():
 def print_room_details():
     if room_map[myPlayer.location]['completed']:
         type_effect("You have found all there is to find in this room")
-    else:
-        type_effect(room_map[myPlayer.location]['details'])
-    if myPlayer.location == 'b3':
-        if myPlayer.weapon == 'No Weapon':
-            myPlayer.weapon = 'Rusty Dagger'
-            myPlayer.strength = 4
-    if myPlayer.location == 'a4':
+
+    elif myPlayer.location == 'b3':
+        storage_room_details()
+
+    elif myPlayer.location == 'a4':
         dining_room_prompt()
 
+    elif myPlayer.location == 'c4':
+        type_effect(room_map[myPlayer.location]['details'])
+        lantern_prompt()
+
+    else:
+        type_effect(room_map[myPlayer.location]['details'])
+
+
+def storage_room_details():
+    if room_map['b3']['looked'] is True:
+        if myPlayer.lantern is False:
+            type_effect(gametext.room_details_looked['b3'])
+        else:
+            type_effect(gametext.room_details_lantern['b3'])
+            myPlayer.manormap = True
+            room_map['b3']['completed'] = True
+
+    else:
+        if myPlayer.lantern is False:
+            if myPlayer.weapon == 'No Weapon':
+                myPlayer.weapon = 'Rusty Dagger'
+                myPlayer.strength = 4
+                type_effect(room_map['b3']['details'])
+                room_map['b3']['looked'] = True
+        else:
+            type_effect(gametext.room_details_combined['b3'])
+            myPlayer.manormap = True
+            room_map['b3']['completed'] = True
+    
 
 def update_player_health(num):
-    myPlayer.health = myPlayer.health - num
+    myPlayer.health = myPlayer.health + num
+    if myPlayer.health <= 0:
+        player_death()
 
 
 def update_enemy_health(enemy, num):
