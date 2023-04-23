@@ -1,8 +1,8 @@
 import time
 import sys
 import os
-import art
 import random
+import art
 
 
 def type_effect(text, speed=0.0001):
@@ -62,6 +62,9 @@ myPlayer = Player(
 
 # Enemies Setup ###########
 class Monster:
+    """
+    Monster class
+    """
     def __init__(self, name, health, strength, armour):
         self.name = name
         self.health = health
@@ -105,7 +108,8 @@ def title_screen_options():
     """
     option = input('> ')
     if option.lower().strip() == ('play'):
-        start_game()  # define this later
+        player_setup()
+        game_introduction()  # define this later
     elif option.lower().strip() == ('help'):
         help_screen()  # define this later
     elif option.lower().strip() == ('quit'):
@@ -117,19 +121,14 @@ def title_screen_options():
         title_screen_options()
 
 
-def start_game():
-    print('Game Starting...')
-    player_setup()
-    myPlayer.location = 'c3'
-    myPlayer.health = 10
-    game_introduction()
-    # prompt()
-
-
 def help_screen():
+    """
+    Displays the game instructions on ASCII art
+    background
+    """
     HELP = art.HELP
     print(HELP)
-    input("Press ENTER to continue")
+    input("\n\n                     -- Press ENTER to continue --")
     display_main_menu()
     title_screen_options()
 
@@ -138,6 +137,22 @@ def quit_game():
     print('Exiting Game...')
     sys.exit()
 
+
+def player_setup():
+    """
+    Sets player starting attributes to default values
+    """
+    myPlayer.name = 'Player'
+    myPlayer.location = 'c3'
+    myPlayer.health = 10
+    myPlayer.weapon = 'No Weapon'
+    myPlayer.strength = 2
+    myPlayer.shield = 'No shield'
+    myPlayer.armour = 2
+    myPlayer.lantern = False
+    myPlayer.manormap = False
+    myPlayer.eyeglass = False
+    myPlayer.silver_key = False
 
 
 def inventory_screen():
@@ -406,7 +421,7 @@ room_map = {
 }
 
 
-def player_setup():
+def game_introduction():
     os.system("clear")
     type_effect("What is your name, victim ")
     type_effect('\b\b\b\b\b\b\b', 0.04)
@@ -421,6 +436,7 @@ def player_setup():
     time.sleep(0.5)
     type_effect("\nless than hospitable \n", 0.06)
     type_effect("Heh heh heh heh \n", 0.15)
+    game_instructions()
 
 
 def update_player_location(destination):
@@ -451,6 +467,10 @@ def print_room_details():
         type_effect("You have found all there is to find in this room")
     else:
         type_effect(room_map[myPlayer.location]['details'])
+    if myPlayer.location == 'b3':
+        if myPlayer.weapon == 'No Weapon':
+            myPlayer.weapon = 'Rusty Dagger'
+            myPlayer.strength = 4
     if myPlayer.location == 'a4':
         dining_room_prompt()
 
@@ -464,8 +484,8 @@ def update_enemy_health(enemy, num):
 
 
 def player_death():
-    type_effect("You Died....")
-    time.sleep(2)
+    type_effect("\n\nYou Died....")
+    time.sleep(4)
     main()
 
 
@@ -489,27 +509,37 @@ def calculate_valid_directions():
     return directions_list
 
 
-def prompt_default():
+def main_prompt():
     print("\n")
-    type_effect("\nYou can 'look' around the room for more information, \nor")
+    type_effect(
+        "\nYou can 'look' around the room for more information,"
+        " type 'items' to view your items, \nor"
+        )
     directions_list = calculate_valid_directions()
     print("\n")
     type_effect("What would you like to do?\n", 0.04)
     answer = input("> ")
     if answer.lower().strip() in directions_list:
         update_player_location(room_map[myPlayer.location][f"{answer}"])
-    elif answer == 'look':
+    elif answer.lower().strip() == 'look':
         os.system("clear")
         print_room_details()
-    prompt_default()
+    elif answer.lower().strip() == 'items':
+        inventory_screen()
+    main_prompt()
 
 
 def dining_room_prompt():
     type_effect("Do you take a bite of the bread? (yes/no)\n")
     answer = input("> ")
     if answer.lower().strip() == 'yes':
-        type_effect("You take a bite of the bread etc.")
-        type_effect("Will you take another bite?")
+        type_effect(
+            "You take a bite of the bread, it is astonishingly tasty,"
+            " fluffy and warm, yet delightfully crunchy."
+            "\n your health has increased by 2 points!"
+            )
+        update_player_health(-2)
+        type_effect("\nWill you take another bite?")
         second_answer = input("> ")
         if second_answer.lower().strip() == 'yes':
             type_effect("You sudddenly hear a loud crash etc.")
@@ -524,14 +554,14 @@ def dining_room_prompt():
 # update_player_location(room_map[myPlayer.location]['east'])
 
 
-def game_introduction():
+def game_instructions():
     os.system("clear")
 # type_effect("You must escape from Fell Manor! \n", 0.003)
-# type_effect("To move from room to room, type 'go north', 'go south',\n", 0.003)
-# type_effect("go east' or 'go west' when prompted.", 0.003)
+# type_effect("To move from room to room, type 'north', 'south',\n", 0.003)
+# type_effect("'east' or 'west' when prompted.", 0.003)
 # print('\n')
 # time.sleep(0.07)
-# type_effect("You can also type 'look' to try to examine", 0.003)
+# type_effect("You can also type 'look' to examine", 0.003)
 # type_effect(" the room you are in for more information \n", 0.003)
 # print("\n")
 # time.sleep(0.07)
@@ -541,7 +571,7 @@ def game_introduction():
     input("-- press ENTER to begin --")
     os.system("clear")
     game_begin_message()
-    prompt_default()
+    main_prompt()
 
 
 def combat(enemy):
@@ -558,7 +588,10 @@ def combat(enemy):
     else:
         input("Press ENTER to attack!")
 
-    type_effect(f"You attack the {enemy.name} with your {myPlayer.weapon}!")
+    if myPlayer.weapon == 'No Weapon':
+        type_effect(f"You attack the {enemy.name} with your bare fists!")
+    else:
+        type_effect(f"You attack the {enemy.name} with your {myPlayer.weapon}!")
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
     print(f"You hit the {enemy.name} for {attack_strength} damage!")
     print(f"The {enemy.name}'s health was at {enemy.health}")
@@ -570,6 +603,7 @@ def combat(enemy):
         return
     else:
         input("Press ENTER to continue!")
+        combat(enemy)
 
 
 def main():
