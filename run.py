@@ -58,7 +58,7 @@ class Player:
 
 myPlayer = Player(
     'Player', 'c3', 10, 'No Weapon', 2, 'No Shield', 2,
-    False, False, False, False
+    False, False, False, False, False
     )
 
 
