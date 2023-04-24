@@ -50,6 +50,9 @@ room_descriptions = {
           " and then, as you take in the door as a whole, you realise that"
           " all the carvings come together to form the outline of... a face?",
 
+    'c2': "Large alcove. This seems to be the place where that cloaked man"
+          " might sit and watch the fighting below.",
+
     'c3': "Cold, stone room. It seems to be a cell of "
           "some sort\nbut the large iron-barred door "
           "to the north hangs open.\n",
@@ -93,6 +96,9 @@ room_details = {
           " vial of thick blue liquid. It looks unnatural but you"
           " are tempted to try it.",
 
+    'b2': "The arena lies empty, but it looks like you might be able"
+          " to climb up to the large alcove to the south.",
+
     'b3': "You search around in the dark and find a RUSTY DAGGER!\n"
           "It looks like decades of rust have blunted its blade, "
           "but it's better than your fists.\n\n"
@@ -128,6 +134,21 @@ room_details = {
           " \n\n You step away from the door and the face's eyes slowly"
           " close shut again. Its features sinking back into the surface of"
           " the huge door.",
+
+    'c2': "You see a small stone table beside the seat. Upon the table"
+          " there sits an elegantly ornate little box. You lift its"
+          " lid and see a line of strange script that you cannot"
+          " make sense of carved into the inside of the lid."
+          " Sitting snugly in a recess in the box's red and gold"
+          " interior is what looks like a miniature metallic telescope"
+          " you take it and hold it up to your eye and peer through it."
+          " You squint as you look through its lens but you can't seem"
+          " to see any effect compared to your vision."
+          "\n That is until you use it to look back at the ornate box."
+          " The script on the inside of the box slides and moves, the"
+          " lines of the letters turning and rotating to form a sentence!"
+          "\n\n'See beyond what is shown'\n\n"
+          " You place the eyeglass in your pocket.",
 
     'c3': "It's too dark to see anything."
           " Perhaps if you had a light source...",
@@ -211,6 +232,24 @@ room_details_password = {
             "\n\n **The entrance to the south is now open**\n\n"
 
 
+}
+
+room_details_eyeglass = {
+
+      'a3': "As you walk forward, eyes scanning along the countless"
+            " old tomes lining the walls, you see one book whose"
+            " cover does not seem to have any dust on it at all."
+            " You reach over and open it, but cannot read any of"
+            " its contents as it seems to be written in a strange script."
+            " remembering the script on the inside of the eyeglass's box,"
+            " you hastily pull out the eyeglass and peer through it at"
+            " the script in the book."
+            "\n Sure enough, the script begins to change as it did before,"
+            " allowing you to decipher the book's contents"
+            "\nYou skim along the pages of the book before stopping at a"
+            " page containing only two words, \n'Password'\n and directly"
+            " below it, \n'Ajagar'\n"
+            " You make careful note of this word and slam the book shut."        
 }
 
 room_details_lesser_item = {
@@ -305,6 +344,17 @@ enemy_death = {
                        " and quickly pull it out."
                        "\n\n **You equip the IRON SHIELD**\n\n"
                        "This thing looks like it offers some serious"
-                       " protection!"
+                       " protection!",
+
+      'gorehowl': "You fall to your knees beside the huge body of your"
+                  " opponent, gasping for breath and staring at the"
+                  " floor, dumbstruck over the feat you have just"
+                  " accomplished. When you do look up, all the spectators"
+                  " have vanished, and you are once again alone in this"
+                  " massive arena. You pick yourself up and glance around"
+                  " the room once more. The way south, where this beast"
+                  " emerged from has disappeared! but it looks like you"
+                  " might just be able to climb up to the large alcove"
+                  " on that side of the room."
 
 }

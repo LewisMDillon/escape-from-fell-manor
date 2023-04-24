@@ -283,12 +283,12 @@ room_map = {
     },
     'b2': {
         'room_name': 'Arena',
-        'description': 'a bathroom',
-        'details': "you look around and see a toilet",
+        'description': (f"{gametext.room_descriptions['b2']}"),
+        'details': (f"{gametext.room_details['b2']}"),
         'entered': False,
         'completed': False,
         'north': False,
-        'south': 'c2',
+        'south': False,
         'east': False,
         'west': 'b1'
     },
@@ -328,9 +328,9 @@ room_map = {
         'west': False
     },
     'c2': {
-        'room_name': 'Bedroom',
-        'description': 'a library',
-        'details': "you look around and see books",
+        'room_name': 'Alcove',
+        'description': (f"{gametext.room_descriptions['c2']}"),
+        'details': (f"{gametext.room_details['c2']}"),
         'entered': False,
         'completed': False,
         'north': 'b2',
@@ -474,6 +474,9 @@ def print_room_details():
     elif myPlayer.location == 'b3':
         storage_room_details()
 
+    elif myPlayer.location == 'a3':
+        library_details()
+
     elif myPlayer.location == 'a4':
         dining_room_prompt()
 
@@ -532,7 +535,14 @@ def prison_cell_details():
             myPlayer.armour = 4
         else:
             type_effect(gametext.room_details_lesser_item['c3'])
-       
+
+
+def library_details():
+    if myPlayer.eyeglass:
+        type_effect(gametext.room_details_eyeglass['a3'])
+    else:
+        type_effect(gametext.room_details['a3'])
+
 
 def black_chasm_details():
     if myPlayer.lantern:
@@ -599,6 +609,12 @@ def arena_details():
     combat(gorehowl)
 
 
+def alcove_details():
+    type_effect(gametext.room_details['c2'])
+    myPlayer.eyeglass = True
+    room_map['c2']['completed'] = True
+
+
 def final_door_details():
     if myPlayer.password:
         type_effect(gametext.room_details_password['c1'])
@@ -621,6 +637,11 @@ def player_death():
     type_effect("\n\nYou Died....")
     time.sleep(4)
     main()
+
+
+def gorehowl_death():
+    type_effect("\n\nYou defeated Gorehowl!\n\n")
+    type_effect(gametext.enemy_death['gorehowl'])
 
 
 def enemy_death(enemy):
