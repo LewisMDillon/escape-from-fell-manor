@@ -98,8 +98,8 @@ class Shield:
         self.armour = armour
 
 
-wooden_shield = Shield('WOODEN SHIELD', 2)
-iron_shield = Shield('IRON SHIELD', 4)
+wooden_shield = Shield('WOODEN SHIELD', 4)
+iron_shield = Shield('IRON SHIELD', 8)
 
 
 def title_screen_options():
@@ -148,7 +148,7 @@ def player_setup():
     myPlayer.health = 10
     myPlayer.weapon = 'No Weapon'
     myPlayer.strength = 2
-    myPlayer.shield = 'No shield'
+    myPlayer.shield = 'No Shield'
     myPlayer.armour = 2
     myPlayer.lantern = False
     myPlayer.manormap = False
@@ -461,6 +461,9 @@ def print_room_details():
     elif myPlayer.location == 'a4':
         dining_room_prompt()
 
+    elif myPlayer.location == 'c3':
+        prison_cell_details()
+
     elif myPlayer.location == 'c4':
         type_effect(room_map[myPlayer.location]['details'])
         lantern_prompt()
@@ -490,6 +493,18 @@ def storage_room_details():
             myPlayer.manormap = True
             room_map['b3']['completed'] = True
     
+
+def prison_cell_details():
+    if myPlayer.lantern is False:
+        type_effect(room_map[myPlayer.location]['details'])
+    else:
+        if myPlayer.shield == 'No Shield':
+            type_effect(gametext.room_details_lantern['c3'])
+            myPlayer.shield = wooden_shield
+            myPlayer.armour = 4
+        else:
+            type_effect(gametext.room_details_lesser_item['c3'])
+       
 
 def update_player_health(num):
     myPlayer.health = myPlayer.health + num
@@ -559,7 +574,7 @@ def main_prompt():
 
 
 def lantern_prompt():
-    type_effect("Do you want to try to grab the lantern? (yes/no)\n")
+    type_effect(" Do you want to try to grab the lantern? (yes/no)\n")
     answer = input("> ")
     if answer.lower().strip() == 'yes':
         lantern_attempt()
@@ -575,7 +590,7 @@ def lantern_attempt():
     else:
         type_effect(gametext.item_text['lantern_failure'])
         update_player_health(1)
-        type_effect("Do you want to try again? (yes/no)")
+        type_effect(" Do you want to try again? (yes/no)")
         answer = input("> ")
         if answer.lower().strip() == 'yes':
             lantern_attempt()

@@ -78,20 +78,30 @@ room_details_looked = {
 }
 
 room_details_lantern = {
-    'b3': "With the aid of your lantern you search around the crates"
+    'b3': "With the aid of your lantern you search around the crates."
           " It seems to be mostly useless junk, but at the bottom of"
           " an old, rotting wooden crate you find a rolled-up scroll of"
           " parchment. You carefully unravel and examine it. It's a map"
           " of Fell Manor!"
           "\n\n You can now type 'map' when prompted to see a map of"
-          " Fell Manor's rooms."
+          " Fell Manor's rooms.",
+
+    'c3': "Your lantern lights up your immediate surroundings."
+          " A family of mice scurries away from your footfall as"
+          " you scan the room. There is a grimy stone slab which serves"
+          " as a bed and not much else. You do see, however, the"
+          " broken remains of a small wooden table. You pick up"
+          " a large slab of wood which looks like it could be used"
+          " as a makeshift shield! You hug it to your side,"
+          " grateful for whatever protection it can offer"
+          " \n**You equip the WOODEN SHIELD**\n"
 }
 
 room_details_combined = {
     'b3': "You search around and find a RUSTY DAGGER!\n"
           "It looks like decades of rust have blunted its blade, "
-          "but it's better than your fists.\n\n"
-          "**You equip the RUSTY DAGGER**\n\n"
+          "but it's better than your fists."
+          "\n**You equip the RUSTY DAGGER**\n"
           "Not only that, but with the aid of your lantern"
           " you find, at the bottom of an old, rotting"
           " wooden crate, a rolled-up scroll of parchment."
@@ -99,6 +109,29 @@ room_details_combined = {
           " of Fell Manor!"
           "\n\n You can now type 'map' when prompted to see a map of"
           " Fell Manor's rooms."
+}
+
+room_details_lesser_item = {
+      'b3': "You search around and find a RUSTY DAGGER!\n"
+            "It looks like decades of rust have blunted its blade, "
+            " This dagger looks far less useful than your SILVER"
+            " SWORD so you leave it behind."
+            "\nAs well as the dagger, with the aid of your lantern"
+            " you find, at the bottom of an old, rotting"
+            " wooden crate, a rolled-up scroll of parchment."
+            " You carefully unravel and examine it. It's a map"
+            " of Fell Manor!"
+            "\n\n You can now type 'map' when prompted to see a map of"
+            " Fell Manor's rooms.",
+
+      'c3': "Your lantern lights up your immediate surroundings."
+            " A family of mice scurries away from your footfall as"
+            " you scan the room. There is a grimy stone slab which serves"
+            " as a bed and not much else. You do see, however, the"
+            " broken remains of a small wooden table. You pick up"
+            " a large slab of wood which looks like it could be used"
+            " as a makeshift shield, but much worse than your"
+            " IRON SHIELD, so you leave it behind."
 }
 
 item_text = {
