@@ -506,6 +506,31 @@ def prison_cell_details():
             type_effect(gametext.room_details_lesser_item['c3'])
        
 
+def black_chasm_details():
+    if myPlayer.lantern:
+        type_effect(gametext.room_details_lantern['a2'])
+        room_map['a2']['west'] = 'a1'
+    else:
+        type_effect("Do you want to step forward into the blackness? (yes/no)")
+        answer = input("> ")
+        if answer.lower().strip() == 'yes':
+            type_effect(gametext.room_details['a2'])
+            player_death()
+        else:
+            main_prompt()
+
+
+def study_details():
+    type_effect(gametext.room_details['a1'])
+    type_effect("Do you want to open the chest? (yes/no)\n")
+    answer = input("> ")
+    if answer.lower().strip() == 'yes':
+        type_effect(gametext.enemy_text['haunted_chest'])
+        combat(haunted_chest)
+    else:
+        type_effect("You step nervously back from the chest.")
+
+
 def update_player_health(num):
     myPlayer.health = myPlayer.health + num
     if myPlayer.health <= 0:
