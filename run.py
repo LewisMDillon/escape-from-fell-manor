@@ -684,31 +684,32 @@ def game_instructions():
 
 
 def combat(enemy):
-    type_effect(f"The {enemy.name} attacks!")
+    type_effect(f"\nThe {enemy.name} attacks!")
     enemy_attack_strength = random.randint(0, 4) + enemy.strength - myPlayer.armour
-    type_effect(f"The {enemy.name} hits you for {enemy_attack_strength} damage!")
-    print(f"Your health was at {myPlayer.health}")
+    if enemy_attack_strength < 0:
+        enemy_attack_strength = 0
+    type_effect(f"\nThe {enemy.name} hits you for {enemy_attack_strength} damage!")
+    print(f"\nYour health was at {myPlayer.health}")
+    print(
+        f"\nafter that attack, it's now at {myPlayer.health - enemy_attack_strength}"
+        )
     update_player_health(enemy_attack_strength * -1)
-    print(f"after that attack, it's now at {myPlayer.health}")
 
-    if myPlayer.health <= 0:
-        player_death()
-        return
-    else:
-        input("Press ENTER to attack!")
+    input("\n\nPress ENTER to attack!")
 
     if myPlayer.weapon == 'No Weapon':
         type_effect(f"You attack the {enemy.name} with your bare fists!")
     else:
         type_effect(f"You attack the {enemy.name} with your {myPlayer.weapon}!")
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
+    if attack_strength < 0:
+        attack_strength = 0
     print(f"You hit the {enemy.name} for {attack_strength} damage!")
     print(f"The {enemy.name}'s health was at {enemy.health}")
+    print(f"After that attack, it's now at {enemy.health - attack_strength}")
     update_enemy_health(enemy, attack_strength * -1)
-    print(f"After that attack, it's now at {enemy.health}")
-
+    
     if enemy.health <= 0:
-        enemy_death(enemy)
         return
     else:
         input("Press ENTER to continue!")
