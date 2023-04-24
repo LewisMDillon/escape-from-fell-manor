@@ -25,6 +25,14 @@ room_descriptions = {
           " door at the southern end of the corridor, and you can see"
           " an alcove on the western side with another door.",
 
+    'b2': "Huge circular room. The floor below your feet is hard stone"
+          " and stained a dark crimson colour. You look up and see dark"
+          " alcoves set in to the walls every few meters. You can just"
+          " about make out what look like seats in the alcoves. You then"
+          " see this place for what it is: an arena."
+          " \n As you go to run back the way you came, a voice comes"
+          " booming out from behind you.",
+
     'b3': "storage room. Wooden crates are piled high"
           " all around you. \nThere is very little light,"
           " but you can just make out a spiral staircase"

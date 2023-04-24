@@ -76,6 +76,7 @@ class Monster:
 
 ogre = Monster('Ogre', 10, 4, 2)
 haunted_chest = Monster('Haunted Chest', 12, 5, 3)
+gorehowl = Monster('Gorehowl', 20, 6, 1)
 
 
 class Weapon:
@@ -570,6 +571,34 @@ def candlelit_corridor_details():
             )
 
 
+def arena_details():
+    type_effect(
+        f"\n\n'Welcome {myPlayer.name}."
+                 )
+    type_effect(
+        "You spin around to see a tall slender man in a red and gold cloak,"
+        "smiling from ear to ear, his feet floating six inches of the ground."
+        "\n At the same time, you see all manner of foul creatures scurrying"
+        " around the upper levels of the arena, fighting for seats."
+    )
+    type_effect(
+        "The cloked man turns and in a grandiose gesture you see"
+        " two unnaturally long, grey-skinned arms emerge from his cloak"
+        " into the air before he speaks again:"
+
+        "\n\n'Can we please be upstanding for this evening's main event."
+        f"The brave adventurer {myPlayer.name} will take on our undefeated"
+        " champion, GOREHOWL!'\n\n"
+
+        "With that, the cloaked man vanishes and you hear a terrifying"
+        "guttural growl from the door on the opposite end of the room."
+        "\n Suddenly, a huge beast charges forth from the door! You only"
+        " get a brief second to take in its huge mass of fur and fangs"
+        " before it is upon you!"
+    )
+    combat(gorehowl)
+
+
 def final_door_details():
     if myPlayer.password:
         type_effect(gametext.room_details_password['c1'])
@@ -739,7 +768,7 @@ def combat(enemy):
     print(f"The {enemy.name}'s health was at {enemy.health}")
     print(f"After that attack, it's now at {enemy.health - attack_strength}")
     update_enemy_health(enemy, attack_strength * -1)
-    
+   
     if enemy.health <= 0:
         return
     else:
