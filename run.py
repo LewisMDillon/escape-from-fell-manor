@@ -40,7 +40,7 @@ class Player:
     """
     def __init__(
         self, name, location, health, weapon, strength, shield, armour,
-        lantern, manormap, eyeglass, silver_key
+        lantern, manormap, eyeglass, silver_key, password
                 ):
         self.name = name
         self.location = location
@@ -53,6 +53,7 @@ class Player:
         self.manormap = manormap
         self.eyeglass = eyeglass
         self.silver_key = silver_key
+        self.password = password
 
 
 myPlayer = Player(
@@ -155,6 +156,7 @@ def player_setup():
     myPlayer.manormap = False
     myPlayer.eyeglass = False
     myPlayer.silver_key = False
+    myPlayer.password = False
 
 
 def inventory_screen():
@@ -315,12 +317,12 @@ room_map = {
     },
     'c1': {
         'room_name': 'Final Door',
-        'description': 'an Observatory',
-        'details': 'you look around and see space',
+        'description': (f"{gametext.room_descriptions['c1']}"),
+        'details': (f"{gametext.room_details['c1']}"),
         'entered': False,
         'completed': False,
         'north': 'b1',
-        'south': 'd1',
+        'south': False,
         'east': False,
         'west': False
     },
@@ -487,6 +489,9 @@ def print_room_details():
     elif myPlayer.location == 'a1':
         study_details()
 
+    elif myPlayer.location == 'c1':
+        final_door_details()
+
     else:
         type_effect(room_map[myPlayer.location]['details'])
 
@@ -563,6 +568,12 @@ def candlelit_corridor_details():
         type_effect(
             "You leave the vial where it is and slide the drawer shut"
             )
+
+
+def final_door_details():
+    if myPlayer.password:
+        type_effect(gametext.room_details_password['c1'])
+        room_map['c1']['south'] = 'd1'
 
 
 def update_player_health(num):

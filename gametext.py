@@ -107,6 +107,20 @@ room_details = {
           " it is saying...\n\n\n"
           "     'Return to me when you can see beyond what is shown'\n\n\n",
 
+    'c1': "As you stare at the carvings, they begin to move! The giant wooden"
+          " features of the face on the door creasing and opening."
+          " The wood cracks and groans as the face's eyes fully open."
+          " It stares directly at you with its huge, green, wooden eyes"
+          " and speaks one word...\n\n 'PASSWORD' \n\n"
+          " You stare blankly back for a moment before realising that"
+          " it is expecting an answer from you. "
+          " You try to think of what this password could be but nothing"
+          " comes to your mind. Perhaps there is a clue hidden somewhere"
+          " in another room..."
+          " \n\n You step away from the door and the face's eyes slowly"
+          " close shut again. Its features sinking back into the surface of"
+          " the huge door.",
+
     'c3': "It's too dark to see anything."
           " Perhaps if you had a light source...",
 
@@ -172,6 +186,23 @@ room_details_combined = {
           " of Fell Manor!"
           "\n\n You can now type 'map' when prompted to see a map of"
           " Fell Manor's rooms."
+}
+
+room_details_password = {
+
+      'c1': "As you stare at the carvings, they begin to move! The giant"
+            " wooden features of the face on the door creasing and opening."
+            " The wood cracks and groans as the face's eyes fully open."
+            " It stares directly at you with its huge, green, wooden eyes"
+            " and speaks one word...\n\n 'PASSWORD' \n\n"
+            " Knowing the password, you speak the word:"
+            " \n\n'Ajagar'\n\n"
+            " The wooden face grimaces, snapping and creaking as the door"
+            " slowly swings open. Through it you can see Fell Manor's"
+            " final room, and beyond it, the door to your escape..."
+            "\n\n **The entrance to the south is now open**\n\n"
+
+
 }
 
 room_details_lesser_item = {
