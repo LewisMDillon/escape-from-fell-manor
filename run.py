@@ -225,8 +225,8 @@ def test_function():
 room_map = {
     'a1': {
         'room_name': 'Study',
-        'description': 'a lab with chemicals',
-        'details': 'you look around and see chemicals',
+        'description': (f"{gametext.room_descriptions['a1']}"),
+        'details': (f"{gametext.room_details['a1']}"),
         'entered': False,
         'completed': False,
         'north': False,
@@ -235,20 +235,20 @@ room_map = {
         'west': False
     },
     'a2': {
-        'room_name': 'Corridor of Spikes',
-        'description': 'a scary dungeon',
-        'details': "it's a really scary dungeon",
+        'room_name': 'Black Chasm',
+        'description': (f"{gametext.room_descriptions['a2']}"),
+        'details': (f"{gametext.room_details['a2']}"),
         'entered': False,
         'completed': False,
         'north': False,
         'south': False,
         'east': 'a3',
-        'west': 'a1'
+        'west': False
     },
     'a3': {
         'room_name': 'Library',
-        'description': 'a dingy cellar',
-        'details': "it's a really dingy cellar",
+        'description': (f"{gametext.room_descriptions['a3']}"),
+        'details': (f"{gametext.room_details['a3']}"),
         'entered': False,
         'completed': False,
         'north': False,
@@ -258,8 +258,8 @@ room_map = {
     },
     'a4': {
         'room_name': 'Dining room',
-        'description': (f"{gametext.room_descriptions[myPlayer.location]}"),
-        'details': (f"{gametext.room_details[myPlayer.location]}"),
+        'description': (f"{gametext.room_descriptions['a4']}"),
+        'details': (f"{gametext.room_details['a4']}"),
         'entered': False,
         'completed': False,
         'north': False,
@@ -454,7 +454,7 @@ def update_player_location(destination):
 
 def print_room_description():
     if room_map[myPlayer.location]['entered']:
-        type_effect(
+        print(
             f"You are back in the {room_map[myPlayer.location]['description']}"
             )
     else:
@@ -481,6 +481,12 @@ def print_room_details():
         type_effect(room_map[myPlayer.location]['details'])
         lantern_prompt()
 
+    elif myPlayer.location == 'a2':
+        black_chasm_details()
+
+    elif myPlayer.location == 'a1':
+        study_details()
+
     else:
         type_effect(room_map[myPlayer.location]['details'])
 
@@ -503,6 +509,9 @@ def storage_room_details():
                 room_map['b3']['looked'] = True
         else:
             type_effect(gametext.room_details_combined['b3'])
+            if myPlayer.weapon == 'No Weapon':
+                myPlayer.weapon = 'Rusty Dagger'
+                myPlayer.strength = 4
             myPlayer.manormap = True
             room_map['b3']['completed'] = True
     
@@ -513,7 +522,7 @@ def prison_cell_details():
     else:
         if myPlayer.shield == 'No Shield':
             type_effect(gametext.room_details_lantern['c3'])
-            myPlayer.shield = wooden_shield
+            myPlayer.shield = 'Wooden Shield'
             myPlayer.armour = 4
         else:
             type_effect(gametext.room_details_lesser_item['c3'])
@@ -544,6 +553,18 @@ def study_details():
         type_effect("You step nervously back from the chest.")
 
 
+def candlelit_corridor_details():
+    type_effect(gametext.room_details['b1'])
+    type_effect("Do you want to drink the liquid? (yes/no)\n")
+    answer = input("> ")
+    if answer.lower().strip() == 'yes':
+        type_effect(gametext.item_text['health_potion'])
+    else:
+        type_effect(
+            "You leave the vial where it is and slide the drawer shut"
+            )
+
+
 def update_player_health(num):
     myPlayer.health = myPlayer.health + num
     if myPlayer.health <= 0:
@@ -551,7 +572,9 @@ def update_player_health(num):
 
 
 def update_enemy_health(enemy, num):
-    enemy.health = enemy.health - num
+    enemy.health = enemy.health + num
+    if enemy.health <= 0:
+        enemy_death(enemy)
 
 
 def player_death():
@@ -561,8 +584,17 @@ def player_death():
 
 
 def enemy_death(enemy):
-    type_effect(f"You defeated the {enemy.name}!")
-
+    type_effect(f"You defeated the {enemy.name}!\n")
+    if myPlayer.location == 'a4':
+        type_effect(gametext.enemy_death['ogre'])
+        update_player_health(10)
+        room_map['a4']['completed'] = True
+    elif myPlayer.location == 'a1':
+        type_effect(gametext.enemy_death['haunted_chest'])
+        myPlayer.shield = 'Iron Shield'
+        myPlayer.armour = 8
+        room_map['a1']['completed'] = True
+        
 
 def game_begin_message():
     type_effect(f"You awake in a {room_map[myPlayer.location]['description']}")
@@ -585,17 +617,17 @@ def main_prompt():
     if myPlayer.manormap is False:
         type_effect(
             "\nYou can 'look' around the room for more information,"
-            " type 'items' to view your items, \nor"
+            " type 'items' to view your items & health, \nor"
                  )
     else:
         type_effect(
             "\nYou can 'look' around the room for more information,"
-            " type 'items' to view your items, type 'map' to view the"
+            " type 'items' to view your items & health, type 'map' to view the"
             " map,\nor"
                  )
     directions_list = calculate_valid_directions()
     print("\n")
-    type_effect("What would you like to do?\n", 0.04)
+    type_effect("What would you like to do?\n", 0.004)
     answer = input("> ")
     if answer.lower().strip() in directions_list:
         update_player_location(room_map[myPlayer.location][f"{answer}"])
@@ -637,30 +669,18 @@ def lantern_attempt():
 
 
 def dining_room_prompt():
+    type_effect(f"{gametext.room_details['a4']}")
     type_effect("Do you take a bite of the bread? (yes/no)\n")
     answer = input("> ")
     if answer.lower().strip() == 'yes':
         type_effect(
             "You take a bite of the bread, it is astonishingly tasty,"
             " fluffy and warm, yet delightfully crunchy."
-            "\n your health has increased by 2 points!"
+            "\n\n **Your health increases by 2 points**\n\n"
             )
         update_player_health(2)
-        type_effect("\nWill you take another bite?")
-        second_answer = input("> ")
-        if second_answer.lower().strip() == 'yes':
-            type_effect(
-                "You sudddenly hear a loud crash!\n"
-                )
-            combat(ogre)
-        else:
-            type_effect("You manage to stop yourself etc.")
-    else:
-        type_effect("You manage to stop yourself etc.")
-
-
-# this is the code to move room
-# update_player_location(room_map[myPlayer.location]['east'])
+        type_effect(gametext.enemy_text['ogre'])
+        combat(ogre)
 
 
 def game_instructions():
