@@ -74,6 +74,7 @@ class Monster:
 
 
 ogre = Monster('Ogre', 10, 4, 2)
+haunted_chest = Monster('Haunted Chest', 12, 5, 3)
 
 
 class Weapon:
@@ -98,8 +99,8 @@ class Shield:
         self.armour = armour
 
 
-wooden_shield = Shield('WOODEN SHIELD', 4)
-iron_shield = Shield('IRON SHIELD', 8)
+wooden_shield = Shield('Wooden Shield', 4)
+iron_shield = Shield('Iron Shield', 8)
 
 
 def title_screen_options():
@@ -150,7 +151,7 @@ def player_setup():
     myPlayer.strength = 2
     myPlayer.shield = 'No Shield'
     myPlayer.armour = 2
-    myPlayer.lantern = False
+    myPlayer.lantern = True
     myPlayer.manormap = False
     myPlayer.eyeglass = False
     myPlayer.silver_key = False
@@ -159,7 +160,7 @@ def player_setup():
 def inventory_screen():
     """
     Displays the player inventory, lists all weapons,
-    equipment, and items the player has found.
+    equipment, and items the player has found & displays player health
     """
     print("Here are the items and equipment " 
           "that you have gathered on your journey so far:\n")
@@ -173,7 +174,17 @@ def inventory_screen():
             )
     else:
         print(f"\nWeapon: {myPlayer.weapon}")
-    print(f"\nShield: {myPlayer.shield}")
+
+    if myPlayer.shield == 'Wooden Shield':
+        print(
+            f"\nShield: {myPlayer.shield} -- +{wooden_shield.armour - 2} armour"
+            )
+    elif myPlayer.shield == 'Iron Shield':
+        print(
+            f"\nShield: {myPlayer.shield} -- +{iron_shield.armour - 2} armour"
+            )
+    else:
+        print(f"\nShield: {myPlayer.shield}")
     print("\nOther items:")
     if myPlayer.lantern:
         print("Lantern")
@@ -185,6 +196,8 @@ def inventory_screen():
         print("Eyeglass")
     if myPlayer.silver_key:
         print("Silver Key")
+    
+    print(f"\n\n Your health is currently at {myPlayer.health}")
     
 
 def display_map():
