@@ -32,7 +32,7 @@ MAIN_MENU = """
 
 HELP = """
    _.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._.-=-._
-.-'---      - ---     --     ---   -----   - --       ----  ----   -     ---`-.
+.-'                                                                         `-.
  )                     You must escape from Fell Manor!                      (
 (                                                                             )
  )   - To move from room to room, type 'north', 'south' 'east' or            (

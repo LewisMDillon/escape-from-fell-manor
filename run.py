@@ -21,6 +21,19 @@ def type_effect(text, speed=0.04):
         time.sleep(speed)
 
 
+CENT = "{:^80}".format  # variable for centering text in terminal
+
+
+def paragraph():
+    print("\n\n")
+
+
+def confirm():
+    paragraph()
+    input(CENT("-- Press ENTER to continue --"))
+    clear()
+
+
 def display_title_screen():
     """
     Displays the Main Game Logo
@@ -28,8 +41,7 @@ def display_title_screen():
     clear()
     TITLE = art.TITLE
     type_effect(TITLE, 0.002)
-    input("\n\n-- Press ENTER to continue --")
-    clear()
+    confirm()
     display_main_menu()
 
 
@@ -37,10 +49,52 @@ def display_main_menu():
     """
     Displays the main menu
     """
+    clear()
     MAIN_MENU = art.MAIN_MENU
     type_effect(MAIN_MENU, 0.003)
-    type_effect("\n\n Type 'play', 'help', or 'quit'")
+    paragraph()
+    print(CENT("Type 'play', 'help', or 'quit'"))
     title_screen_options()
+
+
+def title_screen_options():
+    """
+    presents user with different selectable options at
+    the title screen
+    """
+    option = input('\n> ')
+    if option.lower().strip() == ('play'):
+        player_setup()
+        game_introduction()
+    elif option.lower().strip() == ('help'):
+        help_screen()
+    elif option.lower().strip() == ('quit'):
+        quit_game()
+    elif option.lower().strip() == ('test'):
+        test_function()
+    else:
+        print('Please type play, help, or quit')
+        confirm()
+        display_main_menu()
+        title_screen_options()
+
+
+def help_screen():
+    """
+    Displays the game instructions on ASCII art
+    background
+    """
+    clear()
+    HELP = art.HELP
+    print(HELP)
+    confirm()
+    display_main_menu()
+    title_screen_options()
+
+
+def quit_game():
+    print('Exiting Game...')
+    sys.exit()
 
 
 # Player Setup ############
@@ -113,43 +167,6 @@ class Shield:
 
 wooden_shield = Shield('Wooden Shield', 4)
 iron_shield = Shield('Iron Shield', 8)
-
-
-def title_screen_options():
-    """
-    presents user with different selectable options at
-    the title screen
-    """
-    option = input('\n> ')
-    if option.lower().strip() == ('play'):
-        player_setup()
-        game_introduction()  # define this later
-    elif option.lower().strip() == ('help'):
-        help_screen()  # define this later
-    elif option.lower().strip() == ('quit'):
-        quit_game()  # define this later
-    elif option.lower().strip() == ('test'):
-        test_function()
-    else:
-        print('Please type play, help, or quit')
-        title_screen_options()
-
-
-def help_screen():
-    """
-    Displays the game instructions on ASCII art
-    background
-    """
-    HELP = art.HELP
-    print(HELP)
-    input("\n\n                     -- Press ENTER to continue --")
-    display_main_menu()
-    title_screen_options()
-
-
-def quit_game():
-    print('Exiting Game...')
-    sys.exit()
 
 
 def player_setup():
