@@ -1,19 +1,19 @@
 room_descriptions = {
 
-    'a1': "Luxurious study. The room's many shelves are home to"
+    'a1': "luxurious study. The room's many shelves are home to"
           " various odd trinkets which you've never seen before."
           " You suddenly feel like something to the north moved"
           " ever so slightly. You whip your gaze around to that side"
           " of the room but everything lies still...",
 
-    'a2': "Pitch-dark chamber. The ground beneath your feet is hard stone"
+    'a2': "pitch-dark chamber. The ground beneath your feet is hard stone"
           " but you cannot see anything more than a few inches in front"
           " of your face",
 
-    'a3': "Library. Rows of books line shelves on the northern and"
+    'a3': "library. Rows of books line shelves on the northern and"
           " southern walls, all covered in a thick layer of dust.",
 
-    'a4': "Dining room. A fire burns in the huge hearth on the"
+    'a4': "dining room. A fire burns in the huge hearth on the"
           " opposite wall, casting warm orange light on to the"
           " centerpiece of the room:\na gigantic oaken dining table.\n\n"
           " On this dining table sits a single plate, upon which"
@@ -36,26 +36,26 @@ room_descriptions = {
           "\nall around you. There is very little light,"
           "\nbut you can just make out a spiral staircase to the east",
 
-    'b4': "Grand hall. your eyes follow the intricate pattern on the"
+    'b4': "grand hall. your eyes follow the intricate pattern on the"
           " red and gold carpet up to the staggeringly high walls,"
           " adorned from bottom to top with countless beautiful paintings"
           " and portraits.\n\n There are large ornate wooden doors"
           " to the north and to the south.",
 
-    'c1': "Grand entranceway. In front of you stands a huge wooden door,"
+    'c1': "grand entranceway. In front of you stands a huge wooden door,"
           " beatifully carved with intricate flowing designs from bottom"
           " to top. Your eyes follow the lines from one design to the next"
           " and then, as you take in the door as a whole, you realise that"
           " all the carvings come together to form the outline of... a face?",
 
-    'c2': "Large alcove. This seems to be the place where that cloaked man"
+    'c2': "large alcove. This seems to be the place where that cloaked man"
           " might sit and watch the fighting below.",
 
-    'c3': "Cold, stone room. It seems to be a cell of "
+    'c3': "cold, stone room. It seems to be a cell of "
           "some sort\nbut the large iron-barred door "
           "to the north hangs open.\n",
 
-    'c4': "Narrow, stone-walled corridor. A single, small lantern"
+    'c4': "narrow, stone-walled corridor. A single, small lantern"
           " hangs from the curved roof, casting a dim light onto the"
           " floor below, upon which you see a puddle has formed,"
           " presumably from a leak in the stone ceiling."
@@ -66,10 +66,10 @@ room_descriptions = {
 
 room_descriptions_completed = {
 
-      'a4': "Dining room, the ogre's body lies slumped over the"
+      'a4': "dining room, the ogre's body lies slumped over the"
             " giant dining table.",
 
-      'c4': "Narrow, stone-walled corridor where you found your lantern."
+      'c4': "narrow, stone-walled corridor where you found your lantern."
 }
 
 room_details = {
