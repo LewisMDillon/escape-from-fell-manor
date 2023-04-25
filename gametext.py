@@ -53,7 +53,7 @@ room_descriptions = {
 
     'c3': "cold, stone room. It seems to be a cell of "
           "some sort\nbut the large iron-barred door "
-          "to the north hangs open.\n",
+          "to the north hangs open.",
 
     'c4': "narrow, stone-walled corridor. A single, small lantern"
           " hangs from the curved roof, casting a dim light onto the"

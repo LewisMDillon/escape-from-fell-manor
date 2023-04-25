@@ -18,18 +18,22 @@ def type_effect(text, speed=0.04):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(speed)
+        time.sleep(speed)       
 
 
 CENT = "{:^80}".format  # variable for centering text in terminal
 
 
-def paragraph():
+def skip_line():
+    print("\n")
+
+
+def skip_two_lines():
     print("\n\n")
 
 
 def confirm():
-    paragraph()
+    skip_two_lines()
     input(CENT("-- Press ENTER to continue --"))
     clear()
 
@@ -52,7 +56,7 @@ def display_main_menu():
     clear()
     MAIN_MENU = art.MAIN_MENU
     type_effect(MAIN_MENU, 0.003)
-    paragraph()
+    skip_two_lines()
     print(CENT("Type 'play', 'help', or 'quit'"))
     title_screen_options()
 
@@ -196,26 +200,31 @@ def inventory_screen():
           "that you have gathered on your journey so far:")
     if myPlayer.weapon == 'Rusty Dagger':
         print(
-            f"\nWeapon: {myPlayer.weapon} -- +{rusty_dagger.strength - 2} damage"
+            f"\nWeapon: {myPlayer.weapon}"
+            f"-- +{rusty_dagger.strength - 2} damage"
             )
     elif myPlayer.weapon == 'Silver Sword':
         print(
-            f"\nWeapon: {myPlayer.weapon} -- +{silver_sword.strength - 2} damage"
+            f"\nWeapon: {myPlayer.weapon}"
+            f"-- +{silver_sword.strength - 2} damage"
             )
     else:
         print(f"\nWeapon: {myPlayer.weapon}")
 
     if myPlayer.shield == 'Wooden Shield':
         print(
-            f"\nShield: {myPlayer.shield} -- +{wooden_shield.armour - 2} armour"
+            f"\nShield: {myPlayer.shield}"
+            f"-- +{wooden_shield.armour - 2} armour"
             )
     elif myPlayer.shield == 'Iron Shield':
         print(
-            f"\nShield: {myPlayer.shield} -- +{iron_shield.armour - 2} armour"
+            f"\nShield: {myPlayer.shield}"
+            f"-- +{iron_shield.armour - 2} armour"
             )
     else:
         print(f"\nShield: {myPlayer.shield}")
-    print("\nOther items:")
+    skip_line()
+    print("Other items:")
     if myPlayer.lantern:
         print("Lantern")
     else:
@@ -226,8 +235,8 @@ def inventory_screen():
         print("Eyeglass")
     if myPlayer.silver_key:
         print("Silver Key")
-    
-    print(f"\n Your health is currently at {myPlayer.health}")
+    skip_line()
+    print(f"Your health is currently at {myPlayer.health}")
     
 
 def display_map():
@@ -458,17 +467,18 @@ def game_introduction():
     type_effect("What is your name, victim ")
     time.sleep(0.35)
     type_effect('\b\b\b\b\b\b\b', 0.03)
-    type_effect('brave adventurer? \n')
+    type_effect('brave adventurer?')
+    skip_line()
     name = input('> ')
     myPlayer.name = name
     clear()
-    type_effect(f"Welcome, {myPlayer.name}, to Fell Manor\n")
-    type_effect("Please, do make yourself at home. \n")
-    type_effect("But you may wish to steer clear of the other guests. \n")
-    type_effect("You might find them...")
+    type_effect(f"\nWelcome, {myPlayer.name}, to Fell Manor")
+    type_effect("\nPlease, do make yourself at home.")
+    type_effect("\nBut you may wish to steer clear of the other guests.")
+    type_effect("\nYou might find them...")
     time.sleep(0.5)
-    type_effect("\nless than hospitable \n", 0.05)
-    type_effect("Heh heh heh heh \n", 0.18)
+    type_effect("\nless than hospitable", 0.05)
+    type_effect("\nHeh heh heh heh", 0.18)
     game_instructions()
 
 
@@ -585,7 +595,9 @@ def black_chasm_details():
         room_map['a2']['west'] = 'a1'
         room_map['a2']['completed'] = True
     else:
-        type_effect("\nDo you want to step forward into the blackness? (yes/no)")
+        type_effect(
+            "\nDo you want to step forward into the blackness? (yes/no)"
+        )
         answer = input("> ")
         if answer.lower().strip() == 'yes':
             type_effect(gametext.room_details['a2'])
@@ -793,17 +805,17 @@ def dining_room_prompt():
 
 def game_instructions():
     clear()
-    type_effect("You must escape from Fell Manor! \n", 0.01)
-    type_effect("To move from room to room, type 'north', 'south',\n", 0.01)
-    type_effect("'east' or 'west' when prompted.", 0.01)
-    print('\n')
-    type_effect("You can also type 'look' to examine", 0.01)
-    type_effect(" the room you are in for more information \n", 0.01)
-    print("\n")
-    type_effect("Many challenges await you,\n", 0.01)
-    type_effect("Good Luck!\n", 0.01)
-    print("\n \n")
-    input("-- press ENTER to begin --")
+    print(CENT("You must escape from Fell Manor!"))
+    print(CENT("To move from room to room, type 'north', 'south'"))
+    print(CENT("'east' or 'west' when prompted."))
+    skip_line()
+    print(CENT("You can also type 'look' to examine"))
+    print(CENT("the room you are in for more information"))
+    skip_line()
+    print(CENT("Many challenges await you,\n"))
+    print(CENT("Good Luck!"))
+    skip_two_lines()
+    input(CENT("-- press ENTER to begin --"))
     clear()
     game_begin_message()
     main_prompt()
@@ -845,5 +857,6 @@ def combat(enemy):
 
 def main():
     display_title_screen()
+
 
 main()
