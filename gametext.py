@@ -6,10 +6,9 @@ room_descriptions = {
           " ever so slightly. You whip your gaze around to that side"
           " of the room but everything lies still...",
 
-    'a2': "Pitch-dark chamber. You cannot see anything more than a"
-          " few inches in front of your face, but the sound of your"
-          " footsteps reverberating around the chamber gives you the"
-          " sense that this chamber is vast.",
+    'a2': "Pitch-dark chamber. The ground beneath your feet is hard stone"
+          " but you cannot see anything more than a few inches in front"
+          " of your face",
 
     'a3': "Library. Rows of books line shelves on the northern and"
           " southern walls, all covered in a thick layer of dust.",
@@ -21,11 +20,11 @@ room_descriptions = {
           " rests the most, soft, warm, appetizing loaf of bread\n"
           " Your stomach grumbles...",
 
-    'b1': "Long candlelit corridor. The candles' glow illuminates a"
+    'b1': "long candlelit corridor. The candles' glow illuminates a"
           " door at the southern end of the corridor, and you can see"
           " an alcove on the western side with another door.",
 
-    'b2': "Huge circular room. The floor below your feet is hard stone"
+    'b2': "huge circular room. The floor below your feet is hard stone"
           " and stained a dark crimson colour. You look up and see dark"
           " alcoves set in to the walls every few meters. You can just"
           " about make out what look like seats in the alcoves. You then"
@@ -34,13 +33,12 @@ room_descriptions = {
           " booming out from behind you.",
 
     'b3': "storage room. Wooden crates are piled high"
-          " all around you. \nThere is very little light,"
-          " but you can just make out a spiral staircase"
-          " to the east\n",
+          "\nall around you. There is very little light,"
+          "\nbut you can just make out a spiral staircase to the east",
 
     'b4': "Grand hall. your eyes follow the intricate pattern on the"
           " red and gold carpet up to the staggeringly high walls,"
-          " adorned from bottom to top with beautiful paintings"
+          " adorned from bottom to top with countless beautiful paintings"
           " and portraits.\n\n There are large ornate wooden doors"
           " to the north and to the south.",
 
@@ -66,11 +64,19 @@ room_descriptions = {
 
 }
 
+room_descriptions_completed = {
+
+      'a4': "Dining room, the ogre's body lies slumped over the"
+            " giant dining table.",
+
+      'c4': "Narrow, stone-walled corridor where you found your lantern."
+}
+
 room_details = {
 
     'a1': "You step nervously towards the north side of the room"
           " and see, on the ground, a large sturdy wooden chest."
-          " you know that it can't have been the chest that moved"
+          " You know that it can't have been the chest that moved"
           " but at the same time, something about it looks... off",
 
     'a2': "You take your first step forward into the blackness."
@@ -92,19 +98,19 @@ room_details = {
     'b1': "As you make your way down the corridor, you notice that"
           " there is a small brass ring hanging from the wall."
           " You give it a slight pull and a little drawer pulls"
-          " out from the wall! Inside this drawer sits, a sealed"
+          " out from the wall! Inside this drawer sits a sealed"
           " vial of thick blue liquid. It looks unnatural but you"
           " are tempted to try it.",
 
     'b2': "The arena lies empty, but it looks like you might be able"
           " to climb up to the large alcove to the south.",
 
-    'b3': "You search around in the dark and find a RUSTY DAGGER!\n"
-          "It looks like decades of rust have blunted its blade, "
-          "but it's better than your fists.\n\n"
-          "**You equip the RUSTY DAGGER**\n\n"
+    'b3': "You search around in the dark and find a RUSTY DAGGER!"
+          "\nIt looks like decades of rust have blunted its blade, "
+          "\nbut it's better than your fists."
+          "\n\n**You equip the RUSTY DAGGER**\n\n"
           "There is probably more hidden among the crates, but "
-          "it's too dark to see anything",
+          "\nit's too dark to see anything",
 
     'b4': "You inspect the paintings. They are all beautifully done."
           " You notice that the characters in the portraits are never"
@@ -174,7 +180,7 @@ room_details_lantern = {
 
     'a2': "You say a silent thanks for your lantern as you feel the"
           " oppresive dark pushed back from you, even if only slightly."
-          " you take a ginger step forwards and lower your lantern to"
+          " you step tentatively forwards and lower your lantern to"
           " see that the ground one step beyond your feet gives way"
           " to a black chasm. Stepping beyond where you stand seems"
           " like certain death, but you notice to your left, an"
@@ -193,21 +199,21 @@ room_details_lantern = {
           " Fell Manor's rooms.",
 
     'c3': "Your lantern lights up your immediate surroundings."
-          " A family of mice scurries away from your footfall as"
-          " you scan the room. There is a grimy stone slab which serves"
-          " as a bed and not much else. You do see, however, the"
-          " broken remains of a small wooden table. You pick up"
-          " a large slab of wood which looks like it could be used"
-          " as a makeshift shield! You hug it to your side,"
-          " grateful for whatever protection it can offer"
-          " \n**You equip the WOODEN SHIELD**\n"
+          "\nA family of mice scurries away from your footfall as"
+          "\nyou scan the room. There is a grimy stone slab which serves"
+          "\nas a bed and not much else. You do see, however, the"
+          "\nbroken remains of a small wooden table. You pick up"
+          "\na large slab of wood which looks like it could be used"
+          "\nas a makeshift shield! You hug it to your side,"
+          "\ngrateful for whatever protection it can offer"
+          " \n\n**You equip the WOODEN SHIELD**\n\n"
 }
 
 room_details_combined = {
     'b3': "You search around and find a RUSTY DAGGER!\n"
           "It looks like decades of rust have blunted its blade, "
           "but it's better than your fists."
-          "\n**You equip the RUSTY DAGGER**\n"
+          "\n\n**You equip the RUSTY DAGGER**\n\n"
           "Not only that, but with the aid of your lantern"
           " you find, at the bottom of an old, rotting"
           " wooden crate, a rolled-up scroll of parchment."
@@ -249,7 +255,7 @@ room_details_eyeglass = {
             "\nYou skim along the pages of the book before stopping at a"
             " page containing only two words, \n'Password'\n and directly"
             " below it, \n'Ajagar'\n"
-            " You make careful note of this word and slam the book shut."        
+            " You make careful note of this word and slam the book shut."
 }
 
 room_details_lesser_item = {
@@ -266,18 +272,18 @@ room_details_lesser_item = {
             " Fell Manor's rooms.",
 
       'c3': "Your lantern lights up your immediate surroundings."
-            " A family of mice scurries away from your footfall as"
-            " you scan the room. There is a grimy stone slab which serves"
-            " as a bed and not much else. You do see, however, the"
-            " broken remains of a small wooden table. You pick up"
-            " a large slab of wood which looks like it could be used"
-            " as a makeshift shield, but much worse than your"
-            " IRON SHIELD, so you leave it behind."
+            "\nA family of mice scurries away from your footfall as"
+            "\nyou scan the room. There is a grimy stone slab which serves"
+            "\nas a bed and not much else. You do see, however, the"
+            "\nbroken remains of a small wooden table. You pick up"
+            "\na large slab of wood which looks like it could be used"
+            "\nas a makeshift shield, but much worse than your"
+            "\nIRON SHIELD, so you leave it behind."
 }
 
 item_text = {
 
-    'lantern_success': "You shuffle forward as close to the puddle as"
+    'lantern_success': "\nYou shuffle forward as close to the puddle as"
                        " you dare. You reach your arm up as high as you can"
                        " but you only just brush the underside of the lantern"
                        " with your fingertips."
@@ -290,7 +296,7 @@ item_text = {
                        " from the still sizzling liquid, admiring your new"
                        " handheld light source",
 
-    'lantern_failure': "You step forward to the edge of the puddle and reach"
+    'lantern_failure': "\nYou step forward to the edge of the puddle and reach"
                        " as high as you can. Your are just about to reach the"
                        " lantern when your foot slips and you stumble forward"
                        " into the puddle of corrosive liquid!"
@@ -298,7 +304,7 @@ item_text = {
                        " burns your feet and hands!"
                        "\nYou take 1 point of damage",
 
-    'health_potion': "The lid unscrews easily and you immediately"
+    'health_potion': "\nThe lid unscrews easily"
                      " and a sickly sweet aroma floats out of the vial."
                      " You raise the vial to your lips and let the liquid"
                      " pour into your mouth. As soon as you've finished it"
