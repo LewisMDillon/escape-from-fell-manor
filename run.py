@@ -6,6 +6,10 @@ import art
 import gametext
 
 
+def clear():
+    os.system('clear')
+
+
 def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
@@ -21,9 +25,12 @@ def display_title_screen():
     """
     Displays the Main Game Logo
     """
+    clear()
     TITLE = art.TITLE
     type_effect(TITLE, 0.002)
-    time.sleep(0.7)
+    input("\n\n-- Press ENTER to continue --")
+    clear()
+    display_main_menu()
 
 
 def display_main_menu():
@@ -32,6 +39,8 @@ def display_main_menu():
     """
     MAIN_MENU = art.MAIN_MENU
     type_effect(MAIN_MENU, 0.003)
+    type_effect("\n\n Type 'play', 'help', or 'quit'")
+    title_screen_options()
 
 
 # Player Setup ############
@@ -111,7 +120,7 @@ def title_screen_options():
     presents user with different selectable options at
     the title screen
     """
-    option = input('> ')
+    option = input('\n> ')
     if option.lower().strip() == ('play'):
         player_setup()
         game_introduction()  # define this later
@@ -428,19 +437,20 @@ map_dict = {
 
 
 def game_introduction():
-    os.system("clear")
+    clear()
     type_effect("What is your name, victim ")
-    type_effect('\b\b\b\b\b\b\b', 0.04)
+    time.sleep(0.35)
+    type_effect('\b\b\b\b\b\b\b', 0.03)
     type_effect('brave adventurer? \n')
     name = input('> ')
     myPlayer.name = name
-    os.system("clear")
+    clear()
     type_effect(f"Welcome, {myPlayer.name}, to Fell Manor\n")
     type_effect("Please, do make yourself at home. \n")
     type_effect("But you may wish to steer clear of the other guests. \n")
     type_effect("You might find them...")
     time.sleep(0.5)
-    type_effect("\nless than hospitable \n", 0.09)
+    type_effect("\nless than hospitable \n", 0.05)
     type_effect("Heh heh heh heh \n", 0.18)
     game_instructions()
 
@@ -450,7 +460,7 @@ def update_player_location(destination):
     Sets player location value to value of
     destination, passed as an argument.
     """
-    os.system("clear")
+    clear()
     myPlayer.location = destination
     print_room_description()
     room_map[myPlayer.location]['entered'] = True
@@ -712,7 +722,7 @@ def main_prompt():
     if answer.lower().strip() in directions_list:
         update_player_location(room_map[myPlayer.location][f"{answer}"])
     elif answer.lower().strip() == 'look':
-        os.system("clear")
+        clear()
         print_room_details()
     elif answer.lower().strip() == 'items':
         inventory_screen()
@@ -765,7 +775,7 @@ def dining_room_prompt():
 
 
 def game_instructions():
-    os.system("clear")
+    clear()
     type_effect("You must escape from Fell Manor! \n", 0.01)
     type_effect("To move from room to room, type 'north', 'south',\n", 0.01)
     type_effect("'east' or 'west' when prompted.", 0.01)
@@ -777,13 +787,13 @@ def game_instructions():
     type_effect("Good Luck!\n", 0.01)
     print("\n \n")
     input("-- press ENTER to begin --")
-    os.system("clear")
+    clear()
     game_begin_message()
     main_prompt()
 
 
 def combat(enemy):
-    os.system('clear')
+    clear()
     type_effect(f"\nThe {enemy.name} attacks!")
     enemy_attack_strength = random.randint(0, 4) + enemy.strength - myPlayer.armour
     if enemy_attack_strength < 0:
@@ -796,7 +806,7 @@ def combat(enemy):
     update_player_health(enemy_attack_strength * -1)
 
     input("\n\nPress ENTER to attack!")
-    os.system('clear')
+    clear()
     if myPlayer.weapon == 'No Weapon':
         type_effect(f"\nYou attack the {enemy.name} with your bare fists!")
     else:
@@ -818,9 +828,5 @@ def combat(enemy):
 
 def main():
     display_title_screen()
-    time.sleep(0)
-    display_main_menu()
-    title_screen_options()
-
 
 main()
