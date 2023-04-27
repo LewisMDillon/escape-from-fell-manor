@@ -63,7 +63,7 @@ room_descriptions = {
           " see a strange door on the south end of the corridor.",
 
     'd2': "small marble chamber. The floor and walls are white marble"
-          "with veins of shining silver running through them like lightning."
+          " with veins of shining silver running through them like lightning."
           " Ahead of you, between two pillars stands an altar, upon which"
           " sits a large, beautiful white and silver chest.",
 
@@ -79,10 +79,53 @@ room_descriptions = {
 
 room_descriptions_completed = {
 
+      'a1': "luxurious study where you fought the haunted chest",
+
+      'a2': "pitch-dark chamber. You use your lantern once again"
+            " to light the way along the inding stone path",
+
+      'a3': "library. Rows of books line shelves on the northern and"
+            " southern walls, all covered in a thick layer of dust.",
+
       'a4': "dining room, the ogre's body lies slumped over the"
             " giant dining table.",
 
-      'c4': "narrow, stone-walled corridor where you found your lantern."
+      'b1': "long candlelit corridor. The candles' glow illuminates a"
+            " door at the southern end of the corridor, and you can see"
+            " an alcove on the western side with another door.",
+
+      'b2': "arena where you fought Gorehowl",
+
+      'b3': "storage room where you found your dagger and map.",
+
+      'b4': "grand hall where you found the silver key.",
+
+      'c1': "grand entranceway, the huge door, since you gave it the"
+            "correct password, lies open.",
+
+      'c2': "large alcove where you found the mysterious eyeglass.",
+
+      'c3': "cold stone prison cell where you first awoke.",
+
+      'c4': "narrow, stone-walled corridor where you found your lantern.",
+
+      'd2': "marble chamber where you found the silver sword.",
+
+      'd3': "dark damp cave where you fought the goblin.",
+
+      'd4': "square stone chamber that previously closed in upon you."
+}
+
+room_descriptions_goblin_attack = {
+      'd3': "You re-enter the cave, and hear none of the grunting"
+            " and crunching that you heard earlier. You cautiously"
+            " step forward but stop in your tracks as a drop of"
+            " water hits your forehead. You look upwards and see"
+            " the goblin, clinging to the roof, its mouth cracked"
+            " into a wide toothy grin and its tongue lolling out,"
+            " dripping saliva onto you as you stand frozen below."
+            " You lock eyes with it for a split second before it lets"
+            " out a horrific screech and descends upon you!"
 }
 
 room_details = {
@@ -181,6 +224,9 @@ room_details = {
           " if you slip, you might end up falling straight into the"
           " puddle of strange, corrosive liquid.",
 
+    'd2': "You apprach the chest and try to open it, but it is locked."
+          " A heavy silver latch with a keyhole locks the chest shut.",
+
     'd3': "You creep forward and see a small green figure with its"
           " back to you, hunched by the fire. It's inhuman grunts and groans"
           " reach your ears, as well as the awful sound of teeth crunching"
@@ -278,6 +324,16 @@ room_details_eyeglass = {
             " You make careful note of this word and slam the book shut."
 }
 
+room_details_silver_key = {
+      'd2': "You approach the chest and insert the silver key into"
+            " the keyhole and turn. The latch clicks and the chest unlocks!"
+            " You lift the heavy lid and peer inside to see an onrately"
+            " decorated shining silver sword!"
+            " You lift it from the chest and give it a couple of swings."
+            " It feels beautifully balanced in your hand and looks like"
+            " it could cause some serious damage!"
+}
+
 room_details_lesser_item = {
       'b3': "You search around and find a RUSTY DAGGER!\n"
             "It looks like decades of rust have blunted its blade, "
@@ -299,6 +355,20 @@ room_details_lesser_item = {
             "\na large slab of wood which looks like it could be used"
             "\nas a makeshift shield, but much worse than your"
             "\nIRON SHIELD, so you leave it behind."
+}
+
+room_details_lesser_combined = {
+      'b3': "You search around and find a RUSTY DAGGER!\n"
+            "It looks like decades of rust have blunted its blade, "
+            " This dagger looks far less useful than your SILVER"
+            " SWORD so you leave it behind."
+            "\nWith the aid of your lantern"
+            " you also find, at the bottom of an old, rotting"
+            " wooden crate, a rolled-up scroll of parchment."
+            " You carefully unravel and examine it. It's a map"
+            " of Fell Manor!"
+            "\n\n You can now type 'map' when prompted to see a map of"
+            " Fell Manor's rooms.",
 }
 
 item_text = {
