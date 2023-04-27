@@ -672,6 +672,140 @@ def final_door_details():
         room_map['c1']['south'] = 'd1'
         room_map['c1']['completed'] = True
 
+def riddle_room_details():
+    incorrect = 0
+    skip_two_lines()
+    type_effect(CENT(
+        f"'Hello {myPlayer.name},"
+        " I thought we'd play a little game before you proceed.'"
+        ))
+    type_effect(
+        "\n\nWith that, the figure vanishes and you hear the unmistakeable"
+        " sound of stone grating on stone as the walls begin to close in!"
+        " You panic and search the room for an exit but there is none."
+        " At that moment, the same voice of the cloaked figure fills"
+        " your head:"
+        )
+    
+    def wallstate(incorrect):
+        if incorrect == 1:
+            skip_line()
+            type_effect(
+                "The walls begin to close in on you,"
+                " you press your back against one wall"
+                " and lift your feet to press against the other"
+                " but they continue to advance inwards."
+                "\nYou hear the voice again:"
+                )
+        elif incorrect == 2:
+            skip_line()
+            type_effect(
+                "The walls close in again, pushing against you."
+                " You only have a few more seconds left!"
+                "\nThe voice comes to you once again:"
+                )
+        elif incorrect == 3:
+            skip_line()
+            type_effect(
+                "The walls close in one last time, and slam together"
+                " with a dull thud."
+            )
+            player_death()
+
+    def question_one(incorrect):
+        type_effect(CENT(
+            "\n\n'What always runs but never walks."
+            "\n\nOften murmurs, never talks."
+            "\n\nHas a bed but never sleeps."
+            "\n\nAn open mouth that never eats?'"
+            ))
+        answer = input('\n\n> ')
+        if answer.lower().strip() in [
+            'river', 'stream', 'a river', 'a stream', 'the river', 'the stream'
+                ]:
+            clear()
+            type_effect(CENT("'Correct'"))
+            confirm()
+            type_effect(
+                "The walls momentarily slow their advance, and"
+                " the voice comes to you again:"
+                )
+            question_two(incorrect)
+        else:
+            clear()
+            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            incorrect = incorrect + 1
+            wallstate(incorrect)
+            question_one(incorrect)
+
+    def question_two(incorrect):
+        type_effect(CENT(
+            "\n\n'Heard, I am, but never seen I will be."
+            "\n\nI never speak unless you speak to me.'"
+            ))
+        answer = input('\n\n> ')
+        if answer.lower().strip() in [
+            'echo', 'an echo', 'the echo', 'a echo',
+                ]:
+            clear()
+            type_effect(CENT("'Correct'"))
+            confirm()
+            type_effect(
+                "The walls momentarily slow their advance, and"
+                " the voice comes to you again:"
+                )
+            question_three(incorrect)
+        else:
+            clear()
+            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            incorrect = incorrect + 1
+            wallstate(incorrect)
+            question_two(incorrect)
+
+    def question_three(incorrect):
+        type_effect(CENT(
+            "\n\n'Brothers and sisters I have none,"
+            "\n\nYet this man's father is my father's son."
+            "\n\nWho is he?'"
+            ))
+        answer = input('\n\n> ')
+        if answer.lower().strip() in [
+            'son', 'my son', 'your son', 'the son', 'he is my son',
+            'he is your son', 'he is the son', "he's my son",
+            "he's your son", "he's the son" 
+                ]:
+            clear()
+            type_effect(CENT("'Correct'"))
+            confirm()
+            riddle_complete()
+        else:
+            clear()
+            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            incorrect = incorrect + 1
+            wallstate(incorrect)
+            question_three(incorrect)
+
+    question_one(incorrect)
+
+
+def riddle_complete():
+    type_effect("The walls grind to a stop and you hear the voice again:")
+    type_effect(CENT(
+        "\n\n'Well, well... it seems you're sharper than I gave you credit"
+        " for. I hope we see each other again soon, Heh heh heh heh\n\n"
+        ))
+    type_effect(
+        "\nThe voice's ominous laughter fades and you hear the door"
+        " behind you unlock. You also see that a section of the wall on"
+        " the west side of the room has folded inwards, opening a"
+        " narrow passage leading west"
+        )
+    room_map['d4']['completed'] = True
+    room_map['d4']['west'] = 'd3'
+    room_map['d4']['north'] = 'c4'
+
+
+
 
 def update_player_health(num):
     myPlayer.health = myPlayer.health + num

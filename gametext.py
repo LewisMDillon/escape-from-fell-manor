@@ -62,6 +62,19 @@ room_descriptions = {
           " Through the hanging lantern's dim light, you also"
           " see a strange door on the south end of the corridor.",
 
+    'd2': "small marble chamber. The floor and walls are white marble"
+          "with veins of shining silver running through them like lightning."
+          " Ahead of you, between two pillars stands an altar, upon which"
+          " sits a large, beautiful white and silver chest.",
+
+    'd3': "dark, damp cave. Up ahead you see the glow of firelight"
+          " and the shadows of a strange figure dancing on the cave walls.",
+
+    'd4': "square stone chamber. As soon as you take a step"
+          " forwards, the door behind you slams shut and locks."
+          " A tall, slender figure in a red and gold cloak appears"
+          " before you."
+
 }
 
 room_descriptions_completed = {
@@ -167,6 +180,13 @@ room_details = {
           " \nYou think you might be able to reach the lantern, but"
           " if you slip, you might end up falling straight into the"
           " puddle of strange, corrosive liquid.",
+
+    'd3': "You creep forward and see a small green figure with its"
+          " back to you, hunched by the fire. It's inhuman grunts and groans"
+          " reach your ears, as well as the awful sound of teeth crunching"
+          " through bone.",
+
+    'd4': "The riddle room",
 
 }
 
@@ -358,9 +378,14 @@ enemy_death = {
                   " accomplished. When you do look up, all the spectators"
                   " have vanished, and you are once again alone in this"
                   " massive arena. You pick yourself up and glance around"
-                  " the room once more. The way south, where this beast"
+                  " once more. The gate to the south, where this beast"
                   " emerged from has disappeared! but it looks like you"
                   " might just be able to climb up to the large alcove"
-                  " on that side of the room."
+                  " on that side of the room.",
+
+      'goblin': "You take a moment to curse your carelessness as the ugly,"
+                " lifeless face of the goblin stares up at you. You glance"
+                " around the room and see nothing but piles of bones"
+                " and continue on your path."
 
 }
