@@ -10,7 +10,7 @@ def clear():
     os.system('clear')
 
 
-def type_effect(text, speed=0.04):
+def type_effect(text, speed=0.0004):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -410,8 +410,8 @@ room_map = {
     },
     'd2': {
         'room_name': 'Altar',
-        'description': 'a spike pit',
-        'details': 'you look around and see spikes',
+        'description': (f"{gametext.room_descriptions['d2']}"),
+        'details': (f"{gametext.room_details['d2']}"),
         'entered': False,
         'completed': False,
         'north': False,
@@ -420,15 +420,16 @@ room_map = {
         'west': False
     },
     'd3': {
-        'room_name': 'Goblin Room',
-        'description': 'a spike pit',
-        'details': 'you look around and see spikes',
+        'room_name': 'Goblin cave',
+        'description': (f"{gametext.room_descriptions['d3']}"),
+        'details': (f"{gametext.room_details['d3']}"),
         'entered': False,
         'completed': False,
+        'sneaked': False,
         'north': False,
         'south': False,
         'east': 'd4',
-        'west': 'd2'
+        'west': False,
     },
     'd4': {
         'room_name': 'Riddle Room',
@@ -495,10 +496,19 @@ def update_player_location(destination):
 
 
 def print_room_description():
-    if room_map[myPlayer.location]['entered']:
+    if room_map[myPlayer.location]['completed']:
         print(
-            f"You are back in the {room_map[myPlayer.location]['description']}"
-            )
+                "You are back in the "
+                f"{gametext.room_descriptions_completed[myPlayer.location]}"
+                )
+    elif room_map[myPlayer.location]['entered']:
+        if myPlayer.location == 'd3':
+            goblin_cave_description()
+        else:
+            print(
+                "You are back in the "
+                f"{room_map[myPlayer.location]['description']}"
+                )
     else:
         type_effect(
             "You find yourself in"
@@ -542,6 +552,9 @@ def print_room_details():
     elif myPlayer.location == 'c1':
         final_door_details()
 
+    elif myPlayer.location == 'd3':
+        goblin_cave_details()
+
     else:
         type_effect(room_map[myPlayer.location]['details'])
 
@@ -581,6 +594,8 @@ def storage_room_details():
             if myPlayer.weapon == 'No Weapon':
                 myPlayer.weapon = 'Rusty Dagger'
                 myPlayer.strength = 4
+            else:
+                type_effect(gametext.room_details_lesser_item['b3'])
             myPlayer.manormap = True
             room_map['b3']['completed'] = True
 
@@ -692,7 +707,7 @@ def riddle_room_details():
         " At that moment, the same voice of the cloaked figure fills"
         " your head:"
         )
-    
+   
     def wallstate(incorrect):
         if incorrect == 1:
             skip_line()
@@ -815,50 +830,71 @@ def goblin_cave_details():
     type_effect(gametext.room_details['d3'])
     type_effect(
         "\n You think you might be able to sneak by without"
-        "this creature spotting you..."
+        " this creature spotting you..."
         )
     type_effect("\n\nDo you want to try to sneak past? (yes/no)")
     answer = input("\n> ")
-    if answer.lower.strip == 'yes':
-        if myPlayer.lantern:
+    if answer.lower().strip() == 'yes':
+        coinflip = random.randint(1, 2)
+        if coinflip == 1:
+            type_effect(
+                "You start to slowly creep forward towards"
+                " the cave exit on the west side of the chamber."
+                " You walk carefully, step by step through the"
+                " light of the creature's campfire and back into the dark."
+                " You step forwards and hear a sickening crunch as the"
+                " weight of your right foot cracks down through what you"
+                " assume to be a pile of rotting bones."
+                " You hear a shrill scream and spin around as the goblin"
+                " leaps towards you!"
+            )
+            confirm()
+            combat(goblin)
+        else:
             type_effect(
                 "You start to slowly creep forward towards"
                 " the cave exit on the west side of the chamber."
                 " You walk carefully, step by step through the"
                 " light of the creature's campfire and back into the dark,"
-                " when you realise that your lantern is shining!"
-                " You hear a shrill scream and spin around as the goblin"
-                " leaps towards you!"
+                " and reach the west side of the cave!"
+                " You gather by the sounds of the grunting and crunching"
+                " still coming from behind you, that the creature remains"
+                " unaware of your presence as you proceed out of the cave"
+                " and exit to the west."
                 )
-            combat(goblin)
+            confirm()
+            room_map['d3']['sneaked'] = True
+            room_map['d3']['west'] = 'd2'
+            update_player_location('d2')
+            main_prompt()
+
+
+def goblin_cave_description():
+    if room_map['d3']['completed']:
+        print(
+            f"You are back in the"
+            f"{gametext.room_descriptions_completed['d3']}"
+             )
+    else:    
+        if room_map['d3']['sneaked']:
+            goblin_cave_description_sneaked()
         else:
-            coinflip = random.randint(1, 2)
-            if coinflip == 1:
-                type_effect(
-                    "You start to slowly creep forward towards"
-                    " the cave exit on the west side of the chamber."
-                    " You walk carefully, step by step through the"
-                    " light of the creature's campfire and back into the dark."
-                    " You step forwards and hear a sickening crunch as the"
-                    " weight of your right foot cracks down through what you"
-                    " assume to be a pile of rotting bones."
-                    " You hear a shrill scream and spin around as the goblin"
-                    " leaps towards you!"
-                )
-                combat(goblin)
-            else:
-                type_effect(
-                    "You start to slowly creep forward towards"
-                    " the cave exit on the west side of the chamber."
-                    " You walk carefully, step by step through the"
-                    " light of the creature's campfire and back into the dark,"
-                    " and reach the east side of the cave!"
-                    " You gather by the sounds of the grunting and crunching"
-                    " still coming from behind you, that the creature remains"
-                    " unaware of your presence."
-                    )
-                update_player_location('d2')
-                main_prompt()
+            print((f"{gametext.room_descriptions['d3']}"),)
+            
+
+def goblin_cave_description_sneaked():
+    type_effect(gametext.room_descriptions_goblin_attack['d3'])
+    confirm()
+    combat(goblin)
+
+
+def altar_details():
+    if myPlayer.silver_key:
+        type_effect(gametext.room_details_silver_key['d2'])
+        myPlayer.weapon = 'Silver Sword'
+        myPlayer.strength = 8
+    else:
+        type_effect(gametext.room_details['d2'])
 
 
 def update_player_health(num):
@@ -1028,7 +1064,7 @@ def combat(enemy):
         )
     print(f"\nYour health was at {myPlayer.health}")
     print(
-        f"\nafter that attack, it's now at"
+        f"\nafter that attack, it's now at "
         f"{myPlayer.health - enemy_attack_strength}"
         )
     update_player_health(enemy_attack_strength * -1)
