@@ -10,7 +10,7 @@ def clear():
     os.system('clear')
 
 
-def type_effect(text, speed=0.04):
+def type_effect(text, speed=0.0004):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -18,7 +18,7 @@ def type_effect(text, speed=0.04):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
-        time.sleep(speed)       
+        time.sleep(speed)
 
 
 CENT = "{:^80}".format  # variable for centering text in terminal
@@ -143,6 +143,7 @@ class Monster:
 
 
 ogre = Monster('Ogre', 10, 4, 2)
+goblin = Monster('Goblin', 8, 3, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
 gorehowl = Monster('Gorehowl', 20, 8, 1)
 
@@ -196,7 +197,7 @@ def inventory_screen():
     Displays the player inventory, lists all weapons,
     equipment, and items the player has found & displays player health
     """
-    print("\nHere are the items and equipment " 
+    print("\nHere are the items and equipment "
           "that you have gathered on your journey so far:")
     if myPlayer.weapon == 'Rusty Dagger':
         print(
@@ -237,7 +238,7 @@ def inventory_screen():
         print("Silver Key")
     skip_line()
     print(f"Your health is currently at {myPlayer.health}")
-    
+
 
 def display_map():
     print(f"{map_dict[myPlayer.location]}")
@@ -248,7 +249,7 @@ def test_function():
     print('The test function ran successfuly')
     print(f"the player is currently in room {myPlayer.location}")
     calculate_valid_directions()
-    
+
 
 # Map ########
 #     _________________
@@ -431,14 +432,14 @@ room_map = {
     },
     'd4': {
         'room_name': 'Riddle Room',
-        'description': 'a spike pit',
-        'details': 'you look around and see spikes',
+        'description': (f"{gametext.room_descriptions['d4']}"),
+        'details': (f"{gametext.room_details['d4']}"),
         'entered': False,
         'completed': False,
-        'north': 'c4',
+        'north': False,
         'south': False,
         'east': False,
-        'west': 'd3'
+        'west': False
     },
 }
 
@@ -465,7 +466,7 @@ map_dict = {
 def game_introduction():
     clear()
     type_effect("What is your name, victim ")
-    time.sleep(0.35)
+    time.sleep(0.25)
     type_effect('\b\b\b\b\b\b\b', 0.03)
     type_effect('brave adventurer?')
     skip_line()
@@ -505,6 +506,8 @@ def print_room_description():
             )
         if myPlayer.location == 'b2':
             arena_details()
+        elif myPlayer.location == 'd4':
+            riddle_room_details()
 
 
 def print_room_details():
@@ -543,6 +546,20 @@ def print_room_details():
         type_effect(room_map[myPlayer.location]['details'])
 
 
+def prison_cell_details():
+    if myPlayer.lantern is False:
+        type_effect(room_map[myPlayer.location]['details'])
+    else:
+        if myPlayer.shield == 'No Shield':
+            type_effect(gametext.room_details_lantern['c3'])
+            myPlayer.shield = 'Wooden Shield'
+            myPlayer.armour = 4
+            (room_map[myPlayer.location]['completed']) = True
+        else:
+            type_effect(gametext.room_details_lesser_item['c3'])
+            (room_map[myPlayer.location]['completed']) = True
+
+
 def storage_room_details():
     if room_map['b3']['looked'] is True:
         if myPlayer.lantern is False:
@@ -566,20 +583,6 @@ def storage_room_details():
                 myPlayer.strength = 4
             myPlayer.manormap = True
             room_map['b3']['completed'] = True
-    
-
-def prison_cell_details():
-    if myPlayer.lantern is False:
-        type_effect(room_map[myPlayer.location]['details'])
-    else:
-        if myPlayer.shield == 'No Shield':
-            type_effect(gametext.room_details_lantern['c3'])
-            myPlayer.shield = 'Wooden Shield'
-            myPlayer.armour = 4
-            (room_map[myPlayer.location]['completed']) = True
-        else:
-            type_effect(gametext.room_details_lesser_item['c3'])
-            (room_map[myPlayer.location]['completed']) = True
 
 
 def library_details():
@@ -671,6 +674,9 @@ def final_door_details():
         type_effect(gametext.room_details_password['c1'])
         room_map['c1']['south'] = 'd1'
         room_map['c1']['completed'] = True
+    else:
+        type_effect(gametext.room_details['c1'])
+
 
 def riddle_room_details():
     incorrect = 0
@@ -805,6 +811,54 @@ def riddle_complete():
     room_map['d4']['north'] = 'c4'
 
 
+def goblin_cave_details():
+    type_effect(gametext.room_details['d3'])
+    type_effect(
+        "\n You think you might be able to sneak by without"
+        "this creature spotting you..."
+        )
+    type_effect("\n\nDo you want to try to sneak past? (yes/no)")
+    answer = input("\n> ")
+    if answer.lower.strip == 'yes':
+        if myPlayer.lantern:
+            type_effect(
+                "You start to slowly creep forward towards"
+                " the cave exit on the west side of the chamber."
+                " You walk carefully, step by step through the"
+                " light of the creature's campfire and back into the dark,"
+                " when you realise that your lantern is shining!"
+                " You hear a shrill scream and spin around as the goblin"
+                " leaps towards you!"
+                )
+            combat(goblin)
+        else:
+            coinflip = random.randint(1, 2)
+            if coinflip == 1:
+                type_effect(
+                    "You start to slowly creep forward towards"
+                    " the cave exit on the west side of the chamber."
+                    " You walk carefully, step by step through the"
+                    " light of the creature's campfire and back into the dark."
+                    " You step forwards and hear a sickening crunch as the"
+                    " weight of your right foot cracks down through what you"
+                    " assume to be a pile of rotting bones."
+                    " You hear a shrill scream and spin around as the goblin"
+                    " leaps towards you!"
+                )
+                combat(goblin)
+            else:
+                type_effect(
+                    "You start to slowly creep forward towards"
+                    " the cave exit on the west side of the chamber."
+                    " You walk carefully, step by step through the"
+                    " light of the creature's campfire and back into the dark,"
+                    " and reach the east side of the cave!"
+                    " You gather by the sounds of the grunting and crunching"
+                    " still coming from behind you, that the creature remains"
+                    " unaware of your presence."
+                    )
+                update_player_location('d2')
+                main_prompt()
 
 
 def update_player_health(num):
@@ -832,6 +886,7 @@ def gorehowl_death():
 
 
 def enemy_death(enemy):
+    skip_two_lines()
     type_effect(f"You defeated the {enemy.name}!\n")
     if myPlayer.location == 'a4':
         type_effect(gametext.enemy_death['ogre'])
@@ -845,7 +900,12 @@ def enemy_death(enemy):
     elif myPlayer.location == 'b2':
         type_effect(gametext.enemy_death['gorehowl'])
         room_map['b2']['completed'] = True
-        
+        room_map['b2']['south'] = 'c2'
+    elif myPlayer.location == 'd3':
+        type_effect(gametext.enemy_death['goblin'])
+        room_map['d3']['completed'] = True
+        room_map['d3']['west'] = 'd2'
+
 
 def game_begin_message():
     type_effect(f"You awake in a {room_map[myPlayer.location]['description']}")
@@ -903,7 +963,7 @@ def lantern_prompt():
         lantern_attempt()
     else:
         main_prompt()
-        
+
 
 def lantern_attempt():
     rng = random.randint(1, 3)
@@ -958,13 +1018,18 @@ def game_instructions():
 def combat(enemy):
     clear()
     type_effect(f"\nThe {enemy.name} attacks!")
-    enemy_attack_strength = random.randint(0, 4) + enemy.strength - myPlayer.armour
+    enemy_attack_strength = (
+        random.randint(0, 4) + enemy.strength - myPlayer.armour
+    )
     if enemy_attack_strength < 0:
         enemy_attack_strength = 0
-    type_effect(f"\nThe {enemy.name} hits you for {enemy_attack_strength} damage!")
+    type_effect(
+        f"\nThe {enemy.name} hits you for {enemy_attack_strength} damage!"
+        )
     print(f"\nYour health was at {myPlayer.health}")
     print(
-        f"\nafter that attack, it's now at {myPlayer.health - enemy_attack_strength}"
+        f"\nafter that attack, it's now at"
+        f"{myPlayer.health - enemy_attack_strength}"
         )
     update_player_health(enemy_attack_strength * -1)
 
@@ -973,7 +1038,9 @@ def combat(enemy):
     if myPlayer.weapon == 'No Weapon':
         type_effect(f"\nYou attack the {enemy.name} with your bare fists!")
     else:
-        type_effect(f"\nYou attack the {enemy.name} with your {myPlayer.weapon}!")
+        type_effect(
+            f"\nYou attack the {enemy.name} with your {myPlayer.weapon}!"
+            )
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
     if attack_strength < 0:
         attack_strength = 0
@@ -981,7 +1048,7 @@ def combat(enemy):
     print(f"\nThe {enemy.name}'s health was at {enemy.health}")
     print(f"\nAfter that attack, it's now at {enemy.health - attack_strength}")
     update_enemy_health(enemy, attack_strength * -1)
-   
+
     if enemy.health <= 0:
         return
     else:
