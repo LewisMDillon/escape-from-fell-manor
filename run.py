@@ -3,9 +3,27 @@ import sys
 import os
 import random
 import copy
+from datetime import datetime
+from tabulate import tabulate
+import gspread
+from google.oauth2.service_account import Credentials
 import art
 import gametext
 import dictionary
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
+
+HOF = SHEET.worksheet('hall_of_fame')
+hof_data = HOF.get_all_values()
 
 
 def clear():
@@ -78,7 +96,7 @@ def title_screen_options():
     elif option.lower().strip() == ('quit'):
         quit_game()
     elif option.lower().strip() == ('hall of fame'):
-        hall_of_fame()
+        display_hof()
     elif option.lower().strip() == ('test'):
         test_function()
     else:
@@ -101,13 +119,35 @@ def help_screen():
     title_screen_options()
 
 
-def hall_of_fame():
-    print("These are the real schmad lads")
+def display_hof():
+    clear()
+    type_effect(
+        "\nThese are the brave adventurers who braved"
+        "\nthe horrors of Fell Manor and lived to tell the tale."
+    )
+    skip_two_lines()
+    print(
+        "\nThe table below shows the NAME of the adventurer,"
+        "\ntheir remaining HEALTH points upon escaping,"
+        "\nand the DATE on which they accomplished this mighty feat."
+        )
+    skip_line()
+    type_effect(tabulate(hof_data, tablefmt="pretty"), 0.003)
+    skip_two_lines()
+    confirm()
+    display_main_menu()
+    title_screen_options()
 
 
 def quit_game():
     print('Exiting Game...')
     sys.exit()
+
+
+def update_hof():
+    date_today = datetime.today().strftime('%Y-%m-%d')
+    data = [myPlayer.name, myPlayer.health, date_today]
+    HOF.append_row(data)
 
 
 # Player Setup ############
@@ -267,6 +307,9 @@ def display_map():
 # Test Function #######################
 def test_function():
     print('The test function ran successfuly')
+    confirm()
+    hof_data = HOF.get_all_values()
+    print(hof_data)
 
 
 room_map = copy.deepcopy(dictionary.room_map)
@@ -813,7 +856,7 @@ def update_enemy_health(enemy, num):
 
 def player_death():
     type_effect("\n\nYou Died....")
-    time.sleep(4)
+    confirm()
     main()
 
 
@@ -917,7 +960,7 @@ def lantern_attempt():
         room_map['c4']['completed'] = True
     else:
         type_effect(gametext.item_text['lantern_failure'])
-        update_player_health(1)
+        update_player_health(-1)
         type_effect("\nDo you want to try again? (yes/no)")
         answer = input("> ")
         if answer.lower().strip() == 'yes':
@@ -1006,10 +1049,11 @@ def combat(enemy):
 def credits_screen():
     time.sleep(2)
     clear()
+    update_hof()
     type_effect(CENT(
         "\n\nCONGRATULTIONS, You have completed Escape From Fell Manor!"
         " \n\nYour name has been added to the Hall of Fame,"
-        "\n a list of all those courageous adventurers who have entered"
+        "\n a list of all those courageous adventurers who have braved"
         "\n Fell Manor and lived to tell the tale!"
         ))
     confirm()
@@ -1017,7 +1061,7 @@ def credits_screen():
     type_effect(
         "\n\nI hope you have enjoyed Escape From Fell Manor"
         "\n Thanks for playing!"
-        "\n         -Lewis D"
+        "\n\n                     -Lewis D"
         )
     confirm()
     main()
