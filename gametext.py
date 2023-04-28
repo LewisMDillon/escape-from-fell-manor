@@ -62,6 +62,12 @@ room_descriptions = {
           " Through the hanging lantern's dim light, you also"
           " see a strange door on the south end of the corridor.",
 
+    'd1': "large room, beautifully decorated, but your eyes are transfixed"
+          " on the door at the opposite wall. The door to freedom..."
+          " You take a step forwards and the figure of the man in the red"
+          " and gold cloak appeears between you and the door.",
+
+
     'd2': "small marble chamber. The floor and walls are white marble"
           " with veins of shining silver running through them like lightning."
           " Ahead of you, between two pillars stands an altar, upon which"
@@ -321,7 +327,24 @@ room_details_eyeglass = {
             "\nYou skim along the pages of the book before stopping at a"
             " page containing only two words, \n'Password'\n and directly"
             " below it, \n'Ajagar'\n"
-            " You make careful note of this word and slam the book shut."
+            " You make careful note of this word and slam the book shut.",
+
+      'b4': "You inspect the paintings. They are all beautifully done."
+            " You notice that the characters in the portraits are never"
+            " looking straight out, as you would expect, but instead"
+            " looking up or down at other portraits...\n\n"
+            " You follow the gaze of one portrait to the next, and again"
+            " and again and again \nuntil finally coming to a portrait"
+            " of a young girl.\n"
+            " The girl is holding out her hands as if presenting something"
+            " but her hands are empty. \n\n"
+            " You raise the eyeglass and peer through it, and you see in the"
+            " girl's hands a shining silver key!"
+            " You reach forward tentatively and your fingers sink through"
+            " the fabric of the painting as if it were water."
+            " As you grasp the key, the girl's hands clasp yours and"
+            " you feel a surge of rejuvenating energy fill your body."
+            
 }
 
 room_details_silver_key = {
@@ -456,6 +479,14 @@ enemy_death = {
       'goblin': "You take a moment to curse your carelessness as the ugly,"
                 " lifeless face of the goblin stares up at you. You glance"
                 " around the room and see nothing but piles of bones"
-                " and continue on your path."
+                " and continue on your path.",
+
+      'manor_lord': "You fall to the floor, battered and exhausted, but"
+                    " but you know you have finally triumphed over this"
+                    " wretched place and its sadistic host."
+                    " You look up at the final door and pull yourself slowly"
+                    " to your feet. Dragging yourself over to the door, you"
+                    " twist the handle, the door swings open and you"
+                    " breathe in the night air, and escape from Fell Manor."
 
 }

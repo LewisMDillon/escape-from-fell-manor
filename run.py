@@ -325,7 +325,6 @@ def update_player_location(destination):
     clear()
     myPlayer.location = destination
     print_room_description()
-    print(room_map[myPlayer.location])
     room_map[myPlayer.location]['entered'] = True
 
 
@@ -338,6 +337,9 @@ def print_room_description():
     elif room_map[myPlayer.location]['entered']:
         if myPlayer.location == 'd3':
             goblin_cave_description()
+
+        elif myPlayer.location == 'd1':
+            final_room_description()
         else:
             print(
                 "You are back in the "
@@ -388,6 +390,9 @@ def print_room_details():
 
     elif myPlayer.location == 'd3':
         goblin_cave_details()
+
+    elif myPlayer.location == 'c2':
+        alcove_details()
 
     else:
         type_effect(room_map[myPlayer.location]['details'])
@@ -441,6 +446,17 @@ def library_details():
         type_effect(gametext.room_details['a3'])
 
 
+def grand_hall_details():
+    if myPlayer.eyeglass:
+        type_effect(gametext.room_details_eyeglass['b4'])
+        update_player_health(10)
+        type_effect(CENT("**Your health increases by 10 points**"))
+        type_effect(
+            " A kind smile creeps over the girl's face as you pull the key"
+            " back out of the painting and place it in your pocket.")
+        myPlayer.silver_key = True
+
+
 def black_chasm_details():
     if myPlayer.lantern:
         type_effect(gametext.room_details_lantern['a2'])
@@ -476,7 +492,7 @@ def candlelit_corridor_details():
     answer = input("> ")
     if answer.lower().strip() == 'yes':
         type_effect(gametext.item_text['health_potion'])
-        update_player_health(5)
+        update_player_health(10)
         room_map['b1']['completed'] = True
     else:
         type_effect(
@@ -504,11 +520,12 @@ def arena_details():
         " champion, GOREHOWL!'\n\n"
 
         "With that, the cloaked man vanishes and you hear a terrifying"
-        "guttural growl from the door on the opposite end of the room."
-        "\n Suddenly, a huge beast charges forth from the door! You only"
+        " guttural growl from the door on the opposite end of the room."
+        "\nSuddenly, a huge beast charges forth from the door! You only"
         " get a brief second to take in its huge mass of fur and fangs"
         " before it is upon you!"
     )
+    confirm()
     combat(gorehowl)
 
 
@@ -731,6 +748,26 @@ def altar_details():
         type_effect(gametext.room_details['d2'])
 
 
+def final_room_description():
+    type_effect(gametext.room_descriptions['d1'])
+    type_effect(CENT(
+        f"\n\n'Hello again, {myPlayer.name}."
+        "\n You've done so well to get here."
+        "\n Ah, where are my manners."
+        "\n I am the Lord of Fell Manor"
+        "\n and it's been such a pleasure having you as my guest this evening."
+        "\n So much so, that it would be a shame to have you just"
+        "\n walk out of this door, don't you think?"
+        "\n Not when there's so much more fun we could have...."
+        ))
+    type_effect(CENT("Heh heh heh heh"), 0.15)
+    type_effect(
+        "With that, he spreads wide his long, sickly grey arms"
+        " and leaps towards you!"
+        )
+    combat(manor_lord)
+
+
 def update_player_health(num):
     myPlayer.health = myPlayer.health + num
     if myPlayer.health <= 0:
@@ -775,6 +812,9 @@ def enemy_death(enemy):
         type_effect(gametext.enemy_death['goblin'])
         room_map['d3']['completed'] = True
         room_map['d3']['west'] = 'd2'
+    elif myPlayer.location == 'd1':
+        type_effect(gametext.enemy_death['manor_lord'])
+        credits()
 
 
 def game_begin_message():
@@ -924,6 +964,24 @@ def combat(enemy):
     else:
         input("\nPress ENTER to continue!")
         combat(enemy)
+
+
+def credit_screen():
+    time.sleep(2)
+    clear()
+    type_effect(CENT(
+        "\n\nCONGRATULTIONS, You have completed Escape From Fell Manor!"
+        " \n\nYour name has been added to the Hall of Fame,"
+        "\n a list of all those courageous adventurers who have entered"
+        "\n Fell Manor and lived to tell the tale!"
+        ))
+    type_effect(
+        "\n\nI hope you have enjoyed Escape From Fell Manor"
+        "\n Thanks for playing!"
+        "\n         -Lewis D"
+        )
+    confirm()
+    main()
 
 
 def main():
