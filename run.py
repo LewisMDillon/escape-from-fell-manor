@@ -148,8 +148,8 @@ class Monster:
 ogre = Monster('Ogre', 10, 4, 2)
 goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
-gorehowl = Monster('Gorehowl', 20, 7, 1)
-manor_lord = Monster('Lord of Fell Manor', 25, 7, 5)
+gorehowl = Monster('Gorehowl', 20, 8, 1)
+manor_lord = Monster('Lord of Fell Manor', 25, 9, 5)
 
 
 class Weapon:
@@ -334,17 +334,19 @@ def print_room_description():
                 "You are back in the "
                 f"{gametext.room_descriptions_completed[myPlayer.location]}"
                 )
+
     elif room_map[myPlayer.location]['entered']:
         if myPlayer.location == 'd3':
             goblin_cave_description()
-
-        elif myPlayer.location == 'd1':
-            final_room_description()
         else:
             print(
                 "You are back in the "
                 f"{room_map[myPlayer.location]['description']}"
                 )
+    
+    elif myPlayer.location == 'd1':
+        final_room_description()
+
     else:
         type_effect(
             "You find yourself in"
@@ -362,6 +364,9 @@ def print_room_details():
 
     elif myPlayer.location == 'b3':
         storage_room_details()
+
+    elif myPlayer.location == 'b4':
+        grand_hall_details()
 
     elif myPlayer.location == 'a3':
         library_details()
@@ -393,6 +398,9 @@ def print_room_details():
 
     elif myPlayer.location == 'c2':
         alcove_details()
+
+    elif myPlayer.location == 'd2':
+        altar_details()
 
     else:
         type_effect(room_map[myPlayer.location]['details'])
@@ -442,6 +450,7 @@ def storage_room_details():
 def library_details():
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['a3'])
+        myPlayer.password = True
     else:
         type_effect(gametext.room_details['a3'])
 
@@ -450,11 +459,19 @@ def grand_hall_details():
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['b4'])
         update_player_health(10)
+        skip_line()
         type_effect(CENT("**Your health increases by 10 points**"))
+        skip_line()
         type_effect(
-            " A kind smile creeps over the girl's face as you pull the key"
+            "A kind smile creeps over the girl's face as you pull the key"
             " back out of the painting and place it in your pocket.")
         myPlayer.silver_key = True
+        room_map['b4']['completed'] = True
+    else:
+        type_effect(gametext.room_details['b4'])
+        type_effect(CENT(
+            "'Return to me when you can see beyond what is shown'\n\n",
+        ))
 
 
 def black_chasm_details():
@@ -492,6 +509,8 @@ def candlelit_corridor_details():
     answer = input("> ")
     if answer.lower().strip() == 'yes':
         type_effect(gametext.item_text['health_potion'])
+        skip_line()
+        type_effect(CENT("**Your health increases by 10 points**"))
         update_player_health(10)
         room_map['b1']['completed'] = True
     else:
@@ -742,8 +761,12 @@ def goblin_cave_description_sneaked():
 def altar_details():
     if myPlayer.silver_key:
         type_effect(gametext.room_details_silver_key['d2'])
+        type_effect(CENT(
+            "**You equip the Silver Sword**"
+        ))
         myPlayer.weapon = 'Silver Sword'
         myPlayer.strength = 8
+        room_map['d2']['completed'] = True
     else:
         type_effect(gametext.room_details['d2'])
 
@@ -760,11 +783,13 @@ def final_room_description():
         "\n walk out of this door, don't you think?"
         "\n Not when there's so much more fun we could have...."
         ))
-    type_effect(CENT("Heh heh heh heh"), 0.15)
+    skip_line()
+    type_effect(CENT("Heh heh heh heh"))
     type_effect(
         "With that, he spreads wide his long, sickly grey arms"
         " and leaps towards you!"
         )
+    confirm()
     combat(manor_lord)
 
 
@@ -814,7 +839,8 @@ def enemy_death(enemy):
         room_map['d3']['west'] = 'd2'
     elif myPlayer.location == 'd1':
         type_effect(gametext.enemy_death['manor_lord'])
-        credits()
+        confirm()
+        credits_screen()
 
 
 def game_begin_message():
@@ -858,9 +884,11 @@ def main_prompt():
         clear()
         print_room_details()
     elif answer.lower().strip() == 'items':
+        clear()
         inventory_screen()
     elif answer.lower().strip() == 'map':
         if myPlayer.manormap:
+            clear()
             display_map()
 
     main_prompt()
@@ -900,10 +928,13 @@ def dining_room_prompt():
         type_effect(
             "You take a bite of the bread, it is astonishingly tasty,"
             " fluffy and warm, yet delightfully crunchy."
-            "\n\n **Your health increases by 2 points**\n\n"
             )
+        skip_line()
+        type_effect(CENT("**Your health increases by 2 points**"))
         update_player_health(2)
+        skip_two_lines()
         type_effect(gametext.enemy_text['ogre'])
+        confirm()
         combat(ogre)
 
 
@@ -966,7 +997,7 @@ def combat(enemy):
         combat(enemy)
 
 
-def credit_screen():
+def credits_screen():
     time.sleep(2)
     clear()
     type_effect(CENT(
@@ -975,6 +1006,8 @@ def credit_screen():
         "\n a list of all those courageous adventurers who have entered"
         "\n Fell Manor and lived to tell the tale!"
         ))
+    confirm()
+    clear()
     type_effect(
         "\n\nI hope you have enjoyed Escape From Fell Manor"
         "\n Thanks for playing!"

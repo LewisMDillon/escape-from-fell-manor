@@ -186,8 +186,7 @@ room_details = {
           " As you peer into the painting, you realise that there is a"
           " voice coming from it!\n"
           " You press your ear close to it and try to make out what"
-          " it is saying...\n\n\n"
-          "     'Return to me when you can see beyond what is shown'\n\n\n",
+          " it is saying...\n\n\n",
 
     'c1': "As you stare at the carvings, they begin to move! The giant wooden"
           " features of the face on the door creasing and opening."
@@ -426,7 +425,6 @@ item_text = {
                      " night's sleep. You shake yourself out and continue on"
                      " feeling a tiny bit more able to take on the challenges"
                      " of this awful place."
-                     "\n\n**Your health increases by 5 points**\n\n"
 }
 
 enemy_text = {
