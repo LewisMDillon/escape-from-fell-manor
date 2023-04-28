@@ -2,8 +2,10 @@ import time
 import sys
 import os
 import random
+import copy
 import art
 import gametext
+import dictionary
 
 
 def clear():
@@ -44,7 +46,7 @@ def display_title_screen():
     """
     clear()
     TITLE = art.TITLE
-    type_effect(TITLE, 0.002)
+    type_effect(TITLE, 0.00002)
     confirm()
     display_main_menu()
 
@@ -55,7 +57,7 @@ def display_main_menu():
     """
     clear()
     MAIN_MENU = art.MAIN_MENU
-    type_effect(MAIN_MENU, 0.003)
+    type_effect(MAIN_MENU, 0.00003)
     skip_two_lines()
     print(CENT("Type 'play', 'help', or 'quit'"))
     title_screen_options()
@@ -68,6 +70,7 @@ def title_screen_options():
     """
     option = input('\n> ')
     if option.lower().strip() == ('play'):
+        gamestate_reset()
         player_setup()
         game_introduction()
     elif option.lower().strip() == ('help'):
@@ -143,9 +146,10 @@ class Monster:
 
 
 ogre = Monster('Ogre', 10, 4, 2)
-goblin = Monster('Goblin', 8, 3, 1)
+goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
-gorehowl = Monster('Gorehowl', 20, 8, 1)
+gorehowl = Monster('Gorehowl', 20, 7, 1)
+manor_lord = Monster('Lord of Fell Manor', 25, 7, 5)
 
 
 class Weapon:
@@ -171,7 +175,7 @@ class Shield:
 
 
 wooden_shield = Shield('Wooden Shield', 4)
-iron_shield = Shield('Iron Shield', 8)
+iron_shield = Shield('Iron Shield', 6)
 
 
 def player_setup():
@@ -190,6 +194,16 @@ def player_setup():
     myPlayer.eyeglass = False
     myPlayer.silver_key = False
     myPlayer.password = False
+
+
+def gamestate_reset():
+    global room_map
+    room_map = copy.deepcopy(dictionary.room_map)
+    ogre.health = 10
+    goblin.health = 8
+    haunted_chest.health = 12
+    gorehowl.health = 20
+    manor_lord.health = 25
 
 
 def inventory_screen():
@@ -247,9 +261,9 @@ def display_map():
 # Test Function #######################
 def test_function():
     print('The test function ran successfuly')
-    print(f"the player is currently in room {myPlayer.location}")
-    calculate_valid_directions()
 
+
+room_map = copy.deepcopy(dictionary.room_map)
 
 # Map ########
 #     _________________
@@ -262,187 +276,6 @@ def test_function():
 #     |d1 |d2 |d3 |d4 |
 #     |___|___|___|___|
 
-room_map = {
-    'a1': {
-        'room_name': 'Study',
-        'description': (f"{gametext.room_descriptions['a1']}"),
-        'details': (f"{gametext.room_details['a1']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': 'b1',
-        'east': 'a2',
-        'west': False
-    },
-    'a2': {
-        'room_name': 'Black Chasm',
-        'description': (f"{gametext.room_descriptions['a2']}"),
-        'details': (f"{gametext.room_details['a2']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': False,
-        'east': 'a3',
-        'west': False
-    },
-    'a3': {
-        'room_name': 'Library',
-        'description': (f"{gametext.room_descriptions['a3']}"),
-        'details': (f"{gametext.room_details['a3']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': False,
-        'east': 'a4',
-        'west': 'a2'
-    },
-    'a4': {
-        'room_name': 'Dining room',
-        'description': (f"{gametext.room_descriptions['a4']}"),
-        'details': (f"{gametext.room_details['a4']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': 'b4',
-        'east': False,
-        'west': 'a3'
-    },
-    'b1': {
-        'room_name': 'Upstairs Corridor',
-        'description': (f"{gametext.room_descriptions['b1']}"),
-        'details': (f"{gametext.room_details['b1']}"),
-        'entered': False,
-        'completed': False,
-        'north': 'a1',
-        'south': 'c1',
-        'east': 'b2',
-        'west': False
-    },
-    'b2': {
-        'room_name': 'Arena',
-        'description': (f"{gametext.room_descriptions['b2']}"),
-        'details': (f"{gametext.room_details['b2']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': False,
-        'east': False,
-        'west': 'b1'
-    },
-    'b3': {
-        'room_name': 'Storage Room',
-        'description': (f"{gametext.room_descriptions['b3']}"),
-        'details': (f"{gametext.room_details['b3']}"),
-        'entered': False,
-        'looked': False,
-        'lantern_looked': False,
-        'completed': False,
-        'north': False,
-        'south': 'c3',
-        'east': 'b4',
-        'west': False
-    },
-    'b4': {
-        'room_name': 'Grand Hall',
-        'description': (f"{gametext.room_descriptions['b4']}"),
-        'details': (f"{gametext.room_details['b4']}"),
-        'entered': False,
-        'completed': False,
-        'north': 'a4',
-        'south': 'c4',
-        'east': False,
-        'west': 'b3'
-    },
-    'c1': {
-        'room_name': 'Final Door',
-        'description': (f"{gametext.room_descriptions['c1']}"),
-        'details': (f"{gametext.room_details['c1']}"),
-        'entered': False,
-        'completed': False,
-        'north': 'b1',
-        'south': False,
-        'east': False,
-        'west': False
-    },
-    'c2': {
-        'room_name': 'Alcove',
-        'description': (f"{gametext.room_descriptions['c2']}"),
-        'details': (f"{gametext.room_details['c2']}"),
-        'entered': False,
-        'completed': False,
-        'north': 'b2',
-        'south': False,
-        'east': False,
-        'west': False
-    },
-    'c3': {
-        'room_name': 'Prison Cell',
-        'description': (f"{gametext.room_descriptions['c3']}"),
-        'details': (f"{gametext.room_details['c3']}"),
-        'entered': True,
-        'completed': False,
-        'north': 'b3',
-        'south': False,
-        'east': False,
-        'west': False
-    },
-    'c4': {
-        'room_name': 'Stone Corridor',
-        'description': (f"{gametext.room_descriptions['c4']}"),
-        'details': (f"{gametext.room_details['c4']}"),
-        'entered': False,
-        'completed': False,
-        'north': 'b4',
-        'south': 'd4',
-        'east': False,
-        'west': False
-    },
-    'd1': {
-        'room_name': 'Final Room',
-        'description': 'a spike pit',
-        'details': 'you look around and see spikes',
-        'entered': False,
-        'completed': False,
-        'north': 'c1',
-        'south': False,
-        'east': False,
-        'west': False
-    },
-    'd2': {
-        'room_name': 'Altar',
-        'description': (f"{gametext.room_descriptions['d2']}"),
-        'details': (f"{gametext.room_details['d2']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': False,
-        'east': 'd3',
-        'west': False
-    },
-    'd3': {
-        'room_name': 'Goblin cave',
-        'description': (f"{gametext.room_descriptions['d3']}"),
-        'details': (f"{gametext.room_details['d3']}"),
-        'entered': False,
-        'completed': False,
-        'sneaked': False,
-        'north': False,
-        'south': False,
-        'east': 'd4',
-        'west': False,
-    },
-    'd4': {
-        'room_name': 'Riddle Room',
-        'description': (f"{gametext.room_descriptions['d4']}"),
-        'details': (f"{gametext.room_details['d4']}"),
-        'entered': False,
-        'completed': False,
-        'north': False,
-        'south': False,
-        'east': False,
-        'west': False
-    },
-}
 
 map_dict = {
     'a1': art.MAPA1,
@@ -492,6 +325,7 @@ def update_player_location(destination):
     clear()
     myPlayer.location = destination
     print_room_description()
+    print(room_map[myPlayer.location])
     room_map[myPlayer.location]['entered'] = True
 
 
@@ -707,7 +541,7 @@ def riddle_room_details():
         " At that moment, the same voice of the cloaked figure fills"
         " your head:"
         )
-   
+
     def wallstate(incorrect):
         if incorrect == 1:
             skip_line()
@@ -793,7 +627,7 @@ def riddle_room_details():
         if answer.lower().strip() in [
             'son', 'my son', 'your son', 'the son', 'he is my son',
             'he is your son', 'he is the son', "he's my son",
-            "he's your son", "he's the son" 
+            "he's your son", "he's the son"
                 ]:
             clear()
             type_effect(CENT("'Correct'"))
@@ -875,12 +709,12 @@ def goblin_cave_description():
             f"You are back in the"
             f"{gametext.room_descriptions_completed['d3']}"
              )
-    else:    
+    else:
         if room_map['d3']['sneaked']:
             goblin_cave_description_sneaked()
         else:
             print((f"{gametext.room_descriptions['d3']}"),)
-            
+
 
 def goblin_cave_description_sneaked():
     type_effect(gametext.room_descriptions_goblin_attack['d3'])
