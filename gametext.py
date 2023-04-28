@@ -62,8 +62,9 @@ room_descriptions = {
           " Through the hanging lantern's dim light, you also"
           " see a strange door on the south end of the corridor.",
 
-    'd1': "large room, beautifully decorated, but your eyes are transfixed"
-          " on the door at the opposite wall. The door to freedom..."
+    'd1': "You enter a large room, beautifully decorated, but your eyes are"
+          " transfixed on the door at the opposite wall."
+          " The door to freedom..."
           " You take a step forwards and the figure of the man in the red"
           " and gold cloak appeears between you and the door.",
 
@@ -170,7 +171,6 @@ room_details = {
     'b3': "You search around in the dark and find a RUSTY DAGGER!"
           "\nIt looks like decades of rust have blunted its blade, "
           "\nbut it's better than your fists."
-          "\n\n**You equip the RUSTY DAGGER**\n\n"
           "There is probably more hidden among the crates, but "
           "\nit's too dark to see anything",
 
@@ -277,7 +277,6 @@ room_details_lantern = {
           "\na large slab of wood which looks like it could be used"
           "\nas a makeshift shield! You hug it to your side,"
           "\ngrateful for whatever protection it can offer"
-          " \n\n**You equip the WOODEN SHIELD**\n\n"
 }
 
 room_details_combined = {
@@ -459,7 +458,6 @@ enemy_death = {
                        " broken bones, lies an ornate iron shield."
                        " You slowly reach your hand inside, grasp the shield"
                        " and quickly pull it out."
-                       "\n\n **You equip the IRON SHIELD**\n\n"
                        "This thing looks like it offers some serious"
                        " protection!",
 
@@ -479,7 +477,7 @@ enemy_death = {
                 " around the room and see nothing but piles of bones"
                 " and continue on your path.",
 
-      'manor_lord': "You fall to the floor, battered and exhausted, but"
+      'manor_lord': "You fall to the floor, battered and exhausted,"
                     " but you know you have finally triumphed over this"
                     " wretched place and its sadistic host."
                     " You look up at the final door and pull yourself slowly"

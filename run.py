@@ -125,7 +125,7 @@ def display_hof():
         "\nThese are the brave adventurers who braved"
         "\nthe horrors of Fell Manor and lived to tell the tale."
     )
-    skip_two_lines()
+    skip_line()
     print(
         "\nThe table below shows the NAME of the adventurer,"
         "\ntheir remaining HEALTH points upon escaping,"
@@ -194,8 +194,8 @@ class Monster:
 ogre = Monster('Ogre', 10, 4, 2)
 goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
-gorehowl = Monster('Gorehowl', 20, 8, 1)
-manor_lord = Monster('Lord of Fell Manor', 25, 9, 5)
+gorehowl = Monster('Gorehowl', 20, 7, 1)
+manor_lord = Monster('Lord of Fell Manor', 25, 8, 2)
 
 
 class Weapon:
@@ -308,8 +308,10 @@ def display_map():
 def test_function():
     print('The test function ran successfuly')
     confirm()
-    hof_data = HOF.get_all_values()
-    print(hof_data)
+    myPlayer.health = 15
+    myPlayer.strength = 8
+    myPlayer.armour = 6
+    combat(manor_lord)
 
 
 room_map = copy.deepcopy(dictionary.room_map)
@@ -461,6 +463,10 @@ def prison_cell_details():
     else:
         if myPlayer.shield == 'No Shield':
             type_effect(gametext.room_details_lantern['c3'])
+            skip_two_lines()
+            type_effect(CENT(
+                "**You equip the Wooden Shield**"
+            ))
             myPlayer.shield = 'Wooden Shield'
             myPlayer.armour = 4
             (room_map[myPlayer.location]['completed']) = True
@@ -484,12 +490,20 @@ def storage_room_details():
                 myPlayer.weapon = 'Rusty Dagger'
                 myPlayer.strength = 4
                 type_effect(room_map['b3']['details'])
+                skip_two_lines()
+                type_effect(CENT(
+                    "**You equip the Rusty Dagger**"
+                ))
                 room_map['b3']['looked'] = True
         else:
             type_effect(gametext.room_details_combined['b3'])
             if myPlayer.weapon == 'No Weapon':
                 myPlayer.weapon = 'Rusty Dagger'
                 myPlayer.strength = 4
+                skip_two_lines()
+                type_effect(CENT(
+                    "**You equip the Rusty Dagger**"
+                ))
             else:
                 type_effect(gametext.room_details_lesser_item['b3'])
             myPlayer.manormap = True
@@ -546,6 +560,7 @@ def study_details():
     answer = input("> ")
     if answer.lower().strip() == 'yes':
         type_effect(gametext.enemy_text['haunted_chest'])
+        confirm()
         combat(haunted_chest)
         room_map['a1']['completed'] = True
     else:
@@ -810,6 +825,7 @@ def goblin_cave_description_sneaked():
 def altar_details():
     if myPlayer.silver_key:
         type_effect(gametext.room_details_silver_key['d2'])
+        skip_two_lines()
         type_effect(CENT(
             "**You equip the Silver Sword**"
         ))
@@ -834,6 +850,7 @@ def final_room_description():
         ))
     skip_line()
     type_effect(CENT("Heh heh heh heh"))
+    skip_line()
     type_effect(
         "With that, he spreads wide his long, sickly grey arms"
         " and leaps towards you!"
@@ -875,8 +892,12 @@ def enemy_death(enemy):
         room_map['a4']['completed'] = True
     elif myPlayer.location == 'a1':
         type_effect(gametext.enemy_death['haunted_chest'])
+        skip_two_lines()
+        type_effect(CENT(
+            "**You equip the IRON SHIELD**"
+        ))
         myPlayer.shield = 'Iron Shield'
-        myPlayer.armour = 8
+        myPlayer.armour = 6
         room_map['a1']['completed'] = True
     elif myPlayer.location == 'b2':
         type_effect(gametext.enemy_death['gorehowl'])
@@ -1060,8 +1081,10 @@ def credits_screen():
     clear()
     type_effect(
         "\n\nI hope you have enjoyed Escape From Fell Manor"
+        "\n\nRe-run the programme to see your entry in the Hall of Fame!"
         "\n Thanks for playing!"
         "\n\n                     -Lewis D"
+
         )
     confirm()
     main()
