@@ -28,6 +28,7 @@ MAIN_MENU = """
                                    - PLAY -
                                    - HELP -
                                    - QUIT -
+                               - HALL OF FAME -
 """
 
 HELP = """

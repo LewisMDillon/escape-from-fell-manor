@@ -59,7 +59,7 @@ def display_main_menu():
     MAIN_MENU = art.MAIN_MENU
     type_effect(MAIN_MENU, 0.00003)
     skip_two_lines()
-    print(CENT("Type 'play', 'help', or 'quit'"))
+    print(CENT("Type 'play', 'help', 'quit' or 'hall of fame'"))
     title_screen_options()
 
 
@@ -77,10 +77,12 @@ def title_screen_options():
         help_screen()
     elif option.lower().strip() == ('quit'):
         quit_game()
+    elif option.lower().strip() == ('hall of fame'):
+        hall_of_fame()
     elif option.lower().strip() == ('test'):
         test_function()
     else:
-        print('Please type play, help, or quit')
+        print("Please type 'play', 'help', 'quit', or 'hall of fame'")
         confirm()
         display_main_menu()
         title_screen_options()
@@ -97,6 +99,10 @@ def help_screen():
     confirm()
     display_main_menu()
     title_screen_options()
+
+
+def hall_of_fame():
+    print("These are the real schmad lads")
 
 
 def quit_game():
