@@ -53,7 +53,7 @@ def skip_two_lines():
 
 
 def confirm():
-    skip_two_lines()
+    skip_line()
     input(CENT("-- Press ENTER to continue --"))
     clear()
 
@@ -930,16 +930,16 @@ def calculate_valid_directions():
 
 
 def main_prompt():
-    print("\n")
+    skip_line()
     if myPlayer.manormap is False:
         type_effect(
-            "\n----------------------------------------"
+            "----------------------------------------"
             "\nYou can 'look' around the room for more information,"
             "\ntype 'items' to view your items & health, \nor", 0.003
                  )
     else:
         type_effect(
-            "\n----------------------------------------"
+            "----------------------------------------"
             "\nYou can 'look' around the room for more information,"
             "\ntype 'items' to view your items & health,"
             "\ntype 'map' to view the map,\nor", 0.003
@@ -976,12 +976,15 @@ def lantern_prompt():
 def lantern_attempt():
     rng = random.randint(1, 3)
     if rng <= 2:
+        clear()
         type_effect(gametext.item_text['lantern_success'])
         myPlayer.lantern = True
         room_map['c4']['completed'] = True
     else:
+        clear()
         type_effect(gametext.item_text['lantern_failure'])
         update_player_health(-1)
+        skip_line()
         type_effect("\nDo you want to try again? (yes/no)")
         answer = input("> ")
         if answer.lower().strip() == 'yes':
