@@ -7,9 +7,13 @@ from datetime import datetime
 from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
+import colorama
+from colorama import Fore, Style
 import art
 import gametext
 import dictionary
+
+colorama.init()
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -30,7 +34,7 @@ def clear():
     os.system('clear')
 
 
-def type_effect(text, speed=0.0004):
+def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -58,13 +62,37 @@ def confirm():
     clear()
 
 
+def color_type(text, color, speed=0.04):
+    if color == 'red':
+        print(f"{Fore.RED}{Style.BRIGHT} ", end="", flush=True)
+    elif color == 'green':
+        print(f"{Fore.GREEN} ", end="", flush=True)
+    elif color == 'yellow':
+        print(f"{Fore.YELLOW} ", end="", flush=True)
+    elif color == 'blue':
+        print(f"{Fore.BLUE} ", end="", flush=True)
+    elif color == 'magenta':
+        print(f"{Fore.MAGENTA} ", end="", flush=True)
+    elif color == 'cyan':
+        print(f"{Fore.CYAN} ", end="", flush=True)
+    elif color == 'white':
+        print(f"{Fore.WHITE} ", end="", flush=True)
+    
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(speed)
+    print(f"{Fore.RESET} ", end="", flush=True)
+
+
 def display_title_screen():
     """
     Displays the Main Game Logo
     """
     clear()
     TITLE = art.TITLE
-    type_effect(TITLE, 0.00002)
+    color_type(TITLE, 'red', 0.004)
+    print(f"{Fore.RESET}")
     confirm()
     display_main_menu()
 
@@ -308,10 +336,20 @@ def display_map():
 def test_function():
     print('The test function ran successfuly')
     confirm()
-    myPlayer.health = 15
-    myPlayer.strength = 8
-    myPlayer.armour = 6
-    combat(manor_lord)
+    type_effect("here is some regular text, in white")
+    color_type('this text is blue', 'blue')
+    type_effect("this text is regular again!")
+    skip_line()
+    color_type('This text is a lovely magenta', 'magenta')
+    print("")
+    color_type("R", 'red')
+    color_type('a', 'yellow')
+    color_type('i', 'green')
+    color_type('n', 'blue')
+    color_type('b', 'magenta')
+    color_type('o', 'cyan')
+    color_type('w', 'white')
+    print("")
 
 
 room_map = copy.deepcopy(dictionary.room_map)
@@ -350,7 +388,8 @@ map_dict = {
 
 def game_introduction():
     clear()
-    type_effect("What is your name, victim ")
+    type_effect("What is your name,")
+    color_type("victim", 'red')
     time.sleep(0.25)
     type_effect('\b\b\b\b\b\b\b', 0.03)
     type_effect('brave adventurer?')
