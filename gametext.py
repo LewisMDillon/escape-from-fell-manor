@@ -24,7 +24,7 @@ room_descriptions = {
 
     'b1': "long candlelit corridor. The candles' glow illuminates a"
           " door at the southern end of the corridor, and you can see"
-          " an alcove on the western side with another door.",
+          " a short hallway on the eastern side with another door.",
 
     'b2': "huge circular room. The floor below your feet is hard stone"
           " and stained a dark crimson colour. You look up and see dark"
@@ -38,7 +38,7 @@ room_descriptions = {
           "\nall around you. There is very little light,"
           "\nbut you can just make out a spiral staircase to the east",
 
-    'b4': "grand hall. your eyes follow the intricate pattern on the"
+    'b4': "grand hall. Your eyes follow the intricate pattern on the"
           " red and gold carpet up to the staggeringly high walls,"
           " adorned from bottom to top with countless beautiful paintings"
           " and portraits.\n\n There are large ornate wooden doors"
@@ -50,8 +50,8 @@ room_descriptions = {
           " and then, as you take in the door as a whole, you realise that"
           " all the carvings come together to form the outline of... a face?",
 
-    'c2': "large alcove. This seems to be the place where that cloaked man"
-          " might sit and watch the fighting below.",
+    'c2': "large alcove. This seems to be the place where that purple cloaked"
+          " man might sit and watch the fighting below.",
 
     'c3': "cold, stone room. It seems to be a cell of "
           "some sort\nbut the large iron-barred door "
@@ -67,8 +67,8 @@ room_descriptions = {
     'd1': "You enter a large room, beautifully decorated, but your eyes are"
           " transfixed on the door at the opposite wall."
           " The door to freedom..."
-          " You take a step forwards and the figure of the man in the red"
-          " and gold cloak appeears between you and the door.",
+          " You take a step forwards and the figure of the man in the purple"
+          " cloak appeears between you and the door.",
 
 
     'd2': "small marble chamber. The floor and walls are white marble"
@@ -81,7 +81,7 @@ room_descriptions = {
 
     'd4': "square stone chamber. As soon as you take a step"
           " forwards, the door behind you slams shut and locks."
-          " A tall, slender figure in a red and gold cloak appears"
+          " A tall, slender figure in a purple cloak appears"
           " before you."
 
 }
@@ -93,8 +93,7 @@ room_descriptions_completed = {
       'a2': "pitch-dark chamber. You use your lantern once again"
             " to light the way along the inding stone path",
 
-      'a3': "library. Rows of books line shelves on the northern and"
-            " southern walls, all covered in a thick layer of dust.",
+      'a3': "library, wherein you learned the password: 'Ajagar'.",
 
       'a4': "dining room, the ogre's body lies slumped over the"
             " giant dining table.",
@@ -103,7 +102,7 @@ room_descriptions_completed = {
             " door at the southern end of the corridor, and you can see"
             " an alcove on the western side with another door.",
 
-      'b2': "arena where you fought Gorehowl",
+      'b2': "massive arena where you fought Gorehowl",
 
       'b3': "storage room where you found your dagger and map.",
 
@@ -216,9 +215,7 @@ room_details = {
           " to see any effect compared to your vision."
           "\n That is until you use it to look back at the ornate box."
           " The script on the inside of the box slides and moves, the"
-          " lines of the letters turning and rotating to form a sentence!"
-          "\n\n'See beyond what is shown'\n\n"
-          " You place the eyeglass in your pocket.",
+          " lines of the letters turning and rotating to form a sentence!",
 
     'c3': "It's too dark to see anything."
           " Perhaps if you had a light source...",
@@ -325,8 +322,8 @@ room_details_eyeglass = {
             "\n Sure enough, the script begins to change as it did before,"
             " allowing you to decipher the book's contents"
             "\nYou skim along the pages of the book before stopping at a"
-            " page containing only two words, \n'Password'\n and directly"
-            " below it, \n'Ajagar'\n"
+            " page containing only two words, \n\n'Password'\n\n and directly"
+            " below it, \n\n'Ajagar'\n\n"
             " You make careful note of this word and slam the book shut.",
 
       'b4': "You inspect the paintings. They are all beautifully done."
@@ -351,7 +348,7 @@ room_details_silver_key = {
       'd2': "You approach the chest and insert the silver key into"
             " the keyhole and turn. The latch clicks and the chest unlocks!"
             " You lift the heavy lid and peer inside to see an onrately"
-            " decorated shining silver sword!"
+            f" decorated shining {Fore.CYAN}Silver Sword{Fore.WHITE}"
             " You lift it from the chest and give it a couple of swings."
             " It feels beautifully balanced in your hand and looks like"
             " it could cause some serious damage!"

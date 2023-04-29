@@ -66,7 +66,7 @@ def confirm():
 
 def color_type(text, color, speed=0.04):
     if color == 'red':
-        print(f"{Fore.RED}{Style.BRIGHT} ", end="", flush=True)
+        print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
     elif color == 'green':
         print(f"{Fore.GREEN} ", end="", flush=True)
     elif color == 'yellow':
@@ -229,8 +229,8 @@ class Monster:
 ogre = Monster('Ogre', 10, 4, 2)
 goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
-gorehowl = Monster('Gorehowl', 20, 7, 1)
-manor_lord = Monster('Lord of Fell Manor', 25, 8, 2)
+gorehowl = Monster('Arena Beast', 20, 7, 1)
+manor_lord = Monster('Lord of Fell Manor', 20, 7, 2)
 
 
 class Weapon:
@@ -575,6 +575,7 @@ def library_details():
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['a3'])
         myPlayer.password = True
+        room_map['a3']['completed'] = True
     else:
         type_effect(gametext.room_details['a3'])
 
@@ -584,11 +585,17 @@ def grand_hall_details():
         type_effect(gametext.room_details_eyeglass['b4'])
         update_player_health(10)
         skip_line()
-        print(CENT(f"{Fore.GREEN}  **Your health increases by 10 points**"))
+        print(CENT(
+            f"{Fore.GREEN}  **Your health increases by 10 points**{Fore.WHITE}"
+            ))
         skip_line()
         type_effect(
             "A kind smile creeps over the girl's face as you pull the key"
             " back out of the painting and place it in your pocket.")
+        skip_line()
+        print(CENT(
+                f"          {Fore.CYAN}**You found the Silver Key**"
+                f"{Fore.WHITE}"))
         myPlayer.silver_key = True
         room_map['b4']['completed'] = True
     else:
@@ -633,25 +640,31 @@ def candlelit_corridor_details():
     type_effect("\nDo you want to drink the liquid? (yes/no)\n")
     answer = input("> ")
     if answer.lower().strip() == 'yes':
+        clear()
         type_effect(gametext.item_text['health_potion'])
         skip_line()
-        print(CENT(f"{Fore.GREEN}  **Your health increases by 10 points**"))
+        print(CENT(
+            f"{Fore.GREEN}  **Your health increases by 10 points**{Fore.WHITE}"
+            ))
         skip_line()
         update_player_health(10)
         room_map['b1']['completed'] = True
     else:
+        clear()
         type_effect(
             "You leave the vial where it is and slide the drawer shut"
             )
 
 
 def arena_details():
+    skip_line()
     type_effect(
-        f"\n\n'Welcome {myPlayer.name}.\n"
+        f"{Fore.MAGENTA}'Welcome {myPlayer.name}.'{Fore.WHITE}\n"
                  )
+    skip_line()
     type_effect(
-        "You spin around to see a tall slender man in a red and gold cloak,"
-        "smiling from ear to ear, his feet floating six inches of the ground."
+        "You spin around to see a tall slender man in a purple cloak,"
+        " smiling from ear to ear, his feet floating six inches of the ground."
         "\n At the same time, you see all manner of foul creatures scurrying"
         " around the upper levels of the arena, fighting for seats."
     )
@@ -659,11 +672,15 @@ def arena_details():
         "The cloked man turns and in a grandiose gesture you see"
         " two unnaturally long, grey-skinned arms emerge from his cloak"
         " into the air before he speaks again:"
-
-        "\n\n'Can we please be upstanding for this evening's main event."
-        f"The brave adventurer {myPlayer.name} will take on our undefeated"
-        " champion, GOREHOWL!'\n\n"
-
+    )
+    skip_line()
+    color_type(
+        "'Can we please be upstanding for this evening's main event."
+        f" The brave adventurer {myPlayer.name} will take on our undefeated"
+        " champion, The Arena Beast: GOREHOWL!'", 'magenta'
+    )
+    skip_line()
+    type_effect(
         "With that, the cloaked man vanishes and you hear a terrifying"
         " guttural growl from the door on the opposite end of the room."
         "\nSuddenly, a huge beast charges forth from the door! You only"
@@ -676,6 +693,12 @@ def arena_details():
 
 def alcove_details():
     type_effect(gametext.room_details['c2'])
+    skip_line()
+    type_effect(CENT("'See beyond what is shown'"))
+    skip_line()
+    print(CENT(
+                f"          {Fore.CYAN}**You found the Eyeglass**"
+                f"{Fore.WHITE}"))
     myPlayer.eyeglass = True
     room_map['c2']['completed'] = True
 
@@ -692,9 +715,10 @@ def final_door_details():
 def riddle_room_details():
     incorrect = 0
     skip_two_lines()
-    type_effect(CENT(
-        f"'Hello {myPlayer.name},"
+    print(CENT(
+        f"{Fore.MAGENTA}'Hello {myPlayer.name},"
         " I thought we'd play a little game before you proceed.'"
+        f"{Fore.WHITE}"
         ))
     type_effect(
         "\n\nWith that, the figure vanishes and you hear the unmistakeable"
@@ -730,18 +754,18 @@ def riddle_room_details():
             player_death()
 
     def question_one(incorrect):
-        type_effect(CENT(
+        color_type(
             "\n\n'What always runs but never walks."
             "\n\nOften murmurs, never talks."
             "\n\nHas a bed but never sleeps."
-            "\n\nAn open mouth that never eats?'"
-            ))
+            "\n\nAn open mouth that never eats?'", 'magenta'
+            )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
             'river', 'stream', 'a river', 'a stream', 'the river', 'the stream'
                 ]:
             clear()
-            type_effect(CENT("'Correct'"))
+            print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             type_effect(
                 "The walls momentarily slow their advance, and"
@@ -750,22 +774,22 @@ def riddle_room_details():
             question_two(incorrect)
         else:
             clear()
-            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            color_type("'Heh heh heh, Wrong!'", 'magenta')
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_one(incorrect)
 
     def question_two(incorrect):
-        type_effect(CENT(
+        color_type(
             "\n\n'Heard, I am, but never seen I will be."
-            "\n\nI never speak unless you speak to me.'"
-            ))
+            "\n\nI never speak unless you speak to me.'", 'magenta'
+            )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
             'echo', 'an echo', 'the echo', 'a echo',
                 ]:
             clear()
-            type_effect(CENT("'Correct'"))
+            print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             type_effect(
                 "The walls momentarily slow their advance, and"
@@ -774,17 +798,17 @@ def riddle_room_details():
             question_three(incorrect)
         else:
             clear()
-            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            color_type("'Heh heh heh, Wrong!'", 'magenta')
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_two(incorrect)
 
     def question_three(incorrect):
-        type_effect(CENT(
+        color_type(
             "\n\n'Brothers and sisters I have none,"
             "\n\nYet this man's father is my father's son."
-            "\n\nWho is he?'"
-            ))
+            "\n\nWho is he?'", 'magenta'
+            )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
             'son', 'my son', 'your son', 'the son', 'he is my son',
@@ -792,12 +816,12 @@ def riddle_room_details():
             "he's your son", "he's the son"
                 ]:
             clear()
-            type_effect(CENT("'Correct'"))
+            print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             riddle_complete()
         else:
             clear()
-            type_effect(CENT("'Heh heh heh, Wrong!'"))
+            color_type("'Heh heh heh, Wrong!'", 'magenta')
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_three(incorrect)
@@ -807,10 +831,13 @@ def riddle_room_details():
 
 def riddle_complete():
     type_effect("The walls grind to a stop and you hear the voice again:")
-    type_effect(CENT(
+    color_type(
         "\n\n'Well, well... it seems you're sharper than I gave you credit"
-        " for. I hope we see each other again soon, Heh heh heh heh\n\n"
-        ))
+        " for. I hope we see each other again soon,"
+        " \nHeh heh heh heh\n\n", 'magenta'
+        )
+    confirm()
+    clear()
     type_effect(
         "\nThe voice's ominous laughter fades and you hear the door"
         " behind you unlock. You also see that a section of the wall on"
@@ -841,8 +868,8 @@ def goblin_cave_details():
                 " You step forwards and hear a sickening crunch as the"
                 " weight of your right foot cracks down through what you"
                 " assume to be a pile of rotting bones."
-                " You hear a shrill scream and spin around as the goblin"
-                " leaps towards you!"
+                f" You hear a shrill scream and spin around as the "
+                f" {Fore.RED}goblin{Fore.WHITE} leaps towards you!"
             )
             confirm()
             combat(goblin)
@@ -900,7 +927,7 @@ def altar_details():
 
 def final_room_description():
     type_effect(gametext.room_descriptions['d1'])
-    type_effect(CENT(
+    color_type(
         f"\n\n'Hello again, {myPlayer.name}."
         "\n You've done so well to get here."
         "\n Ah, where are my manners."
@@ -908,10 +935,10 @@ def final_room_description():
         "\n and it's been such a pleasure having you as my guest this evening."
         "\n So much so, that it would be a shame to have you just"
         "\n walk out of this door, don't you think?"
-        "\n Not when there's so much more fun we could have...."
-        ))
+        "\n Not when there's so much more fun we could have....'", 'magenta'
+        )
     skip_line()
-    type_effect(CENT("Heh heh heh heh"))
+    color_type("'Heh heh heh heh'", 'red', 0.2)
     skip_line()
     type_effect(
         "With that, he spreads wide his long, sickly grey arms"
@@ -946,6 +973,8 @@ def gorehowl_death():
 
 
 def enemy_death(enemy):
+    confirm()
+    clear()
     skip_two_lines()
     type_effect(f"You defeated the {Fore.RED}{enemy.name}{Fore.WHITE}!\n")
     if myPlayer.location == 'a4':
@@ -1074,7 +1103,9 @@ def dining_room_prompt():
             " fluffy and warm, yet delightfully crunchy."
             )
         skip_line()
-        print(CENT(f"{Fore.GREEN}  **Your health increases by 2 points**"))
+        print(CENT(
+            f"{Fore.GREEN}  **Your health increases by 2 points**{Fore.WHITE}"
+            ))
         update_player_health(2)
         skip_two_lines()
         type_effect(gametext.enemy_text['ogre'])
@@ -1109,55 +1140,57 @@ def game_instructions():
 
 def combat(enemy):
     clear()
-    print(f"\nThe {Fore.RED}{enemy.name} attacks!")
+    print(f"\nThe {Fore.RED}{enemy.name}{Fore.WHITE} attacks!")
     enemy_attack_strength = (
         random.randint(0, 4) + enemy.strength - myPlayer.armour
     )
     if enemy_attack_strength < 0:
         enemy_attack_strength = 0
-    time.sleep(0.4)
+    time.sleep(0.8)
     print(
-        f"\nThe {Fore.RED}{enemy.name}{Fore.WHITE}hits you for "
+        f"\nThe {Fore.RED}{enemy.name}{Fore.WHITE} hits you for "
         f"{Fore.RED}{enemy_attack_strength}{Fore.WHITE} damage!"
         )
-    time.sleep(0.4)
+    time.sleep(0.8)
     print(f"\nYour health was at {Fore.RED}{myPlayer.health}{Fore.WHITE}")
     print(
         f"\nafter that attack, it's now at "
-        f"{Fore.RED}{myPlayer.health - enemy_attack_strength}"
+        f"{Fore.RED}{myPlayer.health - enemy_attack_strength}{Fore.WHITE}"
         )
     update_player_health(enemy_attack_strength * -1)
 
-    input(f"\nPress {Fore.GREEN}ENTER {Fore.WHITE}to attack!")
+    input(f"\n-- Press {Fore.GREEN}ENTER {Fore.WHITE}to attack! --")
     clear()
     if myPlayer.weapon == 'No Weapon':
         type_effect(f"\nYou attack the {enemy.name} with your bare fists!")
     else:
         type_effect(
-            f"\nYou attack the{Fore.RED}{enemy.name}{Fore.WHITE}"
+            f"\nYou attack the {Fore.RED}{enemy.name}{Fore.WHITE}"
             f" with your {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}!"
             )
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
     if attack_strength < 0:
         attack_strength = 0
+    time.sleep(0.8)    
     print(
-        f"\nYou hit the{Fore.RED}{enemy.name}{Fore.WHITE}"
+        f"\n\nYou hit the {Fore.RED}{enemy.name}{Fore.WHITE}"
         f" for {attack_strength} damage!"
         )
+    time.sleep(0.8)
     print(
-        f"\nThe{Fore.RED}{enemy.name}'s{Fore.WHITE}"
+        f"\nThe {Fore.RED}{enemy.name}'s{Fore.WHITE}"
         f" health was at {Fore.RED}{enemy.health}{Fore.WHITE}"
         )
     print(
         "\nAfter that attack, it's now at "
-        f"{Fore.RED}{enemy.health - attack_strength}"
+        f"{Fore.RED}{enemy.health - attack_strength}{Fore.WHITE}"
         )
     update_enemy_health(enemy, attack_strength * -1)
 
     if enemy.health <= 0:
         return
     else:
-        input(f"\nPress {Fore.GREEN}ENTER {Fore.WHITE}to continue!")
+        input(f"\n-- Press {Fore.GREEN}ENTER {Fore.WHITE}to continue! --")
         combat(enemy)
 
 
