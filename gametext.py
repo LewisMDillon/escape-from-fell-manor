@@ -1,3 +1,5 @@
+from colorama import Fore
+
 room_descriptions = {
 
     'a1': "luxurious study. The room's many shelves are home to"
@@ -168,10 +170,11 @@ room_details = {
     'b2': "The arena lies empty, but it looks like you might be able"
           " to climb up to the large alcove to the south.",
 
-    'b3': "You search around in the dark and find a RUSTY DAGGER!"
-          "\nIt looks like decades of rust have blunted its blade, "
+    'b3': f"You search around in the dark and find a {Fore.CYAN}RUSTY DAGGER"
+          f"\n{Fore.WHITE}It looks like decades of rust"
+          " have blunted its blade,"
           "\nbut it's better than your fists."
-          "There is probably more hidden among the crates, but "
+          "\nThere is probably more hidden among the crates, but "
           "\nit's too dark to see anything",
 
     'b4': "You inspect the paintings. They are all beautifully done."
@@ -265,9 +268,7 @@ room_details_lantern = {
           " It seems to be mostly useless junk, but at the bottom of"
           " an old, rotting wooden crate you find a rolled-up scroll of"
           " parchment. You carefully unravel and examine it. It's a map"
-          " of Fell Manor!"
-          "\n\n You can now type 'map' when prompted to see a map of"
-          " Fell Manor's rooms.",
+          " of Fell Manor!",
 
     'c3': "Your lantern lights up your immediate surroundings."
           "\nA family of mice scurries away from your footfall as"
@@ -280,11 +281,12 @@ room_details_lantern = {
 }
 
 room_details_combined = {
-    'b3': "You search around and find a RUSTY DAGGER!\n"
-          "It looks like decades of rust have blunted its blade, "
+    'b3': f"You search around and find a {Fore.CYAN}Rusty Dagger\n"
+          f"{Fore.WHITE}It looks like decades of rust have blunted its blade, "
           "but it's better than your fists."
-          "\n\n**You equip the RUSTY DAGGER**\n\n"
-          "Not only that, but with the aid of your lantern"
+          f"\n\n{Fore.CYAN}                      "
+          "**You equip the RUSTY DAGGER**\n\n"
+          f"{Fore.WHITE}Not only that, but with the aid of your lantern"
           " you find, at the bottom of an old, rotting"
           " wooden crate, a rolled-up scroll of parchment."
           " You carefully unravel and examine it. It's a map"
@@ -408,7 +410,7 @@ item_text = {
                        " handheld light source",
 
     'lantern_failure': "\nYou step forward to the edge of the puddle and reach"
-                       " as high as you can. Your are just about to reach the"
+                       " as high as you can. You are just about to reach the"
                        " lantern when your foot slips and you stumble forward"
                        " into the puddle of corrosive liquid!"
                        " You leap backwards as fast as you can but the acid"
@@ -429,10 +431,11 @@ item_text = {
 enemy_text = {
 
       'ogre': "You suddenly hear a loud crash to your left. A hulking,"
-              " green ogre stands in the doorway. You both stand frozen"
+              f" green {Fore.RED}ogre {Fore.WHITE}stands in the doorway."
+              " You both stand frozen"
               " for a brief second before it bellows out in a deafening"
               " guttural roar:"
-              "\n\nMY BREEEEEEAD!!!!!\n\n"
+              "                    \n\n'MY BREEEEEEAD!!!!!'\n\n"
               " It bounds towards you and attacks!",
 
       'haunted_chest': "You reach down to open the chest, but before you"
@@ -450,7 +453,9 @@ enemy_death = {
               " thankful you're alive. Since the ogre won't be needing"
               " it anymore, you help yourself to the entire rest"
               " of the breadloaf: a well earned reward."
-              "\n\n **Your health increases by 10 points!**\n\n",
+              f"{Fore.GREEN}\n\n"
+              f"                **Your health increases by 10 points!**\n\n"
+              f"{Fore.WHITE}",
 
       'haunted_chest': "The chest lies still, lid hanging open lifelessly."
                        " You wipe the sweat from your face and cautiously"
