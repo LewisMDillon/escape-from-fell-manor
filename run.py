@@ -34,7 +34,7 @@ def clear():
     os.system('clear')
 
 
-def type_effect(text, speed=0.0004):
+def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -93,7 +93,7 @@ def display_title_screen():
     """
     clear()
     TITLE = art.TITLE
-    color_type(TITLE, 'red', 0.0004)
+    color_type(TITLE, 'red', 0.004)
     print(f"{Fore.RESET}")
     confirm()
     display_main_menu()
@@ -105,7 +105,7 @@ def display_main_menu():
     """
     clear()
     MAIN_MENU = art.MAIN_MENU
-    type_effect(MAIN_MENU, 0.00003)
+    type_effect(MAIN_MENU, 0.003)
     skip_two_lines()
     print(CENT(
         f"               {Fore.WHITE}Type {Fore.GREEN}'play',"
