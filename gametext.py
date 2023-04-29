@@ -19,7 +19,7 @@ room_descriptions = {
           " opposite wall, casting warm orange light on to the"
           " centerpiece of the room:\na gigantic oaken dining table.\n\n"
           " On this dining table sits a single plate, upon which"
-          " rests the most, soft, warm, appetizing loaf of bread\n"
+          " rests the most soft, warm, appetizing loaf of bread\n"
           " Your stomach grumbles...",
 
     'b1': "long candlelit corridor. The candles' glow illuminates a"
@@ -67,7 +67,7 @@ room_descriptions = {
     'd1': "You enter a large room, beautifully decorated, but your eyes are"
           " transfixed on the door at the opposite wall."
           " The door to freedom..."
-          " You take a step forwards and the figure of the man in the purple"
+          " You take a step forward and the figure of the man in the purple"
           " cloak appeears between you and the door.",
 
 
@@ -80,7 +80,7 @@ room_descriptions = {
           " and the shadows of a strange figure dancing on the cave walls.",
 
     'd4': "square stone chamber. As soon as you take a step"
-          " forwards, the door behind you slams shut and locks."
+          " forward, the door behind you slams shut and locks."
           " A tall, slender figure in a purple cloak appears"
           " before you."
 
@@ -229,7 +229,7 @@ room_details = {
           " if you slip, you might end up falling straight into the"
           " puddle of strange, corrosive liquid.",
 
-    'd2': "You apprach the chest and try to open it, but it is locked."
+    'd2': "You approach the chest and try to open it, but it is locked."
           " A heavy silver latch with a keyhole locks the chest shut.",
 
     'd3': "You creep forward and see a small green figure with its"
@@ -251,7 +251,7 @@ room_details_lantern = {
 
     'a2': "You say a silent thanks for your lantern as you feel the"
           " oppresive dark pushed back from you, even if only slightly."
-          " you step tentatively forwards and lower your lantern to"
+          " you step tentatively forward and lower your lantern to"
           " see that the ground one step beyond your feet gives way"
           " to a black chasm. Stepping beyond where you stand seems"
           " like certain death, but you notice to your left, an"
