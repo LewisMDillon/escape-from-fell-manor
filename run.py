@@ -79,7 +79,7 @@ def color_type(text, color, speed=0.04):
         print(f"{Fore.CYAN} ", end="", flush=True)
     elif color == 'white':
         print(f"{Fore.WHITE} ", end="", flush=True)
-    
+
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -125,7 +125,7 @@ def title_screen_options():
     if option.lower().strip() == ('play'):
         gamestate_reset()
         player_setup()
-        game_introduction()
+        name_request()
     elif option.lower().strip() == ('help'):
         help_screen()
     elif option.lower().strip() == ('quit'):
@@ -336,6 +336,12 @@ def inventory_screen():
         f"Your {Fore.RED}health {Fore.WHITE}is currently "
         f"at {Fore.RED}{myPlayer.health}{Fore.WHITE}"
         )
+    skip_line()
+    input(CENT(
+        f"            -- Press {Fore.GREEN}ENTER {Fore.WHITE}to continue --"
+        ))
+    clear()
+    print_room_description()
 
 
 def display_map():
@@ -396,16 +402,24 @@ map_dict = {
 }
 
 
-def game_introduction():
+def name_request():
     clear()
     type_effect("What is your name,")
     color_type("victim", 'red')
     time.sleep(0.25)
     type_effect('\b\b\b\b\b\b\b', 0.03)
     type_effect('brave adventurer?')
-    skip_line()
-    name = input('> ')
-    myPlayer.name = name
+    answer = input('\n> ')
+    if validate_name(answer):
+        myPlayer.name = answer
+        game_introduction()
+        return answer
+
+    else:
+        name_request()
+
+
+def game_introduction():
     clear()
     type_effect(f"\nWelcome, {myPlayer.name}, to Fell Manor")
     type_effect("\nPlease, do make yourself at home.")
@@ -444,7 +458,7 @@ def print_room_description():
                 "You are back in the "
                 f"{room_map[myPlayer.location]['description']}"
                 )
-    
+
     elif myPlayer.location == 'd1':
         final_room_description()
 
@@ -611,49 +625,100 @@ def black_chasm_details():
         room_map['a2']['west'] = 'a1'
         room_map['a2']['completed'] = True
     else:
-        type_effect(
-            "\nDo you want to step forward into the blackness? (yes/no)"
+        black_chasm_prompt()
+
+
+def black_chasm_prompt():
+    clear()
+    skip_line()
+    type_effect(
+            "Do you want to step forward into the"
+            f" blackness?"
+            f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
         )
-        answer = input("> ")
-        if answer.lower().strip() == 'yes':
+    answer = input("\n> ")
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            clear()
             type_effect(gametext.room_details['a2'])
             player_death()
-        else:
+        elif answer[0].lower().strip() == 'n':
+            clear()
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
             main_prompt()
+    else:
+        black_chasm_prompt()
 
 
 def study_details():
     type_effect(gametext.room_details['a1'])
-    type_effect("\nDo you want to open the chest? (yes/no)\n")
-    answer = input("> ")
-    if answer.lower().strip() == 'yes':
-        type_effect(gametext.enemy_text['haunted_chest'])
-        confirm()
-        combat(haunted_chest)
-        room_map['a1']['completed'] = True
+    study_prompt()
+
+
+def study_prompt():
+    skip_line()
+    type_effect(
+        "Do you want to open the chest?"
+        f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+        )
+    answer = input("\n> ")
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            clear()
+            type_effect(gametext.enemy_text['haunted_chest'])
+            confirm()
+            combat(haunted_chest)
+            room_map['a1']['completed'] = True
+        elif answer[0].lower().strip() == 'n':
+            clear()
+            type_effect("You step nervously back from the chest.")
+            confirm()
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
+            main_prompt()
     else:
-        type_effect("You step nervously back from the chest.")
+        study_prompt()
 
 
 def candlelit_corridor_details():
     type_effect(gametext.room_details['b1'])
-    type_effect("\nDo you want to drink the liquid? (yes/no)\n")
-    answer = input("> ")
-    if answer.lower().strip() == 'yes':
-        clear()
-        type_effect(gametext.item_text['health_potion'])
-        skip_line()
-        print(CENT(
-            f"{Fore.GREEN}  **Your health increases by 10 points**{Fore.WHITE}"
+    potion_prompt()
+
+
+def potion_prompt():
+    skip_line()
+    type_effect(
+        "Do you want to drink the liquid?"
+        f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+        )
+    answer = input("\n> ")
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            clear()
+            type_effect(gametext.item_text['health_potion'])
+            skip_line()
+            print(CENT(
+                f"{Fore.GREEN}  **Your health increases by "
+                f"10 points**{Fore.WHITE}"
             ))
-        skip_line()
-        update_player_health(10)
-        room_map['b1']['completed'] = True
+            skip_line()
+            update_player_health(10)
+            room_map['b1']['completed'] = True
+        elif answer[0].lower().strip() == 'n':
+            clear()
+            type_effect(
+                "You leave the vial where it is and slide the drawer shut"
+                )
+            confirm()
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
+            main_prompt()
     else:
-        clear()
-        type_effect(
-            "You leave the vial where it is and slide the drawer shut"
-            )
+        potion_prompt()
 
 
 def arena_details():
@@ -782,7 +847,9 @@ def riddle_room_details():
     def question_two(incorrect):
         color_type(
             "\n\n'Heard, I am, but never seen I will be."
-            "\n\nI never speak unless you speak to me.'", 'magenta'
+            "\n\nI never speak unless you speak to me.'"
+            "\n\n In empty air I fly and fly"
+            "\n\n If asked, I give the same reply", 'magenta'
             )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
@@ -855,41 +922,64 @@ def goblin_cave_details():
         "\n You think you might be able to sneak by without"
         " this creature spotting you..."
         )
-    type_effect("\n\nDo you want to try to sneak past? (yes/no)")
+    goblin_prompt()
+
+
+def goblin_prompt():
+    skip_line()
+    type_effect(
+        "Do you want to try to sneak past?"
+        f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+        )
     answer = input("\n> ")
-    if answer.lower().strip() == 'yes':
-        coinflip = random.randint(1, 2)
-        if coinflip == 1:
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            coinflip = random.randint(1, 2)
+            if coinflip == 1:
+                clear()
+                type_effect(
+                 "You start to slowly creep forward towards"
+                 " the cave exit on the west side of the chamber."
+                 " You walk carefully, step by step through the"
+                 " light of the creature's campfire and back into the dark."
+                 " You step forwards and hear a sickening crunch as the"
+                 " weight of your right foot cracks down through what you"
+                 " assume to be a pile of rotting bones."
+                 f" You hear a shrill scream and spin around as the "
+                 f" {Fore.RED}goblin{Fore.WHITE} leaps towards you!"
+                )
+                confirm()
+                combat(goblin)
+            else:
+                clear()
+                type_effect(
+                  "You start to slowly creep forward towards"
+                  " the cave exit on the west side of the chamber."
+                  " You walk carefully, step by step through the"
+                  " light of the creature's campfire and back into the dark,"
+                  " and reach the west side of the cave!"
+                  " You gather by the sounds of the grunting and crunching"
+                  " still coming from behind you, that the creature remains"
+                  " unaware of your presence as you proceed out of the cave"
+                  " and exit to the west."
+                 )
+                confirm()
+                room_map['d3']['sneaked'] = True
+                room_map['d3']['west'] = 'd2'
+                update_player_location('d2')
+                main_prompt()
+        elif answer[0].lower().strip() == 'n':
+            clear()
             type_effect(
-                "You start to slowly creep forward towards"
-                " the cave exit on the west side of the chamber."
-                " You walk carefully, step by step through the"
-                " light of the creature's campfire and back into the dark."
-                " You step forwards and hear a sickening crunch as the"
-                " weight of your right foot cracks down through what you"
-                " assume to be a pile of rotting bones."
-                f" You hear a shrill scream and spin around as the "
-                f" {Fore.RED}goblin{Fore.WHITE} leaps towards you!"
-            )
-            confirm()
-            combat(goblin)
-        else:
-            type_effect(
-                "You start to slowly creep forward towards"
-                " the cave exit on the west side of the chamber."
-                " You walk carefully, step by step through the"
-                " light of the creature's campfire and back into the dark,"
-                " and reach the west side of the cave!"
-                " You gather by the sounds of the grunting and crunching"
-                " still coming from behind you, that the creature remains"
-                " unaware of your presence as you proceed out of the cave"
-                " and exit to the west."
+                "You creep backwards to the cave entrance"
                 )
             confirm()
-            room_map['d3']['sneaked'] = True
-            room_map['d3']['west'] = 'd2'
-            update_player_location('d2')
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
             main_prompt()
+    else:
+        goblin_prompt()
 
 
 def goblin_cave_description():
@@ -961,7 +1051,8 @@ def update_enemy_health(enemy, num):
 
 
 def player_death():
-    type_effect("\n\nYou Died....")
+    skip_two_lines()
+    type_effect(f"{Fore.RED}You Died....{Fore.WHITE}")
     confirm()
     main()
 
@@ -1041,32 +1132,66 @@ def main_prompt():
         print(f"type {Fore.GREEN}'map'{Fore.WHITE} to view the map, or")
     directions_list = calculate_valid_directions()
     print("\n")
-    type_effect("What would you like to do?\n", 0.003)
-    answer = input("> ")
-    if answer.lower().strip() in directions_list:
-        update_player_location(room_map[myPlayer.location][f"{answer}"])
-    elif answer.lower().strip() == 'look':
-        clear()
-        print_room_details()
-    elif answer.lower().strip() == 'items':
-        clear()
-        inventory_screen()
-    elif answer.lower().strip() == 'map':
-        if myPlayer.manormap:
-            clear()
-            display_map()
 
+    choices = ['look', 'l', 'items', 'i',]
+    if myPlayer.manormap:
+        choices.append('map')
+        choices.append('m')
+    for direction in directions_list:
+        choices.append(direction)
+        choices.append(direction[0])
+
+    type_effect("What would you like to do?", 0.003)
+    answer = input("\n> ")
+    if validate_choice(answer, choices):
+
+        if answer.lower().strip() == 'north' or answer.lower().strip() == 'n':
+            update_player_location(room_map[myPlayer.location][f"{'north'}"])
+
+        elif answer.lower().strip() == 'south' or \
+                answer.lower().strip() == 's':
+            update_player_location(room_map[myPlayer.location][f"{'south'}"])
+
+        elif answer.lower().strip() == 'east' or answer.lower().strip() == 'e':
+            update_player_location(room_map[myPlayer.location][f"{'east'}"])
+
+        elif answer.lower().strip() == 'west' or answer.lower().strip() == 'w':
+            update_player_location(room_map[myPlayer.location][f"{'west'}"])
+
+        elif answer.lower().strip() == 'look' or answer.lower().strip() == 'l':
+            clear()
+            print_room_details()
+        elif answer.lower().strip() == 'items' or \
+                answer.lower().strip() == 'i':
+            clear()
+            inventory_screen()
+        elif answer.lower().strip() == 'map' or answer.lower().strip() == 'm':
+            if myPlayer.manormap:
+                clear()
+                display_map()
+    else:
+        print_room_description()
     main_prompt()
 
 
 def lantern_prompt():
     skip_line()
-    type_effect("\nDo you want to try to grab the lantern? (yes/no)\n")
-    answer = input("> ")
-    if answer.lower().strip() == 'yes':
-        lantern_attempt()
+    type_effect(
+        "Do you want to try to grab the lantern?"
+        f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+        )
+    answer = input("\n> ")
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            lantern_attempt()
+        elif answer[0].lower().strip() == 'n':
+            clear()
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
+            main_prompt()
     else:
-        main_prompt()
+        lantern_prompt()
 
 
 def lantern_attempt():
@@ -1085,32 +1210,60 @@ def lantern_attempt():
         type_effect(gametext.item_text['lantern_failure'])
         update_player_health(-1)
         skip_line()
-        type_effect("\nDo you want to try again? (yes/no)")
+        type_effect(
+            "Do you want to try again?"
+            f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+            )
         answer = input("\n> ")
-        if answer.lower().strip() == 'yes':
-            lantern_attempt()
+        if validate_yes_or_no(answer):
+            if answer[0].lower().strip() == 'y':
+                lantern_attempt()
+            elif answer[0].lower().strip() == 'n':
+                clear()
+                room_map[myPlayer.location]['entered'] = False
+                print_room_description()
+                room_map[myPlayer.location]['entered'] = True
+                main_prompt()
         else:
-            main_prompt()
+            lantern_prompt()
 
 
 def dining_room_prompt():
-    type_effect(f"{gametext.room_details['a4']}")
-    type_effect("\nDo you take a bite? (yes/no)\n")
-    answer = input("> ")
-    if answer.lower().strip() == 'yes':
-        type_effect(
-            "You take a bite of the bread, it is astonishingly tasty,"
-            " fluffy and warm, yet delightfully crunchy."
-            )
-        skip_line()
-        print(CENT(
-            f"{Fore.GREEN}  **Your health increases by 2 points**{Fore.WHITE}"
-            ))
-        update_player_health(2)
-        skip_two_lines()
-        type_effect(gametext.enemy_text['ogre'])
-        confirm()
-        combat(ogre)
+    skip_line()
+    type_effect(
+        "Do you take a bite?"
+        f" ({Fore.GREEN}yes{Fore.WHITE}/{Fore.GREEN}no{Fore.WHITE})"
+        )
+    answer = input("\n> ")
+    if validate_yes_or_no(answer):
+        if answer[0].lower().strip() == 'y':
+            type_effect(
+                "You take a bite of the bread, it is astonishingly tasty,"
+                " fluffy and warm, yet delightfully crunchy."
+                )
+            skip_line()
+            print(CENT(
+                f"{Fore.GREEN}  **Your health increases"
+                f" by 2 points**{Fore.WHITE}"
+                ))
+            update_player_health(2)
+            skip_two_lines()
+            type_effect(gametext.enemy_text['ogre'])
+            confirm()
+            combat(ogre)
+
+        elif answer[0].lower().strip() == 'n':
+            clear()
+            type_effect(
+                "You resist the temptation, for now..."
+                )
+            confirm()
+            room_map[myPlayer.location]['entered'] = False
+            print_room_description()
+            room_map[myPlayer.location]['entered'] = True
+            main_prompt()
+    else:
+        dining_room_prompt()
 
 
 def game_instructions():
@@ -1171,7 +1324,7 @@ def combat(enemy):
     attack_strength = random.randint(0, 4) + myPlayer.strength - enemy.armour
     if attack_strength < 0:
         attack_strength = 0
-    time.sleep(0.8)    
+    time.sleep(0.8)
     print(
         f"\n\nYou hit the {Fore.RED}{enemy.name}{Fore.WHITE}"
         f" for {attack_strength} damage!"
@@ -1195,14 +1348,14 @@ def combat(enemy):
 
 
 def credits_screen():
-    time.sleep(2)
+    time.sleep(1)
     clear()
     update_hof()
     type_effect(CENT(
-        "\n\nCONGRATULTIONS, You have completed Escape From Fell Manor!"
-        " \n\nYour name has been added to the Hall of Fame,"
-        "\n a list of all those courageous adventurers who have braved"
-        "\n Fell Manor and lived to tell the tale!"
+        "\n\n       CONGRATULTIONS, You have completed Escape From Fell Manor!"
+        " \n\n            Your name has been added to the Hall of Fame,"
+        "\n         a list of all those courageous adventurers who have braved"
+        "\n               Fell Manor and lived to tell the tale!"
         ))
     confirm()
     clear()
@@ -1215,6 +1368,59 @@ def credits_screen():
         )
     confirm()
     main()
+
+
+# Validator Functions ###########################
+def validate_name(answer):
+    try:
+        if not answer.isalpha() or len(answer) < 2 or len(answer) > 15:
+            raise ValueError
+    except ValueError:
+        clear()
+        print(
+            f'{Fore.RED}Error: "{answer}" is not'
+            f' an acceptable name{Fore.WHITE}'
+            )
+        print('Please choose a name that is 2-15 letters')
+        confirm()
+        clear()
+        return False
+
+    return True
+
+
+def validate_yes_or_no(answer):
+    try:
+        if len(answer) == 0:
+            raise ValueError
+        if answer[0].lower() != "y" and answer[0].lower() != "n":
+            raise ValueError
+    except ValueError:
+        clear()
+        print(
+            f"{Fore.RED}Error: You answered '{answer}', please"
+            f" type {Fore.GREEN}'yes' {Fore.RED}or {Fore.GREEN}'no'"
+            f"{Fore.WHITE}"
+            )
+        confirm()
+        clear()
+        return False
+
+    return True
+
+
+def validate_choice(answer, choices):
+    try:
+        if answer not in choices:
+            raise ValueError
+    except ValueError:
+        clear()
+        print(f"{Fore.RED}Error: '{answer}' is not a valid input{Fore.WHITE}")
+        confirm()
+        clear()
+        return False
+
+    return True
 
 
 def main():

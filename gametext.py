@@ -341,7 +341,7 @@ room_details_eyeglass = {
             " the fabric of the painting as if it were water."
             " As you grasp the key, the girl's hands clasp yours and"
             " you feel a surge of rejuvenating energy fill your body."
-            
+
 }
 
 room_details_silver_key = {
@@ -432,7 +432,7 @@ enemy_text = {
               " You both stand frozen"
               " for a brief second before it bellows out in a deafening"
               " guttural roar:"
-              "                    \n\n'MY BREEEEEEAD!!!!!'\n\n"
+              "\n\n                     'MY BREEEEEEAD!!!!!'\n\n"
               " It bounds towards you and attacks!",
 
       'haunted_chest': "You reach down to open the chest, but before you"
