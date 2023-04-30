@@ -532,7 +532,7 @@ def prison_cell_details():
     else:
         if myPlayer.shield == 'No Shield':
             type_effect(gametext.room_details_lantern['c3'])
-            skip_two_lines()
+            skip_line()
             print(CENT(
                     f"          {Fore.CYAN}**You equip the Wooden Shield**"
                     f"{Fore.WHITE}"))
@@ -569,7 +569,7 @@ def storage_room_details():
                 myPlayer.weapon = 'Rusty Dagger'
                 myPlayer.strength = 4
                 type_effect(room_map['b3']['details'])
-                skip_two_lines()
+                skip_line()
                 print(CENT(
                     f"          {Fore.CYAN}**You equip the Rusty Dagger**"
                     f"{Fore.WHITE}"))
@@ -732,6 +732,7 @@ def potion_prompt():
             clear()
             type_effect(gametext.item_text['health_potion'])
             confirm()
+            skip_line()
             print(CENT(
                 f"{Fore.GREEN}  **Your health increases by "
                 f"10 points**{Fore.WHITE}"
@@ -883,6 +884,7 @@ def riddle_room_details():
             'river', 'stream', 'a river', 'a stream', 'the river', 'the stream'
                 ]:
             clear()
+            skip_line()
             print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             type_effect(
@@ -909,6 +911,7 @@ def riddle_room_details():
             'echo', 'an echo', 'the echo', 'a echo',
                 ]:
             clear()
+            skip_line()
             print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             type_effect(
@@ -936,6 +939,7 @@ def riddle_room_details():
             "he's your son", "he's the son"
                 ]:
             clear()
+            skip_line()
             print(CENT(f"{Fore.MAGENTA}       'Correct'{Fore.WHITE}"))
             confirm()
             riddle_complete()
@@ -1057,7 +1061,7 @@ def goblin_cave_description_sneaked():
 def altar_details():
     if myPlayer.silver_key:
         type_effect(gametext.room_details_silver_key['d2'])
-        skip_two_lines()
+        skip_line()
         print(CENT(
                 f"          {Fore.CYAN}**You equip the Silver Sword**"
                 f"{Fore.WHITE}"))
@@ -1119,7 +1123,6 @@ def gorehowl_death():
 def enemy_death(enemy):
     confirm()
     clear()
-    skip_two_lines()
     type_effect(f"You defeated the {Fore.RED}{enemy.name}{Fore.WHITE}!\n")
     if myPlayer.location == 'a4':
         type_effect(gametext.enemy_death['ogre'])
@@ -1127,7 +1130,7 @@ def enemy_death(enemy):
         room_map['a4']['completed'] = True
     elif myPlayer.location == 'a1':
         type_effect(gametext.enemy_death['haunted_chest'])
-        skip_two_lines()
+        skip_line()
         print(CENT(
                 f"          {Fore.CYAN}**You equip the Iron Shield**"
                 f"{Fore.WHITE}"))

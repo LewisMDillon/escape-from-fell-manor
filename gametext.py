@@ -429,7 +429,7 @@ enemy_death = {
                        "\nYou slowly reach your hand inside, grasp the shield"
                        "\nand quickly pull it out."
                        "\nThis thing looks like it offers some serious"
-                       "protection!",
+                       " protection!",
 
       'gorehowl': "You fall to your knees beside the huge body of your"
                   "\nopponent, gasping for breath and staring at the"
