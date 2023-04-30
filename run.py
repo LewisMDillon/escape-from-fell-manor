@@ -37,7 +37,7 @@ def clear():
 LINE = '-----------------------------------------------------'
 
 
-def type_effect(text, speed=0.04):
+def type_effect(text, speed=0.0004):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -67,7 +67,7 @@ def confirm():
     clear()
 
 
-def color_type(text, color, speed=0.04):
+def color_type(text, color, speed=0.0004):
     if color == 'red':
         print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
     elif color == 'green':
@@ -77,11 +77,11 @@ def color_type(text, color, speed=0.04):
     elif color == 'blue':
         print(f"{Fore.BLUE} ", end="", flush=True)
     elif color == 'magenta':
-        print(f"{Fore.MAGENTA} ", end="", flush=True)
+        print(f"{Fore.MAGENTA}{Style.BRIGHT} ", end="", flush=True)
     elif color == 'cyan':
         print(f"{Fore.CYAN} ", end="", flush=True)
     elif color == 'white':
-        print(f"{Fore.WHITE} ", end="", flush=True)
+        print(f"{Fore.WHITE}{Style.NORMAL} ", end="", flush=True)
 
     for character in text:
         sys.stdout.write(character)
@@ -611,7 +611,7 @@ def grand_hall_details():
         skip_line()
         type_effect(
             "A kind smile creeps over the girl's face as you pull the key"
-            " back out of the painting and place it in your pocket.")
+            "\nback out of the painting and place it in your pocket.")
         skip_line()
         print(CENT(
                 f"          {Fore.CYAN}**You found the Silver Key**"
@@ -620,8 +620,15 @@ def grand_hall_details():
         room_map['b4']['completed'] = True
     else:
         type_effect(gametext.room_details['b4'])
+        clear()
+        type_effect(
+            "\nAs you peer into the painting, you realise that there is a"
+            "\nvoice coming from it!"
+            "\nYou press your ear close to it and try to make out what"
+            "\nit is saying...",
+          )
         type_effect(CENT(
-            "'Return to me when you can see beyond what is shown'\n\n",
+            "\n\n'Return to me when you can see beyond what is shown'\n\n",
         ))
 
 
@@ -735,28 +742,28 @@ def arena_details():
     skip_line()
     type_effect(
         "You spin around to see a tall slender man in a purple cloak,"
-        " smiling from ear to ear, his feet floating six inches of the ground."
-        "\n At the same time, you see all manner of foul creatures scurrying"
-        " around the upper levels of the arena, fighting for seats."
+        "\nsmiling from ear to ear, his feet floating six inches of the ground."
+        "\nAt the same time, you see all manner of foul creatures scurrying"
+        "\naround the upper levels of the arena, fighting for seats."
     )
     type_effect(
         "The cloked man turns and in a grandiose gesture you see"
-        " two unnaturally long, grey-skinned arms emerge from his cloak"
-        " into the air before he speaks again:"
+        "\ntwo unnaturally long, grey-skinned arms emerge from his cloak"
+        "\ninto the air before he speaks again:"
     )
     skip_line()
     color_type(
         "'Can we please be upstanding for this evening's main event."
-        f" The brave adventurer {myPlayer.name} will take on our undefeated"
-        " champion, The Arena Beast: GOREHOWL!'", 'magenta'
+        f"\nThe brave adventurer {myPlayer.name} will take on our undefeated"
+        "\nchampion, The Arena Beast: GOREHOWL!'", 'magenta'
     )
     skip_line()
     type_effect(
         "With that, the cloaked man vanishes and you hear a terrifying"
-        " guttural growl from the door on the opposite end of the room."
+        "\nguttural growl from the door on the opposite end of the room."
         "\nSuddenly, a huge beast charges forth from the door! You only"
-        " get a brief second to take in its huge mass of fur and fangs"
-        " before it is upon you!"
+        "\nget a brief second to take in its huge mass of fur and fangs"
+        "\nbefore it is upon you!"
     )
     confirm()
     combat(gorehowl)
@@ -785,17 +792,16 @@ def final_door_details():
 
 def riddle_room_details():
     incorrect = 0
-    skip_two_lines()
-    print(CENT(
-        f"{Fore.MAGENTA}'Hello {myPlayer.name},"
-        " I thought we'd play a little game before you proceed.'"
-        f"{Fore.WHITE}"
-        ))
+    clear()
+    color_type(
+            f"'Hello, {myPlayer.name}."
+            "I thought we'd play a little game before you proceed.'", 'magenta'
+            )
     type_effect(
         "\n\nWith that, the figure vanishes and you hear the unmistakeable"
-        " sound of stone grating on stone as the walls begin to close in!"
-        " You panic and search the room for an exit but there is none."
-        " At that moment, the same voice of the cloaked figure fills"
+        "\nsound of stone grating on stone as the walls begin to close in!"
+        "\nYou panic and search the room for an exit but there is none."
+        "\nAt that moment, the same voice of the cloaked figure fills"
         " your head:"
         )
 
@@ -804,23 +810,23 @@ def riddle_room_details():
             skip_line()
             type_effect(
                 "The walls begin to close in on you,"
-                " you press your back against one wall"
-                " and lift your feet to press against the other"
-                " but they continue to advance inwards."
+                "\nyou press your back against one wall"
+                "\nand lift your feet to press against the other"
+                "\nbut they continue to advance inwards."
                 "\nYou hear the voice again:"
                 )
         elif incorrect == 2:
             skip_line()
             type_effect(
                 "The walls close in again, pushing against you."
-                " You only have a few more seconds left!"
+                "\nYou only have a few more seconds left!"
                 "\nThe voice comes to you once again:"
                 )
         elif incorrect == 3:
             skip_line()
             type_effect(
                 "The walls close in one last time, and slam together"
-                " with a dull thud."
+                "\nwith a dull thud."
             )
             player_death()
 
@@ -840,7 +846,7 @@ def riddle_room_details():
             confirm()
             type_effect(
                 "The walls momentarily slow their advance, and"
-                " the voice comes to you again:"
+                "\nthe voice comes to you again:"
                 )
             question_two(incorrect)
         else:
@@ -866,7 +872,7 @@ def riddle_room_details():
             confirm()
             type_effect(
                 "The walls momentarily slow their advance, and"
-                " the voice comes to you again:"
+                "\nthe voice comes to you again:"
                 )
             question_three(incorrect)
         else:
@@ -906,16 +912,16 @@ def riddle_complete():
     type_effect("The walls grind to a stop and you hear the voice again:")
     color_type(
         "\n\n'Well, well... it seems you're sharper than I gave you credit"
-        " for. I hope we see each other again soon,"
-        " \nHeh heh heh heh\n\n", 'magenta'
+        "\nfor. I hope we see each other again soon,"
+        "\nHeh heh heh heh\n\n", 'magenta'
         )
     confirm()
     clear()
     type_effect(
         "\nThe voice's ominous laughter fades and you hear the door"
-        " behind you unlock. You also see that a section of the wall on"
-        " the west side of the room has folded inwards, opening a"
-        " narrow passage leading west"
+        "\nbehind you unlock. You also see that a section of the wall on"
+        "\nthe west side of the room has folded inwards, opening a"
+        "\nnarrow passage leading west"
         )
     room_map['d4']['completed'] = True
     room_map['d4']['west'] = 'd3'
@@ -925,8 +931,8 @@ def riddle_complete():
 def goblin_cave_details():
     type_effect(gametext.room_details['d3'])
     type_effect(
-        "\n You think you might be able to sneak by without"
-        " this creature spotting you..."
+        "\nYou think you might be able to sneak by without"
+        "\nthis creature spotting you..."
         )
     goblin_prompt()
 
@@ -945,14 +951,14 @@ def goblin_prompt():
                 clear()
                 type_effect(
                  "You start to slowly creep forward towards"
-                 " the cave exit on the west side of the chamber."
-                 " You walk carefully, step by step through the"
-                 " light of the creature's campfire and back into the dark."
-                 " You step forwards and hear a sickening crunch as the"
-                 " weight of your right foot cracks down through what you"
-                 " assume to be a pile of rotting bones."
-                 f" You hear a shrill scream and spin around as the "
-                 f" {Fore.RED}goblin{Fore.WHITE} leaps towards you!"
+                 "\nthe cave exit on the west side of the chamber."
+                 "\nYou walk carefully, step by step through the"
+                 "\nlight of the creature's campfire and back into the dark."
+                 "\nYou step forwards and hear a sickening crunch as the"
+                 "\nweight of your right foot cracks down through what you"
+                 "\nassume to be a pile of rotting bones."
+                 f"\nYou hear a shrill scream and spin around as the "
+                 f"\n{Fore.RED}goblin{Fore.WHITE} leaps towards you!"
                 )
                 confirm()
                 combat(goblin)
@@ -960,14 +966,14 @@ def goblin_prompt():
                 clear()
                 type_effect(
                   "You start to slowly creep forward towards"
-                  " the cave exit on the west side of the chamber."
-                  " You walk carefully, step by step through the"
-                  " light of the creature's campfire and back into the dark,"
-                  " and reach the west side of the cave!"
-                  " You gather by the sounds of the grunting and crunching"
-                  " still coming from behind you, that the creature remains"
-                  " unaware of your presence as you proceed out of the cave"
-                  " and exit to the west."
+                  "\nthe cave exit on the west side of the chamber."
+                  "\nYou walk carefully, step by step through the"
+                  "\nlight of the creature's campfire and back into the dark,"
+                  "\nand reach the west side of the cave!"
+                  "\nYou gather by the sounds of the grunting and crunching"
+                  "\nstill coming from behind you, that the creature remains"
+                  "\nunaware of your presence as you proceed out of the cave"
+                  "\nand exit to the west."
                  )
                 confirm()
                 room_map['d3']['sneaked'] = True
@@ -1025,13 +1031,13 @@ def final_room_description():
     type_effect(gametext.room_descriptions['d1'])
     color_type(
         f"\n\n'Hello again, {myPlayer.name}."
-        "\n You've done so well to get here."
-        "\n Ah, where are my manners."
-        "\n I am the Lord of Fell Manor"
-        "\n and it's been such a pleasure having you as my guest this evening."
-        "\n So much so, that it would be a shame to have you just"
-        "\n walk out of this door, don't you think?"
-        "\n Not when there's so much more fun we could have....'", 'magenta'
+        "\nYou've done so well to get here."
+        "\nAh, where are my manners."
+        "\nI am the Lord of Fell Manor"
+        "\nand it's been such a pleasure having you as my guest this evening."
+        "\nSo much so, that it would be a shame to have you just"
+        "\nwalk out of this door, don't you think?"
+        "\nNot when there's so much more fun we could have....'", 'magenta'
         )
     skip_line()
     color_type("'Heh heh heh heh'", 'red', 0.2)
@@ -1206,6 +1212,7 @@ def lantern_attempt():
         clear()
         type_effect(gametext.item_text['lantern_success'])
         skip_line()
+        clear()
         print(CENT(
                     f"          {Fore.CYAN}**You found the Lantern**"
                     f"{Fore.WHITE}"))

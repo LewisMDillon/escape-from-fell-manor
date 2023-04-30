@@ -41,7 +41,7 @@ room_descriptions = {
     'b4': "grand hall.\nYour eyes follow the intricate pattern on the"
           "\nred and gold carpet up to the staggeringly high walls,"
           "\nadorned from bottom to top with countless beautiful paintings"
-          "\nand portraits.\n\n There are large ornate wooden doors"
+          "\nand portraits.\n\nThere are large ornate wooden doors"
           "\nto the north and to the south.",
 
     'c1': "grand entranceway.\nIn front of you stands a huge wooden door,"
@@ -54,7 +54,7 @@ room_descriptions = {
           "\nman might sit and watch the fighting below.",
 
     'c3': "cold, stone room.\nIt seems to be a cell of "
-          "\nsome sort\nbut the large iron-barred door "
+          "some sort\nbut the large iron-barred door "
           "\nto the north hangs open.",
 
     'c4': "narrow, stone-walled corridor.\nA single, small lantern"
@@ -184,11 +184,7 @@ room_details = {
           "\nand again and again until finally coming to a portrait"
           "\nof a young girl."
           "\nThe girl is holding out her hands as if presenting something"
-          "\nbut her hands are empty."
-          "\nAs you peer into the painting, you realise that there is a"
-          "\nvoice coming from it!"
-          "\nYou press your ear close to it and try to make out what"
-          "\nit is saying...",
+          "\nbut her hands are empty.",
 
     'c1': "As you stare at the carvings, they begin to move! The giant wooden"
           "\nfeatures of the face on the door creasing and opening."
@@ -242,7 +238,7 @@ room_details = {
 }
 
 room_details_looked = {
-    'b3': "You search around in the dark but don't find anything"
+    'b3': "You search around in the dark but don't find anything."
           "\nThere is probably more hidden among the crates,\nbut "
           "it's too dark to see anything",
 }
@@ -400,9 +396,11 @@ item_text = {
                        "\nYou steel yourself and try one more time, the liquid"
                        "\non the ground sizzles the toe of your right boot and"
                        "\nyou grimace and reach with all your might, until it"
-                       "\nfeels as if your arm will separate from your shoulder"
+                       "\nfeels as if your arm will separate from your"
+                       " shoulder"
                        "\nand you grab it! With a quick sharp tug the lantern"
-                       "\nbreaks off from its chain and you step carefully back"
+                       "\nbreaks off from its chain and you step carefully"
+                       " back"
                        "\nfrom the still sizzling liquid, admiring your new"
                        "\nhandheld light source",
 
