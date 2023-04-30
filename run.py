@@ -232,7 +232,7 @@ class Monster:
 ogre = Monster('Ogre', 10, 4, 2)
 goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
-gorehowl = Monster('Arena Beast', 20, 7, 1)
+gorehowl = Monster('Arena Beast', 18, 6, 1)
 manor_lord = Monster('Lord of Fell Manor', 20, 7, 2)
 
 
@@ -1126,7 +1126,7 @@ def enemy_death(enemy):
     type_effect(f"You defeated the {Fore.RED}{enemy.name}{Fore.WHITE}!\n")
     if myPlayer.location == 'a4':
         type_effect(gametext.enemy_death['ogre'])
-        update_player_health(10)
+        update_player_health(15)
         room_map['a4']['completed'] = True
     elif myPlayer.location == 'a1':
         type_effect(gametext.enemy_death['haunted_chest'])
@@ -1257,6 +1257,7 @@ def lantern_attempt():
         type_effect(gametext.item_text['lantern_success'])
         skip_line()
         confirm()
+        skip_line()
         print(CENT(
                     f"          {Fore.CYAN}**You found the Lantern**"
                     f"{Fore.WHITE}"))

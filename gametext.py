@@ -419,7 +419,7 @@ enemy_death = {
               "\nit anymore, you help yourself to the entire rest"
               "\nof the breadloaf: a well earned reward."
               f"{Fore.GREEN}\n\n"
-              f"                **Your health increases by 10 points!**"
+              f"                **Your health increases by 15 points!**"
               f"{Fore.WHITE}",
 
       'haunted_chest': "The chest lies still, lid hanging open lifelessly."
