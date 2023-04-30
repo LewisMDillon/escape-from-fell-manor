@@ -1134,6 +1134,7 @@ def calculate_valid_directions():
 
 
 def main_prompt():
+    skip_line()
     if myPlayer.manormap is False:
         print(LINE)
         print(
