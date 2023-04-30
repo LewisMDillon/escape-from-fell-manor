@@ -410,7 +410,7 @@ item_text = {
                        "\ninto the puddle of corrosive liquid!"
                        "\nYou leap backwards as fast as you can but the acid"
                        "\nburns your feet and hands!"
-                       "\nYou take 1 point of damage",
+                       f"\nYou take {Fore.RED}1 {Fore.WHITE}point of damage",
 
     'health_potion': "\nThe lid unscrews easily"
                      "\nand a sickly sweet aroma floats out of the vial."

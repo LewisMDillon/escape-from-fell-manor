@@ -79,9 +79,9 @@ def color_type(text, color, speed=0.0004):
     elif color == 'magenta':
         print(f"{Fore.MAGENTA}{Style.BRIGHT} ", end="", flush=True)
     elif color == 'cyan':
-        print(f"{Fore.CYAN} ", end="", flush=True)
+        print(f"{Fore.CYAN}{Style.BRIGHT} ", end="", flush=True)
     elif color == 'white':
-        print(f"{Fore.WHITE}{Style.NORMAL} ", end="", flush=True)
+        print(f"{Fore.WHITE}{Style.BRIGHT} ", end="", flush=True)
 
     for character in text:
         sys.stdout.write(character)
@@ -300,16 +300,16 @@ def inventory_screen():
     print(LINE)
     if myPlayer.weapon == 'Rusty Dagger':
         print(
-            f"\nWeapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}"
+            f"Weapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}"
             f"-- +{rusty_dagger.strength - 2} damage"
             )
     elif myPlayer.weapon == 'Silver Sword':
         print(
-            f"\nWeapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}"
+            f"Weapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}"
             f"-- +{silver_sword.strength - 2} damage"
             )
     else:
-        print(f"\nWeapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}")
+        print(f"Weapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}")
 
     if myPlayer.shield == 'Wooden Shield':
         print(
@@ -341,7 +341,6 @@ def inventory_screen():
         f"at {Fore.RED}{myPlayer.health}{Fore.WHITE}"
         )
     print(LINE)
-    skip_line()
     input(CENT(
         f"            -- Press {Fore.GREEN}ENTER {Fore.WHITE}to continue --"
         ))
@@ -620,7 +619,7 @@ def grand_hall_details():
         room_map['b4']['completed'] = True
     else:
         type_effect(gametext.room_details['b4'])
-        clear()
+        confirm()
         type_effect(
             "\nAs you peer into the painting, you realise that there is a"
             "\nvoice coming from it!"
@@ -837,7 +836,7 @@ def riddle_room_details():
             "\n\nHas a bed but never sleeps."
             "\n\nAn open mouth that never eats?'", 'magenta'
             )
-        answer = input('\n\n> ')
+        answer = input('\n> ')
         if answer.lower().strip() in [
             'river', 'stream', 'a river', 'a stream', 'the river', 'the stream'
                 ]:
@@ -1212,7 +1211,7 @@ def lantern_attempt():
         clear()
         type_effect(gametext.item_text['lantern_success'])
         skip_line()
-        clear()
+        confirm()
         print(CENT(
                     f"          {Fore.CYAN}**You found the Lantern**"
                     f"{Fore.WHITE}"))
