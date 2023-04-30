@@ -479,7 +479,7 @@ def print_room_description():
 
 def print_room_details():
     if room_map[myPlayer.location]['completed']:
-        type_effect("You have found all there is to find in this room", 0.03)
+        type_effect("You have found all there is to find in this room", 0.01)
 
     elif myPlayer.location == 'b3':
         storage_room_details()
@@ -604,6 +604,15 @@ def storage_room_details():
 def library_details():
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['a3'])
+        confirm()
+        type_effect(
+            "\nSure enough, the script begins to change as it did before,"
+            "\nallowing you to decipher the book's contents"
+            "\nYou skim along the pages of the book before stopping at a"
+            "\npage containing only two words, \n'Password'\n and directly"
+            " below it, \n'Ajagar'\n"
+            "You make careful note of this word and slam the book shut.",
+        )
         myPlayer.password = True
         room_map['a3']['completed'] = True
     else:
@@ -618,7 +627,7 @@ def grand_hall_details():
         print(CENT(
             f"{Fore.GREEN}  **Your health increases by 10 points**{Fore.WHITE}"
             ))
-        skip_line()
+        confirm()
         type_effect(
             "A kind smile creeps over the girl's face as you pull the key"
             "\nback out of the painting and place it in your pocket.")
@@ -722,7 +731,7 @@ def potion_prompt():
         if answer[0].lower().strip() == 'y':
             clear()
             type_effect(gametext.item_text['health_potion'])
-            skip_line()
+            confirm()
             print(CENT(
                 f"{Fore.GREEN}  **Your health increases by "
                 f"10 points**{Fore.WHITE}"
@@ -752,7 +761,8 @@ def arena_details():
     skip_line()
     type_effect(
         "You spin around to see a tall slender man in a purple cloak,"
-        "\nsmiling from ear to ear, his feet floating six inches of the ground."
+        "\nsmiling from ear to ear, his feet floating six inches off the"
+        " ground."
         "\nAt the same time, you see all manner of foul creatures scurrying"
         "\naround the upper levels of the arena, fighting for seats."
     )
@@ -783,6 +793,7 @@ def alcove_details():
     type_effect(gametext.room_details['c2'])
     skip_line()
     type_effect(CENT("'See beyond what is shown'"))
+    confirm()
     skip_line()
     print(CENT(
                 f"          {Fore.CYAN}**You found the Eyeglass**"
@@ -794,10 +805,30 @@ def alcove_details():
 def final_door_details():
     if myPlayer.password:
         type_effect(gametext.room_details_password['c1'])
+        confirm()
+        type_effect(
+            "\nKnowing the password, you speak the word:"
+            "\n\n'Ajagar'\n"
+            "\nThe wooden face grimaces, snapping and creaking as the door"
+            "\nslowly swings open. Through it you can see Fell Manor's"
+            "\nfinal room, and beyond it, the door to your escape..."
+            "\n\n **The entrance to the south is now open**\n"
+        )
         room_map['c1']['south'] = 'd1'
         room_map['c1']['completed'] = True
     else:
         type_effect(gametext.room_details['c1'])
+        confirm()
+        type_effect(
+          "\n\nYou stare blankly back for a moment before realising that"
+          "\nit is expecting an answer from you. "
+          "\nYou try to think of what this password could be but nothing"
+          "\ncomes to your mind. Perhaps there is a clue hidden somewhere"
+          "\nin another room..."
+          "\n\nYou step away from the door and the face's eyes slowly"
+          "\nclose shut again. Its features sinking back into the surface of"
+          "\nthe huge door."
+        )
 
 
 def riddle_room_details():
@@ -845,7 +876,7 @@ def riddle_room_details():
             "\n\n'What always runs but never walks."
             "\n\nOften murmurs, never talks."
             "\n\nHas a bed but never sleeps."
-            "\n\nAn open mouth that never eats?'", 'magenta'
+            "\n\nAn open mouth that never eats?\n'", 'magenta'
             )
         answer = input('\n> ')
         if answer.lower().strip() in [
@@ -1373,7 +1404,6 @@ def combat(enemy):
 
 
 def credits_screen():
-    time.sleep(1)
     clear()
     update_hof()
     type_effect(CENT(

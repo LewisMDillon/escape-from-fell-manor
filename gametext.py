@@ -190,15 +190,7 @@ room_details = {
           "\nfeatures of the face on the door creasing and opening."
           "\nThe wood cracks and groans as the face's eyes fully open."
           "\nIt stares directly at you with its huge, green, wooden eyes"
-          "\nand speaks one word...\n\n 'PASSWORD'"
-          "\n\nYou stare blankly back for a moment before realising that"
-          "\nit is expecting an answer from you. "
-          "\nYou try to think of what this password could be but nothing"
-          "\ncomes to your mind. Perhaps there is a clue hidden somewhere"
-          "\nin another room..."
-          "\n\nYou step away from the door and the face's eyes slowly"
-          "\nclose shut again. Its features sinking back into the surface of"
-          "\nthe huge door.",
+          "\nand speaks one word...\n\n 'PASSWORD'",
 
     'c2': "You see a small stone table beside the seat. Upon the table"
           "\nthere sits an elegantly ornate little box. You lift its"
@@ -246,15 +238,13 @@ room_details_looked = {
 room_details_lantern = {
 
     'a2': "You say a silent thanks for your lantern as you feel the"
-          "\noppresive dark pushed back from you, even if only slightly."
-          "\nyou step tentatively forward and lower your lantern to"
-          "\nsee that the ground one step beyond your feet gives way"
-          "\nto a black chasm. Stepping beyond where you stand seems"
-          "\nlike certain death, but you notice to your left, an"
-          "\nextremely narrow stone path, winding its way left and right"
-          "\nout across the chasm. You take the most careful steps you"
-          "\nhave ever taken and manage to follow the stone path to"
-          "\nthe other side of the room."
+          "\noppresive dark pushed back from you. You step tenatively"
+          "\nforward and lower your lantern to see that the ground one"
+          "\nstep beyond your feet gives way to a black chasm. Stepping"
+          "\nbeyond where you stand would be certain death, but you notice"
+          "\nto your left, an extremely narrow stone path winding its way"
+          "\nleft and right out across the chasm. You advance, one slow step"
+          "\nat a time and manage to follow the stone path to the other side."
           "\n\n             **The west side of this room is now reachable**",
 
     'b3': "With the aid of your lantern you search around the crates."
@@ -276,9 +266,9 @@ room_details_lantern = {
 room_details_combined = {
     'b3': f"You search around and find a {Fore.CYAN}Rusty Dagger\n"
           f"{Fore.WHITE}It looks like decades of rust have blunted its blade, "
-          "but it's better than your fists."
+          "\nbut it's better than your fists."
           f"\n\n{Fore.CYAN}                      "
-          "**You equip the RUSTY DAGGER**\n\n"
+          f"**You equip the RUSTY DAGGER**\n\n{Fore.WHITE}"
 }
 
 room_details_password = {
@@ -288,13 +278,6 @@ room_details_password = {
             "\nThe wood cracks and groans as the face's eyes fully open."
             "\nIt stares directly at you with its huge, green, wooden eyes"
             "\nand speaks one word...\n\n 'PASSWORD' \n\n"
-            "\nKnowing the password, you speak the word:"
-            "\n\n'Ajagar'\n\n"
-            "\nThe wooden face grimaces, snapping and creaking as the door"
-            "\nslowly swings open. Through it you can see Fell Manor's"
-            "\nfinal room, and beyond it, the door to your escape..."
-            "\n\n **The entrance to the south is now open**\n\n"
-
 
 }
 
@@ -307,13 +290,7 @@ room_details_eyeglass = {
             "\nits contents as it seems to be written in a strange script."
             "\nremembering the script on the inside of the eyeglass's box,"
             "\nyou hastily pull out the eyeglass and peer through it at"
-            "\nthe script in the book."
-            "\n Sure enough, the script begins to change as it did before,"
-            "\nallowing you to decipher the book's contents"
-            "\nYou skim along the pages of the book before stopping at a"
-            "\npage containing only two words, \n\n'Password'\n\n and directly"
-            " below it, \n\n'Ajagar'\n\n"
-            "\nYou make careful note of this word and slam the book shut.",
+            "\nthe script in the book.",
 
       'b4': "You inspect the paintings. They are all beautifully done."
             "\nYou notice that the characters in the portraits are never"
