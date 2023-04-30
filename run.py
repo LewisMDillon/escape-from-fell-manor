@@ -77,11 +77,11 @@ def color_type(text, color, speed=0.0004):
     elif color == 'blue':
         print(f"{Fore.BLUE} ", end="", flush=True)
     elif color == 'magenta':
-        print(f"{Fore.MAGENTA}{Style.BRIGHT} ", end="", flush=True)
+        print(f"{Fore.MAGENTA} ", end="", flush=True)
     elif color == 'cyan':
-        print(f"{Fore.CYAN}{Style.BRIGHT} ", end="", flush=True)
+        print(f"{Fore.CYAN} ", end="", flush=True)
     elif color == 'white':
-        print(f"{Fore.WHITE}{Style.BRIGHT} ", end="", flush=True)
+        print(f"{Fore.WHITE} ", end="", flush=True)
 
     for character in text:
         sys.stdout.write(character)
@@ -576,6 +576,16 @@ def storage_room_details():
                 room_map['b3']['looked'] = True
         else:
             type_effect(gametext.room_details_combined['b3'])
+            confirm()
+            type_effect(
+                f"{Fore.WHITE}Not only that, but with the aid of your lantern"
+                "\nyou find, at the bottom of an old, rotting"
+                "\nwooden crate, a rolled-up scroll of parchment."
+                "\nYou carefully unravel and examine it. It's a map"
+                "\nof Fell Manor!"
+                "\n\nYou can now type 'map' when prompted to see a map of"
+                "\nFell Manor's rooms."
+            )
             if myPlayer.weapon == 'No Weapon':
                 myPlayer.weapon = 'Rusty Dagger'
                 myPlayer.strength = 4
@@ -583,6 +593,7 @@ def storage_room_details():
                 print(CENT(
                     f"          {Fore.CYAN}**You found the Map**"
                     f"{Fore.WHITE}"))
+                confirm()
                 skip_line()
             else:
                 type_effect(gametext.room_details_lesser_item['b3'])
@@ -716,7 +727,6 @@ def potion_prompt():
                 f"{Fore.GREEN}  **Your health increases by "
                 f"10 points**{Fore.WHITE}"
             ))
-            skip_line()
             update_player_health(10)
             room_map['b1']['completed'] = True
         elif answer[0].lower().strip() == 'n':
@@ -738,6 +748,7 @@ def arena_details():
     type_effect(
         f"{Fore.MAGENTA}'Welcome {myPlayer.name}.'{Fore.WHITE}\n"
                  )
+    confirm()
     skip_line()
     type_effect(
         "You spin around to see a tall slender man in a purple cloak,"
@@ -791,7 +802,7 @@ def final_door_details():
 
 def riddle_room_details():
     incorrect = 0
-    clear()
+    confirm()
     color_type(
             f"'Hello, {myPlayer.name}."
             "I thought we'd play a little game before you proceed.'", 'magenta'
@@ -1123,7 +1134,6 @@ def calculate_valid_directions():
 
 
 def main_prompt():
-    skip_line()
     if myPlayer.manormap is False:
         print(LINE)
         print(
@@ -1249,6 +1259,7 @@ def dining_room_prompt():
     answer = input("\n> ")
     if validate_yes_or_no(answer):
         if answer[0].lower().strip() == 'y':
+            clear()
             type_effect(
                 "You take a bite of the bread, it is astonishingly tasty,"
                 " fluffy and warm, yet delightfully crunchy."
@@ -1259,7 +1270,7 @@ def dining_room_prompt():
                 f" by 2 points**{Fore.WHITE}"
                 ))
             update_player_health(2)
-            skip_two_lines()
+            skip_line()
             type_effect(gametext.enemy_text['ogre'])
             confirm()
             combat(ogre)

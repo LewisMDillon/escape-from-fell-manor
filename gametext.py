@@ -255,7 +255,7 @@ room_details_lantern = {
           "\nout across the chasm. You take the most careful steps you"
           "\nhave ever taken and manage to follow the stone path to"
           "\nthe other side of the room."
-          "\n\n **The west side of this room is now reachable**\n\n",
+          "\n\n             **The west side of this room is now reachable**",
 
     'b3': "With the aid of your lantern you search around the crates."
           "\nIt seems to be mostly useless junk, but at the bottom of"
@@ -279,13 +279,6 @@ room_details_combined = {
           "but it's better than your fists."
           f"\n\n{Fore.CYAN}                      "
           "**You equip the RUSTY DAGGER**\n\n"
-          f"{Fore.WHITE}Not only that, but with the aid of your lantern"
-          "\nyou find, at the bottom of an old, rotting"
-          "\nwooden crate, a rolled-up scroll of parchment."
-          "\nYou carefully unravel and examine it. It's a map"
-          "\nof Fell Manor!"
-          "\n\nYou can now type 'map' when prompted to see a map of"
-          "\nFell Manor's rooms."
 }
 
 room_details_password = {
@@ -449,7 +442,7 @@ enemy_death = {
               "\nit anymore, you help yourself to the entire rest"
               "\nof the breadloaf: a well earned reward."
               f"{Fore.GREEN}\n\n"
-              f"                **Your health increases by 10 points!**\n\n"
+              f"                **Your health increases by 10 points!**"
               f"{Fore.WHITE}",
 
       'haunted_chest': "The chest lies still, lid hanging open lifelessly."
