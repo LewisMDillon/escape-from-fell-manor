@@ -34,6 +34,9 @@ def clear():
     os.system('clear')
 
 
+LINE = '-----------------------------------------------------'
+
+
 def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
@@ -157,7 +160,7 @@ def help_screen():
 def display_hof():
     clear()
     type_effect(
-        "\nThese are the brave adventurers who braved"
+        "\nThese are the mighty adventurers who braved"
         "\nthe horrors of Fell Manor and lived to tell the tale."
     )
     skip_line()
@@ -293,7 +296,8 @@ def inventory_screen():
     equipment, and items the player has found & displays player health
     """
     print("\nHere are the items and equipment "
-          "that you have gathered on your journey so far:")
+          "that you have \ngathered on your journey so far:")
+    print(LINE)
     if myPlayer.weapon == 'Rusty Dagger':
         print(
             f"\nWeapon: {Fore.CYAN}{myPlayer.weapon}{Fore.WHITE}"
@@ -336,6 +340,7 @@ def inventory_screen():
         f"Your {Fore.RED}health {Fore.WHITE}is currently "
         f"at {Fore.RED}{myPlayer.health}{Fore.WHITE}"
         )
+    print(LINE)
     skip_line()
     input(CENT(
         f"            -- Press {Fore.GREEN}ENTER {Fore.WHITE}to continue --"
@@ -487,6 +492,7 @@ def print_room_details():
         library_details()
 
     elif myPlayer.location == 'a4':
+        type_effect(gametext.room_details['a4'])
         dining_room_prompt()
 
     elif myPlayer.location == 'c3':
@@ -1114,7 +1120,7 @@ def calculate_valid_directions():
 def main_prompt():
     skip_line()
     if myPlayer.manormap is False:
-        print("-----------------------------------------------------")
+        print(LINE)
         print(
             f"You can {Fore.GREEN}'look' {Fore.WHITE}around"
             " the room for more information,"
@@ -1122,7 +1128,7 @@ def main_prompt():
         print(f"type {Fore.GREEN}'items' {Fore.WHITE} to view your items"
               " & health, or")
     else:
-        print("-----------------------------------------------------")
+        print(LINE)
         print(
             f"You can {Fore.GREEN}'look' {Fore.WHITE}around"
             " the room for more information,"
@@ -1268,6 +1274,7 @@ def dining_room_prompt():
 
 def game_instructions():
     clear()
+    skip_line()
     print(CENT("You must escape from Fell Manor!"))
     print(CENT(
         f"     To move from room to room, type {Fore.GREEN}'north', 'south'"

@@ -40,11 +40,8 @@ HELP = """
 (    - You can also type 'look' to examine the room you are in                )
  )     for more information                                                  (
 (                                                                             )
- )   - Many challenges await you, Good Luck!                                 (
+ )   - Typing only the first letter of the above words also works!           (
 (                                                                             )
- )                                                                           (
-(                                                                             )
- )                                                                           (
 (___       _       _       _       _       _       _       _       _       ___)
     `-._.-' (___ _) (__ _ ) (_   _) (__  _) ( __ _) (__  _) (__ _ ) `-._.-'
             `-._.-' (  ___) ( _  _) ( _ __) (_  __) (__ __) `-._.-'
