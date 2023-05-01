@@ -37,7 +37,7 @@ def clear():
 LINE = '-----------------------------------------------------'
 
 
-def type_effect(text, speed=0.0004):
+def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -67,7 +67,7 @@ def confirm():
     clear()
 
 
-def color_type(text, color, speed=0.0004):
+def color_type(text, color, speed=0.04):
     if color == 'red':
         print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
     elif color == 'green':
@@ -96,7 +96,7 @@ def display_title_screen():
     """
     clear()
     TITLE = art.TITLE
-    color_type(TITLE, 'red', 0.004)
+    color_type(TITLE, 'red', 0.003)
     print(f"{Fore.RESET}")
     confirm()
     display_main_menu()
