@@ -350,6 +350,7 @@ def inventory_screen():
 
 def display_map():
     print(f"{map_dict[myPlayer.location]}")
+    confirm()
 
 
 # Test Function #######################
@@ -768,13 +769,13 @@ def arena_details():
         "\naround the upper levels of the arena, fighting for seats."
     )
     type_effect(
-        "The cloked man turns and in a grandiose gesture you see"
+        "\nThe cloked man turns and in a grandiose gesture you see"
         "\ntwo unnaturally long, grey-skinned arms emerge from his cloak"
         "\ninto the air before he speaks again:"
     )
     skip_line()
     color_type(
-        "'Can we please be upstanding for this evening's main event."
+        "\n'Can we please be upstanding for this evening's main event."
         f"\nThe brave adventurer {myPlayer.name} will take on our undefeated"
         "\nchampion, The Arena Beast: GOREHOWL!'", 'magenta'
     )
