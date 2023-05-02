@@ -31,23 +31,129 @@ IMPORTANT: Remember to always include a screenshot of each individual feature!
 
 ### Existing Features
 
-- **Title for feature #1**
+- **Title Screen**
 
-    - Details about this particular feature, including the value to the site, and benefit for the user. Be as detailed as possible!
+    - Title screen which loads first on running the programme. Title of the game is displayed in spooky ASCII art style and red in color.
 
 ![screenshot](documentation/feature01.png)
 
-- **Title for feature #2**
+- **Main Menu**
 
-    - Details about this particular feature, including the value to the site, and benefit for the user. Be as detailed as possible!
+    - Main menu for the player to navigate between game options. From this menu, users can begin the game, see help messages, quit the game, or see the hall of fame.
 
 ![screenshot](documentation/feature02.png)
 
-- **Title for feature #3**
+- **Help Messages**
 
-    - Details about this particular feature, including the value to the site, and benefit for the user. Be as detailed as possible!
+    - Game instructions displayed when user types 'help' from the main menu. Short instructions keeps things simple for users. ASCII art used to display text on image of tattered banner
 
 ![screenshot](documentation/feature03.png)
+
+- **Hall of Fame**
+
+    - Shows a formatted table of all players who have successfully completed the entire game. Shows players' names, their remaining health upon completing the game, and the date on which that they completed the game.
+
+![screenshot](documentation/feature04.png)
+
+- **Type Effect on Game Text**
+
+    - By default, the terminal prints all text in a block instantaneously. This feature prints letters one by one, to give the effect of the text being typed in real time. Different typing speeds are used to give the effect of slow or fast speech, for dramatic effect.
+
+![screenshot](documentation/feature05.png)
+
+- **Player Name**
+
+    - The game asks the player for their name upon starting the game, then uses that name throughout the game when rferring to the player. The name is also used in the hall of fame, should the player successfully complete the game.
+
+![screenshot](documentation/feature06.png)
+
+- **Main Game Prompt**
+
+    - This prompt appears by default after every regular player action. It lists the actions that the player can take, including 'look', via which the player character will explare the room they are in, and possibly interact with room elements.
+
+![screenshot](documentation/feature07.png)
+
+- **Navigation**
+
+    - The player can navigate around the areas of the game by typing cardinal directions in response to game prompts. The available directions to the player are calculated automatically and displayed via the main game prompt.
+
+![screenshot](documentation/feature08.png)
+
+- **Items Screen**
+
+    - This screen is displayed when a player types 'items' in response to the main prompt. The player is presented with a formatted and colour-coded list of the equipment and other items that they have found. This screen also lists the player's current health points.
+
+![screenshot](documentation/feature09.png)
+
+- **Player Health**
+
+    - The game uses a health points system for both the player and enemy characters. Various traps and other game elements can either damage or restore the player's health by different amounts.
+
+![screenshot](documentation/feature10.png)
+
+- **Combat**
+
+    - Players can do battle with enemy characters via the game's combat system. The player's weapon determines their damage output and their armour determines their ability to mitigate damage. Enemies also have a damage output and armour rating which come into play during combat. Random number generation is used to create variance in combat numbers.
+
+![screenshot](documentation/feature11.png)
+
+- **Weapons & Armour**
+
+    - The player can find weapons and armour on their journey, which will improve their damage output in combat, and their damage mitigation in combat respectively. Weapons and armour are automatically equipped, unless a superior item is already in the player's possession. The player can view the item screen to see the exact damage and armour numbers that their equipment provides.
+
+![screenshot](documentation/feature12.png)
+
+- **Shortened Prompt Responses**
+
+    - Players can type both the full word, but also just the first letter of those words when prompted, providing the player with an easier way to interact with the game.
+
+![screenshot](documentation/feature13.png)
+
+- **Special Prompts**
+
+    - Certain game events cause special prompts to appear. These are different from the regular game prompt, to which the user can respond usually with a yes or no.
+
+- **Player Death**
+
+    - If the player's health ever drops to zero, the game displays the 'you died' message and th game ends, returning the user to the title screen.
+
+![screenshot](documentation/feature17.png)
+
+- **Game Map**
+
+    - The player may find on their journey, a map. This will open up a new option in the main game prompt which will show the player a map of the game's rooms. The game detects which room the player is in an prints an 'X' on the map to enote the player's location. The map is displayed on ASCII art of a rolled-up scroll.
+
+![screenshot](documentation/feature18.png)
+
+- **Re-entered Room Descriptions**
+
+    - The game tracks whether a room has been visited previously by the player and if so, skips the slow typing effect and displays a shortened room description, to avoid the user having to wait while the same description is typed out.
+
+![screenshot](documentation/feature19.png)
+
+- **Colored character text**
+
+    - Certain important enemies can speak to the player. When they do so, unique text colours are used to add flavour and to help the player to recognise these important enemies.
+
+![screenshot](documentation/feature20.png)
+
+- **Name Validation**
+
+    - The user's name is valiated on input, checking whether it uses only alpha characters, and is between 2 and 15 characters in length. In the case of an invali input, the prompt is then repeated to the user.
+
+![screenshot](documentation/feature21.png)
+
+- **Main Input Validation**
+
+    - When presented with the main game prompt, the user input is checked against all available choices at that current state. For example, if the player can only travel north, any other direction will flag as invalid. All other inputs that are not in the current available choices will also flag as invalid. The prompt is then repeated to the user.
+
+![screenshot](documentation/feature22.png)
+
+- **Yes/No Valiation**
+
+    - When presented with a special game prompt. The game validates the user's input based on the choices given in the prompt. If the game recieves an invalid input from the user, the prompt is then repeated to the user.
+
+![screenshot](documentation/feature23.png)
 
 ⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
 
