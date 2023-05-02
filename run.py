@@ -1299,7 +1299,7 @@ def dining_room_prompt():
             clear()
             type_effect(
                 "You take a bite of the bread, it is astonishingly tasty,"
-                " fluffy and warm, yet delightfully crunchy."
+                "\nfluffy and warm, yet delightfully crunchy."
                 )
             skip_line()
             print(CENT(
