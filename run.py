@@ -31,6 +31,9 @@ hof_data = HOF.get_all_values()
 
 
 def clear():
+    """
+    clears the terminal window
+    """
     os.system('clear')
 
 
@@ -52,14 +55,23 @@ CENT = "{:^80}".format  # variable for centering text in terminal
 
 
 def skip_line():
+    """
+    prints an empty line
+    """
     print("\n")
 
 
 def skip_two_lines():
+    """
+    prints two empty lines
+    """
     print("\n\n")
 
 
 def confirm():
+    """
+    prints the default ENTER to confirm message, clears the screen
+    """
     skip_line()
     input(CENT(
         f"            -- Press {Fore.GREEN}ENTER {Fore.WHITE}to continue --"
@@ -68,6 +80,10 @@ def confirm():
 
 
 def color_type(text, color, speed=0.04):
+    """
+    outputs text letter by letter in a typing style,
+    can use different colors
+    """
     if color == 'red':
         print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
     elif color == 'green':
@@ -156,6 +172,9 @@ def help_screen():
 
 
 def display_hof():
+    """
+    displays the hall of fame with formatted table results
+    """
     clear()
     type_effect(
         "\nThese are the mighty adventurers who braved"
@@ -176,11 +195,17 @@ def display_hof():
 
 
 def quit_game():
+    """
+    Exits the program
+    """
     print('Exiting Game...')
     sys.exit()
 
 
 def update_hof():
+    """
+    Passes player data and date to Google Sheet
+    """
     date_today = datetime.today().strftime('%Y-%m-%d')
     data = [myPlayer.name, myPlayer.health, date_today]
     HOF.append_row(data)
@@ -347,6 +372,10 @@ def inventory_screen():
 
 
 def display_map():
+    """
+    Prints dungeon map. Uses player location
+    to find correct ASCII art
+    """
     print(f"{map_dict[myPlayer.location]}")
     confirm()
 
@@ -386,6 +415,10 @@ map_dict = {
 
 
 def name_request():
+    """
+    Asks player name, validates and updates
+    Player class.
+    """
     clear()
     type_effect("What is your name,")
     color_type("victim", 'red')
@@ -403,6 +436,9 @@ def name_request():
 
 
 def game_introduction():
+    """
+    Prints game introduction messages
+    """
     clear()
     type_effect(f"\nWelcome, {myPlayer.name}, to Fell Manor")
     type_effect("\nPlease, do make yourself at home.")
@@ -418,7 +454,7 @@ def game_introduction():
 def update_player_location(destination):
     """
     Sets player location value to value of
-    destination, passed as an argument.
+    destination, passed as an argument
     """
     clear()
     myPlayer.location = destination
@@ -427,6 +463,9 @@ def update_player_location(destination):
 
 
 def print_room_description():
+    """
+    Prints game room description text
+    """
     if room_map[myPlayer.location]['completed']:
         print(
                 "You are back in the "
@@ -457,6 +496,10 @@ def print_room_description():
 
 
 def print_room_details():
+    """
+    Prints game room details, calls specific functions
+    if player is in a special room
+    """
     if room_map[myPlayer.location]['completed']:
         type_effect("You have found all there is to find in this room", 0.01)
 
@@ -506,6 +549,9 @@ def print_room_details():
 
 
 def prison_cell_details():
+    """
+    prints details of prison cell
+    """
     if myPlayer.lantern is False:
         type_effect(room_map[myPlayer.location]['details'])
     else:
@@ -524,6 +570,9 @@ def prison_cell_details():
 
 
 def storage_room_details():
+    """
+    prints details of strorage room
+    """
     if room_map['b3']['looked'] is True:
         if myPlayer.lantern is False:
             type_effect(gametext.room_details_looked['b3'])
@@ -581,6 +630,9 @@ def storage_room_details():
 
 
 def library_details():
+    """
+    prints details of library
+    """
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['a3'])
         confirm()
@@ -599,6 +651,9 @@ def library_details():
 
 
 def grand_hall_details():
+    """
+    prints details of grand hall
+    """
     if myPlayer.eyeglass:
         type_effect(gametext.room_details_eyeglass['b4'])
         update_player_health(10)
@@ -631,6 +686,9 @@ def grand_hall_details():
 
 
 def black_chasm_details():
+    """
+    prints details of black chasm
+    """
     if myPlayer.lantern:
         type_effect(gametext.room_details_lantern['a2'])
         room_map['a2']['west'] = 'a1'
@@ -640,6 +698,10 @@ def black_chasm_details():
 
 
 def black_chasm_prompt():
+    """
+    prompts the user with yes/no question.
+    Runs functions based on user input
+    """
     clear()
     skip_line()
     type_effect(
@@ -664,11 +726,18 @@ def black_chasm_prompt():
 
 
 def study_details():
+    """
+    prints details of study
+    """
     type_effect(gametext.room_details['a1'])
     study_prompt()
 
 
 def study_prompt():
+    """
+    prompts user with yes/no question.
+    Runs functions based on user input
+    """
     skip_line()
     type_effect(
         "Do you want to open the chest?"
@@ -695,11 +764,18 @@ def study_prompt():
 
 
 def candlelit_corridor_details():
+    """
+    prints candlelit corridor details
+    """
     type_effect(gametext.room_details['b1'])
     potion_prompt()
 
 
 def potion_prompt():
+    """
+    prompts user with yes/no question.
+    Runs functions based on user input
+    """
     skip_line()
     type_effect(
         "Do you want to drink the liquid?"
@@ -733,6 +809,9 @@ def potion_prompt():
 
 
 def arena_details():
+    """
+    prints arena details. Starts combat
+    """
     skip_line()
     type_effect(
         f"{Fore.MAGENTA}'Welcome {myPlayer.name}.'{Fore.WHITE}\n"
@@ -770,6 +849,9 @@ def arena_details():
 
 
 def alcove_details():
+    """
+    prints alcove details
+    """
     type_effect(gametext.room_details['c2'])
     skip_line()
     type_effect(CENT("'See beyond what is shown'"))
@@ -783,6 +865,9 @@ def alcove_details():
 
 
 def final_door_details():
+    """
+    prints final door details
+    """
     if myPlayer.password:
         type_effect(gametext.room_details_password['c1'])
         confirm()
@@ -812,6 +897,9 @@ def final_door_details():
 
 
 def riddle_room_details():
+    """
+    print riddle room details. Presents user with riddles
+    """
     incorrect = 0
     confirm()
     color_type(
@@ -933,6 +1021,10 @@ def riddle_room_details():
 
 
 def riddle_complete():
+    """
+    runs if user answers all riddles correctly, prints win message
+    and completes room
+    """
     type_effect("The walls grind to a stop and you hear the voice again:")
     color_type(
         "\n\n'Well, well... it seems you're sharper than I gave you credit"
@@ -953,6 +1045,9 @@ def riddle_complete():
 
 
 def goblin_cave_details():
+    """
+    prints goblin cave details
+    """
     type_effect(gametext.room_details['d3'])
     type_effect(
         "\nYou think you might be able to sneak by without"
@@ -962,6 +1057,10 @@ def goblin_cave_details():
 
 
 def goblin_prompt():
+    """
+    prompts user with yes/no question.
+    Runs functions based on user input
+    """
     skip_line()
     type_effect(
         "Do you want to try to sneak past?"
@@ -1019,6 +1118,11 @@ def goblin_prompt():
 
 
 def goblin_cave_description():
+    """
+    prints goblin cave description, checks whether
+    player has previously successfully sneaked
+    through the room
+    """
     if room_map['d3']['completed']:
         print(
             f"You are back in the"
@@ -1032,12 +1136,19 @@ def goblin_cave_description():
 
 
 def goblin_cave_description_sneaked():
+    """
+    prints goblin attack text, starts combat with goblin
+    """
     type_effect(gametext.room_descriptions_goblin_attack['d3'])
     confirm()
     combat(goblin)
 
 
 def altar_details():
+    """
+    prints altar details. Checks if user has silver key and opens
+    chest if so
+    """
     if myPlayer.silver_key:
         type_effect(gametext.room_details_silver_key['d2'])
         skip_line()
@@ -1052,6 +1163,9 @@ def altar_details():
 
 
 def final_room_description():
+    """
+    prints final room text, starts combat with manor lord
+    """
     type_effect(gametext.room_descriptions['d1'])
     color_type(
         f"\n\n'Hello again, {myPlayer.name}."
@@ -1075,18 +1189,29 @@ def final_room_description():
 
 
 def update_player_health(num):
+    """
+    Updates player health points by 'num'. Use
+    negative integer for health deduction
+    """
     myPlayer.health = myPlayer.health + num
     if myPlayer.health <= 0:
         player_death()
 
 
 def update_enemy_health(enemy, num):
+    """
+    Updates enemy health by 'num'. Use
+    negative integer for health deduction
+    """
     enemy.health = enemy.health + num
     if enemy.health <= 0:
         enemy_death(enemy)
 
 
 def player_death():
+    """
+    prints death message, restarts program
+    """
     skip_two_lines()
     type_effect(f"{Fore.RED}You Died....{Fore.WHITE}")
     confirm()
@@ -1094,12 +1219,19 @@ def player_death():
 
 
 def gorehowl_death():
+    """
+    prints gorehowl death message, completes room
+    """
     type_effect("\n\nYou defeated Gorehowl!\n\n")
     type_effect(gametext.enemy_death['gorehowl'])
     room_map['b2']['completed'] = True
 
 
 def enemy_death(enemy):
+    """
+    default enemy death message, checks which enemy
+    player is fighting and prints corresponing text
+    """
     confirm()
     clear()
     type_effect(f"You defeated the {Fore.RED}{enemy.name}{Fore.WHITE}!\n")
@@ -1131,10 +1263,17 @@ def enemy_death(enemy):
 
 
 def game_begin_message():
+    """
+    prints beginning of first game sentence
+    """
     type_effect(f"You awake in a {room_map[myPlayer.location]['description']}")
 
 
 def calculate_valid_directions():
+    """
+    checks which directions are available for player
+    to travel, adds them to a list, prints the list.
+    """
     directions_list = []
     for key, value in room_map[myPlayer.location].items():
         if key in ['north', 'south', 'east', 'west']:
@@ -1147,6 +1286,10 @@ def calculate_valid_directions():
 
 
 def main_prompt():
+    """
+    main game prompt - runs if no other special prompt runs.
+    prints all available user input options
+    """
     skip_line()
     if myPlayer.manormap is False:
         print(LINE)
@@ -1210,6 +1353,10 @@ def main_prompt():
 
 
 def lantern_prompt():
+    """
+    prompts the user with yes/no question.
+    Runs functions based on user input.
+    """
     skip_line()
     type_effect(
         "Do you want to try to grab the lantern?"
@@ -1230,6 +1377,11 @@ def lantern_prompt():
 
 
 def lantern_attempt():
+    """
+    creates random number for 2/3 chance at player victory.
+    prints success text on success, or else prints failure text
+    and reprompts the user.
+    """
     rng = random.randint(1, 3)
     if rng <= 2:
         clear()
@@ -1266,6 +1418,11 @@ def lantern_attempt():
 
 
 def dining_room_prompt():
+    """
+    presents user with yes/no prompt.
+    Runs functions based on user input.
+    Starts combat on 'yes'
+    """
     skip_line()
     type_effect(
         "Do you take a bite?"
@@ -1305,6 +1462,9 @@ def dining_room_prompt():
 
 
 def game_instructions():
+    """
+    prints game instructions on starting new game
+    """
     clear()
     skip_line()
     print(CENT("You must escape from Fell Manor!"))
@@ -1331,6 +1491,11 @@ def game_instructions():
 
 
 def combat(enemy):
+    """
+    combat function. takes enemy strength, adds a random number (0 - 4)
+    and minuses player armour to get total damage. updates player health.
+    Then runs the same procedure for player attacks against enemy.
+    """
     clear()
     print(f"\nThe {Fore.RED}{enemy.name}{Fore.WHITE} attacks!")
     enemy_attack_strength = (
@@ -1387,6 +1552,9 @@ def combat(enemy):
 
 
 def credits_screen():
+    """
+    Prints game complete messages.
+    """
     clear()
     update_hof()
     type_effect(CENT(
@@ -1408,8 +1576,12 @@ def credits_screen():
     main()
 
 
-# Validator Functions ###########################
+# Validator Functions
 def validate_name(answer):
+    """
+    Validates user input on name prompt. Checks if user input is
+    2-15 alpha characters, throws error otherwise
+    """
     try:
         if not answer.isalpha() or len(answer) < 2 or len(answer) > 15:
             raise ValueError
@@ -1428,6 +1600,11 @@ def validate_name(answer):
 
 
 def validate_yes_or_no(answer):
+    """
+    validates yes/no user prompts. Checks whether user has input
+    'yes' or 'no', also accepts any word beginning with 'y' or
+    'n'. Throws error otherwise
+    """
     try:
         if len(answer) == 0:
             raise ValueError
@@ -1448,6 +1625,10 @@ def validate_yes_or_no(answer):
 
 
 def validate_choice(answer, choices):
+    """
+    Checks whether user input is valid from a list of acceptable
+    choices. Throws error otherwise
+    """
     try:
         if answer not in choices:
             raise ValueError
