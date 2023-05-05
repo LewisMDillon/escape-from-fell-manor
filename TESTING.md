@@ -37,13 +37,13 @@ Defensive programming was manually tested with the below user acceptance testing
 | Page | User Action | Expected Result | Pass/Fail | Comments |
 | --- | --- | --- | --- | --- |
 | Main Menu | | | | |
-| | Input only from options given | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user |
+| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user |
 | User Name Request | | | | |
-| | Input 2-15 alpha characters | Store name as player name | Pass | Input of of any other kind eg. numbers, special characters or whitespace throws error an repeats prompt to user |
+| | Input 2-15 alpha characters | Store name as player name | Pass | Input of any other kind e.g. numbers, special characters or whitespace throws error an repeats prompt to user |
 | Main Game Prompt | | | | |
-| | Input only from options given | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user |
+| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user |
 | Yes/No Prompts | | | | |
-| | Input only 'yes' or 'no' | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user. User is able to input any word beginning with 'y' for yes and 'n' for no |
+| | Input only 'yes' or 'no' | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user. User is able to input any word beginning with 'y' for yes and 'n' for no |
 
 
 ## Bugs

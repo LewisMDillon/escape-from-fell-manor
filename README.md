@@ -5,7 +5,6 @@ Escape From Fell Manor is a text-based adventure game run inside a terminal wind
 ![screenshot](documentation/mockup.png)
 
 
-
 ## UX
 
 The UX is largely dictated by the constraints of running inside the terminal window, however, various colors were used to highlight an flavour certain text elements. When instructing the user to respond with a choice of words, those words are always highlighted in green. Text for health damage to the player and enemies is red. Item text is in cyan.
@@ -13,7 +12,6 @@ The UX is largely dictated by the constraints of running inside the terminal win
 ASCII art was employed for the main game title and also to provide makeshift illustrations of certain game elements. The player map, for example uses a depiction of a scroll, as is described in game, to display the game map.
 
 ## Features
-
 
 ### Existing Features
 
@@ -49,13 +47,13 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
 - **Player Name**
 
-    - The game asks the player for their name upon starting the game, then uses that name throughout the game when rferring to the player. The name is also used in the hall of fame, should the player successfully complete the game.
+    - The game asks the player for their name upon starting the game, then uses that name throughout the game when referring to the player. The name is also used in the hall of fame, should the player successfully complete the game.
 
 ![screenshot](documentation/feature06.png)
 
 - **Main Game Prompt**
 
-    - This prompt appears by default after every regular player action. It lists the actions that the player can take, including 'look', via which the player character will explare the room they are in, and possibly interact with room elements.
+    - This prompt appears by default after every regular player action. It lists the actions that the player can take, including 'look', via which the player character will explore the room they are in, and possibly interact with room elements.
 
 ![screenshot](documentation/feature07.png)
 
@@ -101,13 +99,13 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
 - **Player Death**
 
-    - If the player's health ever drops to zero, the game displays the 'you died' message and th game ends, returning the user to the title screen.
+    - If the player's health ever drops to zero, the game displays the 'you died' message and the game ends, returning the user to the title screen.
 
 ![screenshot](documentation/feature17.png)
 
 - **Game Map**
 
-    - The player may find on their journey, a map. This will open up a new option in the main game prompt which will show the player a map of the game's rooms. The game detects which room the player is in an prints an 'X' on the map to enote the player's location. The map is displayed on ASCII art of a rolled-up scroll.
+    - The player may find on their journey, a map. This will open up a new option in the main game prompt which will show the player a map of the game's rooms. The game detects which room the player is in an prints an 'X' on the map to denote the player's location. The map is displayed on ASCII art of a rolled-up scroll.
 
 ![screenshot](documentation/feature18.png)
 
@@ -125,7 +123,7 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
 - **Name Validation**
 
-    - The user's name is valiated on input, checking whether it uses only alpha characters, and is between 2 and 15 characters in length. In the case of an invali input, the prompt is then repeated to the user.
+    - The user's name is validated on input, checking whether it uses only alpha characters, and is between 2 and 15 characters in length. In the case of an invalid input, the prompt is then repeated to the user.
 
 ![screenshot](documentation/feature21.png)
 
@@ -135,22 +133,20 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
 ![screenshot](documentation/feature22.png)
 
-- **Yes/No Valiation**
+- **Yes/No Validation**
 
-    - When presented with a special game prompt. The game validates the user's input based on the choices given in the prompt. If the game recieves an invalid input from the user, the prompt is then repeated to the user.
+    - When presented with a special game prompt. The game validates the user's input based on the choices given in the prompt. If the game receives an invalid input from the user, the prompt is then repeated to the user.
 
 ![screenshot](documentation/feature23.png)
 
-
 ### Future Features
 
-
 - Character customisation
-    - Functionality to allow users to create different characters with different strengths & weaknesses. Possible character classes eg. Warrior, Mage, Rogue etc.
+    - Functionality to allow users to create different characters with different strengths & weaknesses. Possible character classes e.g. Warrior, Mage, Rogue etc.
 - More equipment/item implementation
     - Inclusion of more weapons and armor with varying levels of power
 - Scoring system
-    - system to score player runs based on health/damage done/correct answers/time taken etc. Implemented into hall of fame to create ranked leaerboard.
+    - system to score player runs based on health/damage done/correct answers/time taken etc. Implemented into hall of fame to create ranked leaderboard.
 
 ## Tools & Technologies Used
 
@@ -165,7 +161,6 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 ### Flowchart
 
 A flowchart was used to map out the 'rooms' of the game and to visualise the content of and connections between these 'rooms'. This was done using [Lucidchart](https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning)
-
 
 ![screenshot](documentation/flowchart.png)
 
@@ -195,7 +190,6 @@ class Player:
         self.silver_key = silver_key
         self.password = password
 
-
 myPlayer = Player(
     'Player', 'c3', 10, 'No Weapon', 2, 'No Shield', 2,
     False, False, False, False, False
@@ -213,7 +207,6 @@ class Monster:
         self.strength = strength
         self.armour = armour
 
-
 ogre = Monster('Ogre', 10, 4, 2)
 goblin = Monster('Goblin', 8, 4, 1)
 haunted_chest = Monster('Haunted Chest', 12, 5, 2)
@@ -230,7 +223,6 @@ class Weapon:
         self.name = name
         self.strength = strength
 
-
 rusty_dagger = Weapon('RUSTY DAGGER', 4)
 silver_sword = Weapon('SILVER SWORD', 8)
 ```
@@ -244,11 +236,9 @@ class Shield:
         self.name = name
         self.armour = armour
 
-
 wooden_shield = Shield('Wooden Shield', 4)
 iron_shield = Shield('Iron Shield', 6)
 ```
-
 
 The primary functions used on this application are:
 
@@ -269,7 +259,7 @@ The primary functions used on this application are:
 - `calculate_valid_directions()`
     - Displays to the user a list of the cardinal directions currently available to travel in.
 - `combat()`
-    - Runs combat sequnce between player and enemy. Loops until either is dead.
+    - Runs combat sequence between player and enemy. Loops until either is dead.
 - `main()`
     - Runs initial program functions.
 
@@ -283,7 +273,7 @@ I've used the following Python packages and/or external imported packages.
 - `sys`: used for text typing effect & quit game functions
 - `os`: used for adding a `clear()` function
 - `random`: used to get a random choice from a list
-- `copy`: used to create deep copy of room dicttionary from dictionary.py
+- `copy`: used to create deep copy of room dictionary from dictionary.py
 - `datetime`: used to insert date into hall of fame entries
 - `tabulate`: used to format hall of fame entries
 - `colorama`: used for including color in the terminal
@@ -334,7 +324,7 @@ Or:
 - In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
 - Set the remote for Heroku: `heroku git:remote -a app_name` (replace *app_name* with your app name)
 - After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
-	- `git push heroku main`
+    - `git push heroku main`
 
 The frontend terminal should now be connected and deployed to Heroku!
 
@@ -357,7 +347,7 @@ You can clone the repository by following these steps:
 4. Open Git Bash or Terminal
 5. Change the current working directory to the one where you want the cloned directory
 6. In your IDE Terminal, type the following command to clone my repository:
-	- `git clone https://github.com/LewisMDillon/escape-from-fell-manor.git`
+    - `git clone https://github.com/LewisMDillon/escape-from-fell-manor.git`
 7. Press Enter to create your local clone.
 
 Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
@@ -376,7 +366,6 @@ You can fork this repository by using the following steps:
 2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
 3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
 
-
 ## Credits
 
 ### Content
@@ -385,7 +374,7 @@ You can fork this repository by using the following steps:
 | --- | --- | --- |
 | [Markdown Builder](https://traveltimn.github.io/markdown-builder) | README and TESTING | tool to help generate the Markdown files |
 | [StackOverflow](https://stackoverflow.com/questions/71163139/for-looping-over-dictionary-object) | dictionary | How to iterate over a dictionary with a loop |
-| [StackOverflow](https://stackoverflow.com/questions/5598181/how-can-i-print-multiple-things-on-the-same-line-one-at-a-time) | color_type function | How to put separate print statements on on line |
+| [StackOverflow](https://stackoverflow.com/questions/5598181/how-can-i-print-multiple-things-on-the-same-line-one-at-a-time) | color_type function | How to put separate print statements on one line |
 | [YouTube](https://www.youtube.com/watch?v=MFW8DJ6qsak) | entire site | tutorial for making text-based game in python |
 | [strftime](https://strftime.org) | Hall of Fame entries | helpful tool to format date/time from string |
 | [101computing](https://www.101computing.net/python-typing-text-effect/) | entire site | tutorial for creating type effect in python terminal window applications |
@@ -404,3 +393,5 @@ You can fork this repository by using the following steps:
 - I would like to thank the [Code Institute](https://codeinstitute.net) tutor team for their assistance with troubleshooting and debugging some project issues.
 - I would like to thank the [Code Institute Slack community](https://code-institute-room.slack.com) for the moral support; it kept me going during periods of self doubt and imposter syndrome.
 - I would like to thank my partner Rachel, for believing in me, and allowing me to make this transition into software development, and also for being the first player to complete the game and entering the Hall of Fame!
+
+
