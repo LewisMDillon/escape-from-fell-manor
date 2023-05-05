@@ -14,20 +14,6 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
 ## Features
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-In this section, you should go over the different parts of your project,
-and describe each in a sentence or so.
-
-You will need to explain what value each of the features provides for the user,
-focusing on who this website is for, what it is that they want to achieve,
-and how your project is the best way to help them achieve these things.
-
-For some/all of your features, you may choose to reference the specific project files that implement them.
-
-IMPORTANT: Remember to always include a screenshot of each individual feature!
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 ### Existing Features
 
@@ -155,13 +141,6 @@ IMPORTANT: Remember to always include a screenshot of each individual feature!
 
 ![screenshot](documentation/feature23.png)
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-Repeat as necessary for as many features as your site contains.
-
-Hint: the more, the merrier!
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 ### Future Features
 
@@ -174,12 +153,12 @@ Consider adding any helpful links or notes to help remind you in the future, if 
 
 🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
-- Title for future feature #1
-    - Any additional notes about this feature.
-- Title for future feature #2
-    - Any additional notes about this feature.
-- Title for future feature #3
-    - Any additional notes about this feature.
+- Character customisation
+    - Functionality to allow users to create different characters with different strengths & weaknesses. Possible character classes eg. Warrior, Mage, Rogue etc.
+- More equipment/item implementation
+    - Inclusion of more weapons and armor with varying levels of power
+- Scoring system
+    - system to score player runs based on health/damage done/correct answers/time taken etc. Implemented into hall of fame to create ranked leaerboard.
 
 ## Tools & Technologies Used
 
@@ -192,39 +171,18 @@ Feel free to delete any unused items below as necessary.
 
 🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
-- [HTML](https://en.wikipedia.org/wiki/HTML) used for the main site content.
-- [CSS](https://en.wikipedia.org/wiki/CSS) used for the main site design and layout.
-- [CSS :root variables](https://www.w3schools.com/css/css3_variables.asp) used for reusable styles throughout the site.
-- [CSS Flexbox](https://www.w3schools.com/css/css3_flexbox.asp) used for an enhanced responsive layout.
-- [CSS Grid](https://www.w3schools.com/css/css_grid.asp) used for an enhanced responsive layout.
-- [JavaScript](https://www.javascript.com) used for user interaction on the site.
-- [Python](https://www.python.org) used as the back-end programming language.
+- [Python](https://www.python.org) used for all functionality of site.
 - [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`)
 - [GitHub](https://github.com) used for secure online code storage.
-- [GitHub Pages](https://pages.github.com) used for hosting the deployed front-end site.
 - [Gitpod](https://gitpod.io) used as a cloud-based IDE for development.
-- [Bootstrap](https://getbootstrap.com) used as the front-end CSS framework for modern responsiveness and pre-built components.
-- [Materialize](https://materializecss.com) used as the front-end CSS framework for modern responsiveness and pre-built components.
-- [Flask](https://flask.palletsprojects.com) used as the Python framework for the site.
-- [Django](https://www.djangoproject.com) used as the Python framework for the site.
-- [MongoDB](https://www.mongodb.com) used as the non-relational database management with Flask.
-- [SQLAlchemy](https://www.sqlalchemy.org) used as the relational database management with Flask.
-- [PostgreSQL](https://www.postgresql.org) used as the relational database management.
-- [ElephantSQL](https://www.elephantsql.com) used as the Postgres database.
-- [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
-- [Cloudinary](https://cloudinary.com) used for online static file storage.
-- [Stripe](https://stripe.com) used for online secure payments of ecommerce products/services.
-- [AWS S3](https://aws.amazon.com/s3) used for online static file storage.
+- [Heroku](https://www.heroku.com) used for hosting the deployed site.
 
 ## Data Model
 
 ### Flowchart
 
-To follow best practice, a flowchart was created for the app's logic,
-and mapped out before coding began using a free version of
-[Lucidchart](https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning) and/or [Draw.io](https://www.draw.io).
+A flowchart was used to map out the 'rooms' of the game and to visualise the content of and connections between these 'rooms'. This was done using [Lucidchart](https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning)
 
-Below is the flowchart of the main process of this Python program. It shows the entire cycle of the program.
 
 ![screenshot](documentation/flowchart.png)
 
@@ -233,31 +191,104 @@ Below is the flowchart of the main process of this Python program. It shows the 
 The program uses classes as a blueprint for the project's objects (OOP). This allows for the object to be reusable.
 
 ```python
-class Person:
-    """ Insert docstring comments here """
-    def __init__(self, name, age, health, inventory):
+class Player:
+    """
+    Player character class
+    """
+    def __init__(
+        self, name, location, health, weapon, strength, shield, armour,
+        lantern, manormap, eyeglass, silver_key, password
+                ):
         self.name = name
-        self.age = age
+        self.location = location
         self.health = health
-        self.inventory = inventory
+        self.weapon = weapon
+        self.shield = shield
+        self.strength = strength
+        self.armour = armour
+        self.lantern = lantern
+        self.manormap = manormap
+        self.eyeglass = eyeglass
+        self.silver_key = silver_key
+        self.password = password
+
+
+myPlayer = Player(
+    'Player', 'c3', 10, 'No Weapon', 2, 'No Shield', 2,
+    False, False, False, False, False
+    )
 ```
+---
+```python
+class Monster:
+    """
+    Monster class
+    """
+    def __init__(self, name, health, strength, armour):
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.armour = armour
+
+
+ogre = Monster('Ogre', 10, 4, 2)
+goblin = Monster('Goblin', 8, 4, 1)
+haunted_chest = Monster('Haunted Chest', 12, 5, 2)
+gorehowl = Monster('Arena Beast', 18, 6, 1)
+manor_lord = Monster('Lord of Fell Manor', 20, 7, 2)
+```
+---
+```python
+class Weapon:
+    """
+    Weapon class
+    """
+    def __init__(self, name, strength):
+        self.name = name
+        self.strength = strength
+
+
+rusty_dagger = Weapon('RUSTY DAGGER', 4)
+silver_sword = Weapon('SILVER SWORD', 8)
+```
+---
+```python
+class Shield:
+    """
+    Shield class
+    """
+    def __init__(self, name, armour):
+        self.name = name
+        self.armour = armour
+
+
+wooden_shield = Shield('Wooden Shield', 4)
+iron_shield = Shield('Iron Shield', 6)
+```
+
 
 The primary functions used on this application are:
 
-- `get_sales_data()`
-    - Get sales figures input from the user.
-- `validate_data()`
-    - Converts all string values into integers.
-- `update_worksheet()`
-    - Update the relevant worksheet with the data provided.
-- `calculate_surplus_data()`
-    - Compare sales with stock and calculate the surplus for each item type.
-- `get_last_5_entries_sales()`
-    - Collects columns of data from sales worksheet.
-- `calculate_stock_data()`
-    -  Calculate the average stock for each item type, adding 10%.
+- `main_prompt()`
+    - Present available in-game actions to user.
+- `print_room_descritpion()`
+    - print the description of the room that the player is in.
+- `print_room_details()`
+    - prints the additional details of the room that the player is in. Runs after player uses the input 'look'. 
+- `update_player_health()`
+    - Increases or decreases the user character's health points.
+- `update enemy health()`
+    - Increases or decreases enemies' health points.
+- `player_death()`
+    - Runs if player health reaches zero. Displays 'You died' message and resets the game.
+- `enemy_death()`
+    - Runs if enemy health reaches zero. Displays victory message and runs next game functions.
+- `calculate_valid_directions()`
+    - Displays to the user a list of the cardinal directions currently available to travel in.
+- `combat()`
+    - Runs combat sequnce between player and enemy. Loops until either is dead.
 - `main()`
-    - Run all program functions.
+    - Runs initial program functions.
 
 ### Imports
 
@@ -266,9 +297,13 @@ I've used the following Python packages and/or external imported packages.
 - `gspread`: used with the Google Sheets API
 - `google.oauth2.service_account`: used for the Google Sheets API credentials
 - `time`: used for adding time delays
+- `sys`: used for text typing effect & quit game functions
 - `os`: used for adding a `clear()` function
-- `colorama`: used for including color in the terminal
 - `random`: used to get a random choice from a list
+- `copy`: used to create deep copy of room dicttionary from dictionary.py
+- `datetime`: used to insert date into hall of fame entries
+- `tabulate`: used to format hall of fame entries
+- `colorama`: used for including color in the terminal
 
 ## Testing
 
