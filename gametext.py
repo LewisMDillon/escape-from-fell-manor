@@ -91,12 +91,12 @@ room_descriptions_completed = {
       'a1': "luxurious study where you fought the haunted chest",
 
       'a2': "pitch-dark chamber. You use your lantern once again"
-            "\nto light the way along the inding stone path",
+            "\nto light the way along the winding stone path",
 
       'a3': "library, wherein you learned the password: 'Ajagar'.",
 
       'a4': "dining room, the ogre's body lies slumped over the"
-            "\ngiant dining table.",
+            "\ndining table.",
 
       'b1': "long candlelit corridor.\nThe candles' glow illuminates a"
             "\ndoor at the southern end of the corridor, and you can see"
@@ -238,7 +238,7 @@ room_details_looked = {
 room_details_lantern = {
 
     'a2': "You say a silent thanks for your lantern as you feel the"
-          "\noppresive dark pushed back from you. You step tenatively"
+          "\noppresive dark pushed back from you. You step tentatively"
           "\nforward and lower your lantern to see that the ground one"
           "\nstep beyond your feet gives way to a black chasm. Stepping"
           "\nbeyond where you stand would be certain death, but you notice"
