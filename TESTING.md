@@ -12,110 +12,18 @@ with the project providing an easy and straightforward way for the users to achi
 
 ## Code Validation
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-Use the space to discuss code validation for any of your own code files (where applicable).
-You are not required to validate external libraries/frameworks, such as imported Bootstrap, Materialize, Font Awesome, etc.
-
-**IMPORTANT**: You must provide a screenshot for each file you validate.
-
-**PRO TIP**: Always validate the live site pages, not your local code. There could be subtle/hidden differences.
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 ### Python
 
 I have used the recommended [CI Python Linter](https://pep8ci.herokuapp.com) to validate all of my Python files.
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-The CI Python Linter can be used two different ways.
-- Copy/Paste your Python code directly into the linter.
-- As an API, using the "raw" URL appended to the linter URL.
-    - To find the "raw" URL, navigate to your file directly on the GitHub repo.
-    - On that page, GitHub provides a button on the right called "Raw" that you can click on.
-    - From that new page, copy the full URL, and paste it after the CI Python Linter URL (with a `/` separator).
-    - Examples:
-
-    | File | CI URL | Raw URL | Combined |
-    | --- | --- | --- | --- |
-    | PP3 *run.py* file | `https://pep8ci.herokuapp.com/` | `https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/run.py` | https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/run.py |
-    | Boutique Ado *settings.py* | `https://pep8ci.herokuapp.com/` | `https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/boutique_ado/settings.py` | https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/boutique_ado/settings.py |
-
-It's recommended to validate each file using the API URL.
-This will give you a custom URL which you can use on your testing documentation.
-It makes it easier to return back to a file to validate it again in the future.
-Use the steps above to generate your own custom URLs for each Python file.
-
-**IMPORTANT**: Django settings.py
-
-The Django settings.py file comes with 4 lines that are quite long, and will throw the `E501 line too long` error.
-This is default behavior, but can be fixed by adding `# noqa` to the end of those lines.
-
-`noqa` = **NO Quality Assurance**
-
-Example:
-
-```python
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa
-    },
-]
-```
-
-**NOTE**: You must include 2 *spaces* before the `#`, and 1 *space* after the `#`.
-
-Do not use `# noqa` all over your project just to clear down validation errors!
-This can still cause a project to fail, for failing to fix actual PEP8 validation errors.
-
-Sometimes strings or variables get too long, or long `if` conditional statements.
-These are acceptable instances to use the `# noqa`.
-
-When trying to fix "line too long" errors, try to avoid using `/` to split lines.
-A better approach would be to use any type of opening bracket, and hit Enter just after that.
-Any opening bracket type will work: `(`, `[`, `{`.
-By using an opening bracket, Python knows where to appropriately indent the next line of code,
-without having to "guess" yourself and attempt to tab to the correct indentation level.
-
-Example:
-
-```python
-return HttpResponse(
-    content=(
-        f'Webhook received: {event["type"]} | '
-        'SUCCESS: Verified order already in database'
-    ),
-    status=200
-)
-```
-
-**IMPORTANT**: migration and pycache files
-
-You do not have to ever validate files from the `migrations/` or `pycache/` folders!
-Ignore these `.py` files, and validate just the files that you've created or modified.
-
-Sample Python code validation documentation (tables are extremely helpful!):
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 | File | CI URL | Screenshot | Notes |
 | --- | --- | --- | --- |
-| run.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/run.py) | ![screenshot](documentation/py-validation-run.png) | W291 trailing whitespace |
-| settings.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/boutique-ado/settings.py) | ![screenshot](documentation/py-validation-settings.png) | E501 line too long |
-| Blog views.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/blog/views.py) | ![screenshot](documentation/py-validation-blog-views.png) | Pass: No Errors |
-| Checkout urls.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/checkout/urls.py) | ![screenshot](documentation/py-validation-checkout-urls.png) | W292 no newline at end of file |
-| Profiles models.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/profiles/models.py) | ![screenshot](documentation/py-validation-profiles-models.png) | Pass: No Errors |
-| x | x | x | repeat for all remaining Python files |
+| run.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/run.py) | ![screenshot](documentation/py-validation-run.png) | Pass: No Errors |
+| dictionary.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/dictionary.py) | ![screenshot](documentation/py-validation-dictionary.png) | Pass: No Errors |
+| gametext.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/gametext.py) | ![screenshot](documentation/py-validation-gametext.png) | Pass: No Errors |
+| art.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/art.py) | ![screenshot](documentation/py-validation-art.png) | Several Errors, expected as file contains ASCII art |
 
 ## Lighthouse Audit
 
@@ -142,87 +50,24 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 | --- | --- | --- | --- |
 | Home | Mobile | ![screenshot](documentation/lighthouse-home-mobile.png) | Some minor warnings |
 | Home | Desktop | ![screenshot](documentation/lighthouse-home-desktop.png) | Few warnings |
-| About | Mobile | ![screenshot](documentation/lighthouse-about-mobile.png) | Some minor warnings |
-| About | Desktop | ![screenshot](documentation/lighthouse-about-desktop.png) | Few warnings |
-| Gallery | Mobile | ![screenshot](documentation/lighthouse-gallery-mobile.png) | Slow response time due to large images |
-| Gallery | Desktop | ![screenshot](documentation/lighthouse-gallery-desktop.png) | Slow response time due to large images |
-| x | x | x | repeat for any other tested pages/sizes |
+
 
 ## Defensive Programming
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-Defensive programming (defensive design) is extremely important!
-
-When building projects that accept user inputs or forms, you should always test the level of security for each.
-Examples of this could include (not limited to):
-
-Forms:
-- Users cannot submit an empty form
-- Users must enter valid email addresses
-
-PP3 (Python-only):
-- Users must enter a valid letter/word/string when prompted
-- Users must choose from a specific list only
-
-Flask/Django:
-- Users cannot brute-force a URL to navigate to a restricted page
-- Users cannot perform CRUD functionality while logged-out
-- User-A should not be able to manipulate data belonging to User-B, or vice versa
-- Non-Authenticated users should not be able to access pages that require authentication
-- Standard users should not be able to access pages intended for superusers
-
-You'll want to test all functionality on your application, whether it's a standard form,
-or uses CRUD functionality for data manipulation on a database.
-Make sure to include the `required` attribute on any form-fields that should be mandatory.
-Try to access various pages on your site as different user types (User-A, User-B, guest user, admin, superuser).
-
-You should include any manual tests performed, and the expected results/outcome.
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 Defensive programming was manually tested with the below user acceptance testing:
 
 | Page | User Action | Expected Result | Pass/Fail | Comments |
 | --- | --- | --- | --- | --- |
-| Home Page | | | | |
-| | Click on Logo | Redirection to Home page | Pass | |
-| | Click on Home link in navbar | Redirection to Home page | Pass | |
-| Gallery Page | | | | |
-| | Click on Gallery link in navbar | Redirection to Gallery page | Pass | |
-| | Load gallery images | All images load as expected | Pass | |
-| Contact Page | | | | |
-| | Click on Contact link in navbar | Redirection to Contact page | Pass | |
-| | Enter first/last name | Field will accept freeform text | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter message in textarea | Field will accept freeform text | Pass | |
-| | Click the Submit button | Redirects user to form-dump | Pass | User must click 'Back' button to return |
-| Sign Up | | | | |
-| | Click on Sign Up button | Redirection to Sign Up page | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter valid password (twice) | Field will only accept password format | Pass | |
-| | Click on Sign Up button | Asks user to confirm email page | Pass | Email sent to user |
-| | Confirm email | Redirects user to blank Sign In page | Pass | |
-| Log In | | | | |
-| | Click on the Login link | Redirection to Login page | Pass | |
-| | Enter valid email address | Field will only accept email address format | Pass | |
-| | Enter valid password | Field will only accept password format | Pass | |
-| | Click Login button | Redirects user to home page | Pass | |
-| Log Out | | | | |
-| | Click Logout button | Redirects user to logout page | Pass | Confirms logout first |
-| | Click Confirm Logout button | Redirects user to home page | Pass | |
-| Profile | | | | |
-| | Click on Profile button | User will be redirected to the Profile page | Pass | |
-| | Click on the Edit button | User will be redirected to the edit profile page | Pass | |
-| | Click on the My Orders link | User will be redirected to the My Orders page | Pass | |
-| | Brute forcing the URL to get to another user's profile | User should be given an error | Pass | Redirects user back to own profile |
+| Main Menu | | | | |
+| | Input only from options given | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user |
+| User Name Request | | | | |
+| | Input 2-15 alpha characters | Store name as player name | Pass | Input of of any other kind eg. numbers, special characters or whitespace throws error an repeats prompt to user |
+| Main Game Prompt | | | | |
+| | Input only from options given | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user |
+| Yes/No Prompts | | | | |
+| | Input only 'yes' or 'no' | Execute based on input | Pass | Input of of any other text throws error an repeats prompt to user. User is able to input any word beginning with 'y' for yes and 'n' for no |
 
-⚠️⚠️⚠️⚠️⚠️ START OF NOTES (to be deleted) ⚠️⚠️⚠️⚠️⚠️
-
-Repeat for all other tests, as applicable to your own site.
-The aforementioned tests are just an example of a few different project scenarios.
-
-🛑🛑🛑🛑🛑 END OF NOTES (to be deleted) 🛑🛑🛑🛑🛑
 
 ## Bugs
 

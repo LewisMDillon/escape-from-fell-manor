@@ -1168,7 +1168,7 @@ def main_prompt():
     directions_list = calculate_valid_directions()
     print("\n")
 
-    choices = ['look', 'l', 'items', 'i',]
+    choices = ['look', 'l', 'items', 'i', ]
     if myPlayer.manormap:
         choices.append('map')
         choices.append('m')
