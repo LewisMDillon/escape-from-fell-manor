@@ -13,8 +13,9 @@ import art
 import gametext
 import dictionary
 
-colorama.init()
+colorama.init()  # initiates colorama module
 
+# Code for google sheet import
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -26,10 +27,12 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
 
+# global variables for google sheet
 HOF = SHEET.worksheet('hall_of_fame')
 hof_data = HOF.get_all_values()
 
 
+# Text Display Functions
 def clear():
     """
     clears the terminal window
@@ -106,6 +109,7 @@ def color_type(text, color, speed=0.04):
     print(f"{Fore.RESET} ", end="", flush=True)
 
 
+# Game Intro Functions
 def display_title_screen():
     """
     Displays the Main Game Logo
@@ -211,7 +215,7 @@ def update_hof():
     HOF.append_row(data)
 
 
-# Player Setup ############
+# Player Class Setup
 class Player:
     """
     Player character class
@@ -240,7 +244,7 @@ myPlayer = Player(
     )
 
 
-# Enemies Setup ###########
+# Enemies Class Setup
 class Monster:
     """
     Monster class
@@ -259,6 +263,7 @@ gorehowl = Monster('Arena Beast', 18, 6, 1)
 manor_lord = Monster('Lord of Fell Manor', 20, 7, 2)
 
 
+# Equipment Classes
 class Weapon:
     """
     Weapon class
@@ -304,6 +309,9 @@ def player_setup():
 
 
 def gamestate_reset():
+    """
+    Resets the game to default state
+    """
     global room_map
     room_map = copy.deepcopy(dictionary.room_map)
     ogre.health = 10
@@ -451,6 +459,7 @@ def game_introduction():
     game_instructions()
 
 
+# game functions
 def update_player_location(destination):
     """
     Sets player location value to value of
@@ -495,6 +504,7 @@ def print_room_description():
             riddle_room_details()
 
 
+# Special room detail functions
 def print_room_details():
     """
     Prints game room details, calls specific functions
@@ -1643,6 +1653,9 @@ def validate_choice(answer, choices):
 
 
 def main():
+    """
+    main function to begin running the game
+    """
     display_title_screen()
 
 
