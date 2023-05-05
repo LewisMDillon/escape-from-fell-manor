@@ -135,8 +135,6 @@ def title_screen_options():
         quit_game()
     elif option.lower().strip() == ('hall of fame'):
         display_hof()
-    elif option.lower().strip() == ('test'):
-        test_function()
     else:
         print("Please type 'play', 'help', 'quit', or 'hall of fame'")
         confirm()
@@ -351,26 +349,6 @@ def inventory_screen():
 def display_map():
     print(f"{map_dict[myPlayer.location]}")
     confirm()
-
-
-# Test Function #######################
-def test_function():
-    print('The test function ran successfuly')
-    confirm()
-    type_effect("here is some regular text, in white")
-    color_type('this text is blue', 'blue')
-    type_effect("this text is regular again!")
-    skip_line()
-    color_type('This text is a lovely magenta', 'magenta')
-    print("")
-    color_type("R", 'red')
-    color_type('a', 'yellow')
-    color_type('i', 'green')
-    color_type('n', 'blue')
-    color_type('b', 'magenta')
-    color_type('o', 'cyan')
-    color_type('w', 'white')
-    print("")
 
 
 room_map = copy.deepcopy(dictionary.room_map)
