@@ -1569,8 +1569,7 @@ def credits_screen():
     clear()
     type_effect(
         "\n\nI hope you have enjoyed Escape From Fell Manor"
-        "\n\nRe-run the programme to see your entry in the Hall of Fame!"
-        "\n Thanks for playing!"
+        "\n\n Thanks for playing!"
         "\n\n                     -Lewis D"
 
         )
@@ -1648,6 +1647,8 @@ def main():
     """
     main function to begin running the game
     """
+    global hof_data
+    hof_data = HOF.get_all_values()
     display_title_screen()
 
 
