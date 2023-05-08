@@ -43,7 +43,7 @@ def clear():
 LINE = '-----------------------------------------------------'
 
 
-def type_effect(text, speed=0.04):
+def type_effect(text, speed=0.0004):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
@@ -87,20 +87,7 @@ def color_type(text, color, speed=0.04):
     outputs text letter by letter in a typing style,
     can use different colors
     """
-    if color == 'red':
-        print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
-    elif color == 'green':
-        print(f"{Fore.GREEN} ", end="", flush=True)
-    elif color == 'yellow':
-        print(f"{Fore.YELLOW} ", end="", flush=True)
-    elif color == 'blue':
-        print(f"{Fore.BLUE} ", end="", flush=True)
-    elif color == 'magenta':
-        print(f"{Fore.MAGENTA} ", end="", flush=True)
-    elif color == 'cyan':
-        print(f"{Fore.CYAN} ", end="", flush=True)
-    elif color == 'white':
-        print(f"{Fore.WHITE} ", end="", flush=True)
+    print(f"{color}{Style.NORMAL} ", end="", flush=True)
 
     for character in text:
         sys.stdout.write(character)
@@ -116,7 +103,7 @@ def display_title_screen():
     """
     clear()
     TITLE = art.TITLE
-    color_type(TITLE, 'red', 0.003)
+    color_type(TITLE, Fore.RED, 0.003)
     print(f"{Fore.RESET}")
     confirm()
     display_main_menu()
@@ -429,7 +416,7 @@ def name_request():
     """
     clear()
     type_effect("What is your name,")
-    color_type("victim", 'red')
+    color_type("victim", Fore.RED)
     time.sleep(0.25)
     type_effect('\b\b\b\b\b\b\b', 0.03)
     type_effect('brave adventurer?')
@@ -593,10 +580,10 @@ def storage_room_details():
                     f"          {Fore.CYAN}**You found the Map**"
                     f"{Fore.WHITE}"))
             skip_line()
-            color_type("You can now type", 'white')
-            color_type("'map'", 'green')
+            color_type("You can now type", Fore.WHITE)
+            color_type("'map'", Fore.GREEN)
             color_type(
-                "when prompted to see a map of Fell Manor's rooms", 'white'
+                "when prompted to see a map of Fell Manor's rooms", Fore.WHITE
                 )
             myPlayer.manormap = True
             room_map['b3']['completed'] = True
@@ -844,7 +831,7 @@ def arena_details():
     color_type(
         "\n'Can we please be upstanding for this evening's main event."
         f"\nThe brave adventurer {myPlayer.name} will take on our undefeated"
-        "\nchampion, The Arena Beast: GOREHOWL!'", 'magenta'
+        "\nchampion, The Arena Beast: GOREHOWL!'", Fore.MAGENTA
     )
     skip_line()
     type_effect(
@@ -914,7 +901,8 @@ def riddle_room_details():
     confirm()
     color_type(
             f"'Hello, {myPlayer.name}."
-            "I thought we'd play a little game before you proceed.'", 'magenta'
+            " I thought we'd play a little game before you"
+            " proceed...'", Fore.MAGENTA
             )
     type_effect(
         "\n\nWith that, the figure vanishes and you hear the unmistakeable"
@@ -951,10 +939,10 @@ def riddle_room_details():
 
     def question_one(incorrect):
         color_type(
-            "\n\n'What always runs but never walks."
-            "\n\nOften murmurs, never talks."
-            "\n\nHas a bed but never sleeps."
-            "\n\nAn open mouth that never eats?\n'", 'magenta'
+            "\n\n'What always runs but never walks,"
+            "\n\nOften murmurs, never talks,"
+            "\n\nHas a bed but never sleeps,"
+            "\n\nAn open mouth that never eats?'\n", Fore.MAGENTA
             )
         answer = input('\n> ')
         if answer.lower().strip() in [
@@ -971,17 +959,17 @@ def riddle_room_details():
             question_two(incorrect)
         else:
             clear()
-            color_type("'Heh heh heh, Wrong!'", 'magenta')
+            color_type("'Heh heh heh, Wrong!'", Fore.MAGENTA)
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_one(incorrect)
 
     def question_two(incorrect):
         color_type(
-            "\n\n'Heard, I am, but never seen I will be."
+            "\n\n'Heard, I am, but never seen I will be,"
             "\n\nI never speak unless you speak to me.'"
-            "\n\n In empty air I fly and fly"
-            "\n\n If asked, I give the same reply", 'magenta'
+            "\n\nIn empty air I fly and fly,"
+            "\n\nIf asked, I give the same reply.", Fore.MAGENTA
             )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
@@ -998,7 +986,7 @@ def riddle_room_details():
             question_three(incorrect)
         else:
             clear()
-            color_type("'Heh heh heh, Wrong!'", 'magenta')
+            color_type("'Heh heh heh, Wrong!'", Fore.MAGENTA)
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_two(incorrect)
@@ -1007,7 +995,7 @@ def riddle_room_details():
         color_type(
             "\n\n'Brothers and sisters I have none,"
             "\n\nYet this man's father is my father's son."
-            "\n\nWho is he?'", 'magenta'
+            "\n\nWho is he?'", Fore.MAGENTA
             )
         answer = input('\n\n> ')
         if answer.lower().strip() in [
@@ -1022,7 +1010,7 @@ def riddle_room_details():
             riddle_complete()
         else:
             clear()
-            color_type("'Heh heh heh, Wrong!'", 'magenta')
+            color_type("'Heh heh heh, Wrong!'", Fore.MAGENTA)
             incorrect = incorrect + 1
             wallstate(incorrect)
             question_three(incorrect)
@@ -1039,7 +1027,7 @@ def riddle_complete():
     color_type(
         "\n\n'Well, well... it seems you're sharper than I gave you credit"
         "\nfor. I hope we see each other again soon,"
-        "\nHeh heh heh heh\n\n", 'magenta'
+        "\nHeh heh heh heh\n\n", Fore.MAGENTA
         )
     confirm()
     clear()
@@ -1185,10 +1173,10 @@ def final_room_description():
         "\nand it's been such a pleasure having you as my guest this evening."
         "\nSo much so, that it would be a shame to have you just"
         "\nwalk out of this door, don't you think?"
-        "\nNot when there's so much more fun we could have....'", 'magenta'
+        "\nNot when there's so much more fun we could have....'", Fore.MAGENTA
         )
     skip_line()
-    color_type("'Heh heh heh heh'", 'red', 0.2)
+    color_type("'Heh heh heh heh'", Fore.RED, 0.2)
     skip_line()
     type_effect(
         "With that, he spreads wide his long, sickly grey arms"
