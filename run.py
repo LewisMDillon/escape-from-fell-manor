@@ -43,7 +43,7 @@ def clear():
 LINE = '-----------------------------------------------------'
 
 
-def type_effect(text, speed=0.0004):
+def type_effect(text, speed=0.04):
     '''
     prints out text letter by letter, adjust speed argument
     to change speed, lower is faster
