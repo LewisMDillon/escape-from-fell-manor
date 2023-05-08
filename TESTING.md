@@ -34,16 +34,16 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 
 Defensive programming was manually tested with the below user acceptance testing:
 
-| Page | User Action | Expected Result | Pass/Fail | Comments |
-| --- | --- | --- | --- | --- |
+| Page | User Action | Expected Result | Pass/Fail | Comments | Screenshot |
+| --- | --- | --- | --- | --- | --- |
 | Main Menu | | | | |
-| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user |
+| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user | ![screenshot](documentation/defensive-programming01.png) |
 | User Name Request | | | | |
-| | Input 2-15 alpha characters | Store name as player name | Pass | Input of any other kind e.g. numbers, special characters or whitespace throws error an repeats prompt to user |
+| | Input 2-15 alpha characters | Store name as player name | Pass | Input of any other kind e.g. numbers, special characters or whitespace throws error an repeats prompt to user | ![screenshot](documentation/defensive-programming02.png) |
 | Main Game Prompt | | | | |
-| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user |
+| | Input only from options given | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user | ![screenshot](documentation/defensive-programming03.png) |
 | Yes/No Prompts | | | | |
-| | Input only 'yes' or 'no' | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user. User is able to input any word beginning with 'y' for yes and 'n' for no |
+| | Input only 'yes' or 'no' | Execute based on input | Pass | Input of any other text throws error an repeats prompt to user. User is able to input any word beginning with 'y' for yes and 'n' for no | ![screenshot](documentation/defensive-programming04.png) |
 
 
 ## Bugs

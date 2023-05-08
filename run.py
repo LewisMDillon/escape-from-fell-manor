@@ -143,7 +143,11 @@ def title_screen_options():
     elif option.lower().strip() == ('hall of fame'):
         display_hof()
     else:
-        print("Please type 'play', 'help', 'quit', or 'hall of fame'")
+        print(CENT(
+            f"               {Fore.WHITE}Please type {Fore.GREEN}'play',"
+            f" 'help', 'quit', {Fore.WHITE}or"
+            f" {Fore.GREEN} 'hall of fame'{Fore.WHITE}."
+        ))
         confirm()
         display_main_menu()
         title_screen_options()
