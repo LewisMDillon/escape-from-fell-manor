@@ -1,5 +1,7 @@
 import gametext
 
+# main room dictionary - contains details of room state
+# and possible travel directions
 room_map = {
     'a1': {
         'room_name': 'Study',

@@ -1,5 +1,6 @@
 from colorama import Fore
 
+# Default descriptions of all rooms
 room_descriptions = {
 
     'a1': "luxurious study.\nThe room's many shelves are home to"
@@ -86,6 +87,7 @@ room_descriptions = {
 
 }
 
+# Descriptions displayed if room is completed
 room_descriptions_completed = {
 
       'a1': "luxurious study where you fought the haunted chest",
@@ -124,6 +126,7 @@ room_descriptions_completed = {
       'd4': "square stone chamber that previously closed in upon you."
 }
 
+# Special description for room d3 before combat
 room_descriptions_goblin_attack = {
       'd3': "You re-enter the cave, and hear none of the grunting"
             "\nand crunching that you heard earlier. You cautiously"
@@ -136,6 +139,7 @@ room_descriptions_goblin_attack = {
             "\nout a horrific screech and descends upon you!"
 }
 
+# Details of rooms displayed to user after 'look' command
 room_details = {
 
     'a1': "You step nervously towards the north side of the room"
@@ -229,12 +233,14 @@ room_details = {
 
 }
 
+# Special description for room b3
 room_details_looked = {
     'b3': "You search around in the dark but don't find anything."
           "\nThere is probably more hidden among the crates,\nbut "
           "it's too dark to see anything",
 }
 
+# Room details displayed when player has the lantern item
 room_details_lantern = {
 
     'a2': "You say a silent thanks for your lantern as you feel the"
@@ -263,6 +269,7 @@ room_details_lantern = {
           "\ngrateful for whatever protection it can offer"
 }
 
+# Special details for room b3 - player finds multiple items at once
 room_details_combined = {
     'b3': f"You search around and find a {Fore.CYAN}Rusty Dagger\n"
           f"{Fore.WHITE}It looks like decades of rust have blunted its blade, "
@@ -271,6 +278,7 @@ room_details_combined = {
           f"**You equip the RUSTY DAGGER**\n\n{Fore.WHITE}"
 }
 
+# Room details if player has found the password
 room_details_password = {
 
       'c1': "As you stare at the carvings, they begin to move! The giant"
@@ -281,6 +289,7 @@ room_details_password = {
 
 }
 
+# Room details if plyer has found the eyeglass
 room_details_eyeglass = {
 
       'a3': "As you walk forward, eyes scanning along the countless"
@@ -310,6 +319,7 @@ room_details_eyeglass = {
 
 }
 
+# Room details if player has found the silver key
 room_details_silver_key = {
       'd2': "You approach the chest and insert the silver key into"
             "\nthe keyhole and turn. The latch clicks and the chest unlocks!"
@@ -320,6 +330,8 @@ room_details_silver_key = {
             "\nit could cause some serious damage!"
 }
 
+# Room details if player finds equipment which is worse than
+# one they already have
 room_details_lesser_item = {
       'b3': "You search around and find a RUSTY DAGGER!"
             "\nIt looks like decades of rust have blunted its blade, "
@@ -343,6 +355,8 @@ room_details_lesser_item = {
             "\nIRON SHIELD, so you leave it behind."
 }
 
+# Special prompt for room b3 - player finds lesser weapon but
+# keeps the map item
 room_details_lesser_combined = {
       'b3': "You search around and find a RUSTY DAGGER!"
             "\nIt looks like decades of rust have blunted its blade, "
@@ -357,6 +371,7 @@ room_details_lesser_combined = {
             "\nFell Manor's rooms.",
 }
 
+# Text for item interactions
 item_text = {
 
     'lantern_success': "\nYou shuffle forward as close to the puddle as"
@@ -393,6 +408,7 @@ item_text = {
                      "\nof this awful place."
 }
 
+# Enemy combat initiation text
 enemy_text = {
 
       'ogre': "You suddenly hear a loud crash to your left. A hulking,"
@@ -411,6 +427,7 @@ enemy_text = {
                        "\nthat line the inside of its lid."
 }
 
+# Enemy death text displayed when user kills an enemy
 enemy_death = {
 
       'ogre': "You breath heavily and look around the room."
