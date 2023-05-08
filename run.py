@@ -381,18 +381,6 @@ def display_map():
 
 room_map = copy.deepcopy(dictionary.room_map)
 
-# Map ########
-#     _________________
-#     |a1 |a2 |a3 |a4 |
-#     |___|___|___|___|
-#     |b1 |b2 |b3 |b4 |
-#     |___|___|___|___|
-#     |c1 |c2 |c3 |c4 |
-#     |___|___|___|___|
-#     |d1 |d2 |d3 |d4 |
-#     |___|___|___|___|
-
-
 map_dict = {
     'a1': art.MAPA1,
     'a2': art.MAPA2,

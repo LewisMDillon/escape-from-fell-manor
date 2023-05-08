@@ -107,6 +107,22 @@ ASCII art was employed for the main game title and also to provide makeshift ill
 
     - The player may find on their journey, a map. This will open up a new option in the main game prompt which will show the player a map of the game's rooms. The game detects which room the player is in an prints an 'X' on the map to denote the player's location. The map is displayed on ASCII art of a rolled-up scroll.
 
+    Original code block for map reference:
+
+```python
+# Map ########
+#     _________________
+#     |a1 |a2 |a3 |a4 |
+#     |___|___|___|___|
+#     |b1 |b2 |b3 |b4 |
+#     |___|___|___|___|
+#     |c1 |c2 |c3 |c4 |
+#     |___|___|___|___|
+#     |d1 |d2 |d3 |d4 |
+#     |___|___|___|___|
+```
+In game map ASCII art:
+
 ![screenshot](documentation/feature18.png)
 
 - **Re-entered Room Descriptions**
