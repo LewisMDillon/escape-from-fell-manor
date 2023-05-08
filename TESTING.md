@@ -119,7 +119,19 @@ All previously closed/fixed bugs can be tracked [here](https://github.com/LewisM
 
 ## Unfixed Bugs
 
-There are no remaining bugs that I am aware of.
+- The user can type text into the terminal window when prompted to press ENTER
+
+    ![screenshot](documentation/unfixed-bug01.png)
+
+    - This is a limitation of the Code Institute terminal and unfixable by me.
+
+- If the user presses CTRL + C, the program will quit and display a non user-friendly keyboard interrupt message.
+
+    ![screenshot](documentation/unfixed-bug02.png)
+
+    - This is a limitation of th Code Institute terminal and unfixable by me.
+
+There are no other remaining bugs that I am aware of.
 
 ## Code Refactoring
 
