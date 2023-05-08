@@ -45,17 +45,17 @@ I've tested my deployed project on multiple browsers to check for compatibility 
 
 ## Responsiveness
 
-I've tested my deployed project on multiple devices to check for responsiveness issues.
+I've tested my deployed project on multiple devices to check for responsiveness issues. Issues on smaller screen sizes are unfixable due to terminal provided by Code Institute.
 
 | Device | Screenshot | Notes |
 | --- | --- | --- |
-| Mobile (DevTools) | ![screenshot](documentation/responsive-mobile.png) | Works as expected |
-| Tablet (DevTools) | ![screenshot](documentation/responsive-tablet.png) | Works as expected |
+| Mobile (DevTools) | ![screenshot](documentation/responsive-mobile.png) | Screen clipping issues |
+| Tablet (DevTools) | ![screenshot](documentation/responsive-tablet.png) | Screen clipping issues |
 | Desktop | ![screenshot](documentation/responsive-desktop.png) | Works as expected |
 | XL Monitor | ![screenshot](documentation/responsive-xl.png) | Scaling starts to have minor issues |
 | 4K Monitor | ![screenshot](documentation/responsive-4k.png) | Noticeable scaling issues |
-| Oneplus Nord 2 | ![screenshot](documentation/responsive-oneplus.png) | Works as expected |
-| iPhone 14 | ![screenshot](documentation/responsive-iphone.png) | Works as expected |
+| Oneplus Nord 2 | ![screenshot](documentation/responsive-oneplus.png) | Screen clipping issues |
+| iPhone 13 | ![screenshot](documentation/responsive-iphone.png) | Screen clipping issues |
 
 
 ## Defensive Programming
