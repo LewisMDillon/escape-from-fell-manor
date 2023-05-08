@@ -16,7 +16,7 @@ I have used the recommended [CI Python Linter](https://pep8ci.herokuapp.com) to 
 | run.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/run.py) | ![screenshot](documentation/py-validation-run.png) | Pass: No Errors |
 | dictionary.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/dictionary.py) | ![screenshot](documentation/py-validation-dictionary.png) | Pass: No Errors |
 | gametext.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/gametext.py) | ![screenshot](documentation/py-validation-gametext.png) | Pass: No Errors |
-| art.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/art.py) | ![screenshot](documentation/py-validation-art.png) | Several Errors, expected as file contains ASCII art |
+| art.py | [CI PEP8](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/LewisMDillon/escape-from-fell-manor/main/art.py) | ![screenshot](documentation/py-validation-art.png) | Pass: No Errors |
 
 ## Lighthouse Audit
 
@@ -53,13 +53,13 @@ Defensive programming was manually tested with the below user acceptance testing
 
     ![screenshot](documentation/bug01.png)
 
-    - To fix this, I fixed a syntax error in the update_player_health function call.
+    - To fix this, I fixed a syntax error in the `update_player_health()` call.
 
 - Player location not updating properly
 
     ![screenshot](documentation/bug02.png)
 
-    - To fix this, I fixed direction errors in the room_map dictionary.
+    - To fix this, I fixed direction errors in the `room_map` dictionary.
 
 - Player name not displaying properly
 
@@ -85,7 +85,38 @@ Defensive programming was manually tested with the below user acceptance testing
 
 All previously closed/fixed bugs can be tracked [here](https://github.com/LewisMDillon/escape-from-fell-manor/issues?q=is%3Aissue+is%3Aclosed).
 
+![screenshot](documentation/github-issues.png)
+
 
 ## Unfixed Bugs
 
 There are no remaining bugs that I am aware of.
+
+## Code Refactoring
+
+I refactored a 14 line if/else conditional check to a single, reusable print statement.
+
+Original:
+
+```python
+    if color == 'red':
+        print(f"{Fore.RED}{Style.NORMAL} ", end="", flush=True)
+    elif color == 'green':
+        print(f"{Fore.GREEN} ", end="", flush=True)
+    elif color == 'yellow':
+        print(f"{Fore.YELLOW} ", end="", flush=True)
+    elif color == 'blue':
+        print(f"{Fore.BLUE} ", end="", flush=True)
+    elif color == 'magenta':
+        print(f"{Fore.MAGENTA} ", end="", flush=True)
+    elif color == 'cyan':
+        print(f"{Fore.CYAN} ", end="", flush=True)
+    elif color == 'white':
+        print(f"{Fore.WHITE} ", end="", flush=True)
+```
+
+Reformatted to:
+
+```python
+print(f"{color}{Style.NORMAL} ", end="", flush=True)
+```
