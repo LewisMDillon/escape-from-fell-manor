@@ -26,7 +26,7 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 | Page | Size | Screenshot | Notes |
 | --- | --- | --- | --- |
 | Home | Mobile | ![screenshot](documentation/lighthouse-home-mobile.png) | Some minor warnings |
-| Home | Desktop | ![screenshot](documentation/lighthouse-home-desktop.png) | Few warnings |
+| Home | Desktop | ![screenshot](documentation/lighthouse-home-desktop.png) | Some minor warnings |
 
 
 ## Defensive Programming
