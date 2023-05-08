@@ -29,6 +29,35 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 | Home | Desktop | ![screenshot](documentation/lighthouse-home-desktop.png) | Some minor warnings |
 
 
+## Browser Compatibility
+
+I've tested my deployed project on multiple browsers to check for compatibility issues.
+
+| Browser | Screenshot | Notes |
+| --- | --- | --- |
+| Chrome | ![screenshot](documentation/browser-chrome.png) | Works as expected |
+| Firefox | ![screenshot](documentation/browser-firefox.png) | Works as expected |
+| Edge | ![screenshot](documentation/browser-edge.png) | Works as expected |
+| Safari | ![screenshot](documentation/browser-safari.png) | Minor ASCII art differences |
+| Brave | ![screenshot](documentation/browser-brave.png) | Works as expected |
+| Opera | ![screenshot](documentation/browser-opera.png) | Works as expected |
+| Internet Explorer | ![screenshot](documentation/browser-iex.png) | Works as expected(!) |
+
+## Responsiveness
+
+I've tested my deployed project on multiple devices to check for responsiveness issues.
+
+| Device | Screenshot | Notes |
+| --- | --- | --- |
+| Mobile (DevTools) | ![screenshot](documentation/responsive-mobile.png) | Works as expected |
+| Tablet (DevTools) | ![screenshot](documentation/responsive-tablet.png) | Works as expected |
+| Desktop | ![screenshot](documentation/responsive-desktop.png) | Works as expected |
+| XL Monitor | ![screenshot](documentation/responsive-xl.png) | Scaling starts to have minor issues |
+| 4K Monitor | ![screenshot](documentation/responsive-4k.png) | Noticeable scaling issues |
+| Oneplus Nord 2 | ![screenshot](documentation/responsive-oneplus.png) | Works as expected |
+| iPhone 14 | ![screenshot](documentation/responsive-iphone.png) | Works as expected |
+
+
 ## Defensive Programming
 
 
