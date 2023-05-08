@@ -400,6 +400,7 @@ You can fork this repository by using the following steps:
 | Source | Location | Type | Notes |
 | --- | --- | --- | --- |
 | [Tumblr](https://64.media.tumblr.com/e87832ae4f38697b1512a962bf46d78a/b12dd6256ec6ff0f-00/s1280x1920/eb208b169e38ddb3b4418f79ffa64868722e3d20.png) | Background image | image | background image behind terminal window |
+| [Flaticon](https://www.flaticon.com/free-icon/haunted-house_10317254?term=haunted+house&page=1&position=68&origin=tag&related_id=10317254) | Favicon | image | Favicon on all pages |
 | [Patorjk](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) | Title screen | ASCII text art | ASCII text art for main title |
 | [ASCII Art.eu](https://www.asciiart.eu/) | help menu & game map | ASCII art | ASCII art used for help menu banner effect & game map parchment scroll effect |
 
