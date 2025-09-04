@@ -22,14 +22,14 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
+# CREDS = Credentials.from_service_account_file('creds.json')
+# SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+# GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+# SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
 
 # global variables for google sheet
-HOF = SHEET.worksheet('hall_of_fame')
-hof_data = HOF.get_all_values()
+# HOF = SHEET.worksheet('hall_of_fame')
+# hof_data = HOF.get_all_values()
 
 
 # Text Display Functions
@@ -37,7 +37,12 @@ def clear():
     """
     clears the terminal window
     """
-    os.system('clear')
+    # For Windows
+    if os.name == 'nt':
+        os.system('cls')
+    # For macOS and Linux
+    else:
+        os.system('clear')
 
 
 LINE = '-----------------------------------------------------'
@@ -1588,7 +1593,7 @@ def validate_name(answer):
     return True
 
 
-def validate_yes_or_no(answer):
+# def validate_yes_or_no(answer):
     """
     validates yes/no user prompts. Checks whether user has input
     'yes' or 'no', also accepts any word beginning with 'y' or
@@ -1636,7 +1641,7 @@ def main():
     main function to begin running the game
     """
     global hof_data
-    hof_data = HOF.get_all_values()
+    # hof_data = HOF.get_all_values()
     display_title_screen()
 
 
