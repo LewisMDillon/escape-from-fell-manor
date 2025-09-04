@@ -7,6 +7,7 @@ from datetime import datetime
 from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
+import gspread.auth
 import colorama
 from colorama import Fore, Style
 import art
@@ -22,14 +23,16 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-# CREDS = Credentials.from_service_account_file('creds.json')
-# SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-# GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-# SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(["https://www.googleapis.com/auth/spreadsheets",
+                                  "https://www.googleapis.com/auth/drive"])
+GSPREAD_CLIENT = gspread.auth.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('escape_from_fell_manor')
 
 # global variables for google sheet
-# HOF = SHEET.worksheet('hall_of_fame')
-# hof_data = HOF.get_all_values()
+HOF = SHEET.worksheet('hall_of_fame')
+hof_data = HOF.get_all_values()
+
 
 
 # Text Display Functions
@@ -1593,7 +1596,7 @@ def validate_name(answer):
     return True
 
 
-# def validate_yes_or_no(answer):
+def validate_yes_or_no(answer):
     """
     validates yes/no user prompts. Checks whether user has input
     'yes' or 'no', also accepts any word beginning with 'y' or
@@ -1641,7 +1644,8 @@ def main():
     main function to begin running the game
     """
     global hof_data
-    # hof_data = HOF.get_all_values()
+    hof_data = HOF.get_all_values()
+    print(hof_data)
     display_title_screen()
 
 
